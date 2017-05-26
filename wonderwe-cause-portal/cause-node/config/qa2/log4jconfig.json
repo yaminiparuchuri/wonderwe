@@ -1,0 +1,19 @@
+{
+  "appenders": [
+    {
+      "type": "dateFile",
+      "filename": "/var/www/html/cause-node/wonderwe-nodejs.log",
+      "pattern": "-from-MM-dd",
+      "layout": {
+        "type": "[%r] [%[%5.5p%]] - %m%n"
+      }
+    },
+    {
+        "type": "gelf",
+        "host": "10.2.2.222",
+        "port": "12201",
+        "facility": "cause-node"
+    }
+  ]
+
+}

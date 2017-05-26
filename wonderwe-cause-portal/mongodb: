@@ -1,0 +1,39 @@
+mongodb:
+  ponzi:
+    :columns:
+    - id:
+      :source: _id
+      :type: TEXT
+    - bond_id:
+      :source: bondId
+      :type: LONG
+    - deposited_amount:
+      :source: depositedAmount
+      :type: DOUBLE PRECISION
+    - refund_amount: 
+      :source:refoundAmount
+      :type: DOUBLE PRECISION
+    - balance_amount:
+      :source: balanceAmount
+      :type: DOUBLE PRECISION
+    - referrence_id:
+      :source: referenceId
+      :type: TEXT
+    - created_date:
+      :source: created_date
+      :type: DATE
+    - updated_date:
+      :source: updated_date
+      :type: DATE
+    - uid:
+      :source: uid
+      :type: TEXT
+    - title:
+      :source: title
+      :type: TEXT
+    - depositor_id:
+      :source: depositor
+      :type: TEXT
+    :meta:
+      :table: ponzi
+      :extra_props: true

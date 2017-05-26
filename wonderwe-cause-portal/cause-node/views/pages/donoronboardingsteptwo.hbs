@@ -1,0 +1,78 @@
+<div class="onboarding-wizard">
+    <nav class="topnavbar navbar navbar-inverse publicnav">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="/"> <img src="/images/top-logo.png" alt="WonderWe"/> </a>
+            </div>
+            <div id="navbar">
+                <div class="col-sm-offset-3 hidden-xs">
+                    <ul class="nav navbar-nav mainnav">
+                        <li>
+                            <p><strong>Preferences</strong></p>
+                        </li>
+                    </ul>
+                </div>
+                <p class="visible-xs onboarding-stepText"><strong>Preferences</strong></p>
+                <div class="nav navbar-nav navbar-right">
+                    <p>Step 2 of 5</p>
+                </div>
+            </div>
+    </nav>
+
+    <div class="container">
+        <div class="row onboarding-step">
+            <div class="col-xs-12 no-gutter">
+                <h2>Tell us the causes you're passionate about.</h2>
+                <ul class="cause-category" data-name="{{name}}" data-userid="{{userid}}">
+                    <li>
+                        <img src="/images/cause-categories/thumbnail/animals.jpg" alt="Animals" class="category-image" />
+                        <div class="category-selected"></div>
+                        <p data-id="D">Animals</p>
+                    </li>
+                    <li>
+                        <img src="/images/cause-categories/thumbnail/education.jpg" alt="Education" class="category-image" />
+                        <div class="category-selected"></div>
+                        <p data-id="B">Education</p>
+                    </li>
+                    <li>
+                        <img src="/images/cause-categories/thumbnail/environment.jpg" alt="Environment" class="category-image" />
+                        <div class="category-selected"></div>
+                        <p data-id="C">Environment</p>
+                    </li>
+                    <li>
+                        <img src="/images/cause-categories/thumbnail/health.jpg" alt="Health" class="category-image" />
+                        <div class="category-selected"></div>
+                        <p data-id="H">Health</p>
+                    </li>
+                    <li>
+                        <img src="/images/cause-categories/thumbnail/people.jpg" alt="People" class="category-image" />
+                        <div class="category-selected"></div>
+                        <p data-id="P">People</p>
+                    </li>
+                    <li>
+                        <img src="/images/cause-categories/thumbnail/international.jpg" alt="International" class="category-image" />
+                        <div class="category-selected"></div>
+                        <p data-id="Q">International</p>
+                    </li>
+                    <li>
+                        <img src="/images/cause-categories/thumbnail/community.jpg" alt="Community" class="category-image" />
+                        <div class="category-selected"></div>
+                        <p data-id="U">Community</p>
+                    </li>
+                    <li>
+                        <img src="/images/cause-categories/thumbnail/religion.jpg" alt="Religion" class="category-image" />
+                        <div class="category-selected"></div>
+                        <p data-id="X">Religion</p>
+                    </li>
+                </ul>
+
+
+            </div>
+            <div class="onboarding-buttons">
+                <a class="skip skipbtn" href="/pages/suggestions/for/donor/onboarding/{{userid}}">Skip</a>
+                <a class="btn btn-orange continuebtn" data-loading-text="Loading..." id="js-saveDonorCategories" data-userId="{{userid}}">Save and Continue <i class="fa fa-chevron-right"></i></a>
+            </div>
+
+        </div>
+
+    </div>

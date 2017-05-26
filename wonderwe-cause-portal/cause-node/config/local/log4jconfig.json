@@ -1,0 +1,22 @@
+{
+  "appenders": [
+    {
+      "category": "tests",
+      "type": "dateFile",
+      "filename": "/Users/venkat/dev/logs/wonderwe-nodejs.log",
+      "pattern": "-from-MM-dd",
+      "layout": {
+        "type": "[%r] [%[%5.5p%]] - %m%n"
+      }
+    },
+    {
+        "type": "gelf",
+        "host": "graylog2.scriptbees.com",
+        "port": "12201",
+        "facility": "cause-node"
+    }
+  ],
+  "levels": {
+    "tests":  "WARN"
+  }
+}

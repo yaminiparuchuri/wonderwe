@@ -1,0 +1,198 @@
+<span id="data-info" data-type="event" data-slug="{{eventData.slug}}" data-entitytype="event" data-entityid="{{eventData.entity_id}}" data-codeid="{{eventData.id}}" data-wecode="{{eventData.event_text}}" data-creater_id="{{eventData.creater_id}}" data-status="{{eventData.status}}"
+data-perfilled="{{eventData.filledPer}}" data-timeleft="{{eventData.time_left}}" data-event="{{#toJson eventData}}{{/toJson}}" data-payment_gateway="{{eventCreaterData.payment_gateway}}" data-currency_code="{{eventCreaterData.currency_code}}" data-currency_symbol="{{eventCreaterData.currency_symbol}}"></span>
+<div class="campaign-canopy">
+	<div class="container-fluid">
+		<div class="campaign-header">
+			<div class="col-sm-9 campaign-title">
+				<h1>{{eventData.event_name}}</h1>
+			</div>
+		</div>
+		<div class="col-sm-9">
+			<div class="js-campaignVideo"></div>
+			<div class="js-campaignPic">
+				<img src="{{constructUrl eventData.event_picture_url '900x500'}}" class="stretch" />
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="module contribute-box">
+				<h3>{{eventData.volunteers_filled}}
+					<small> out of</small> {{eventData.volunteers_required}}
+					<small> people</small>
+				</h3>
+				<div class="donation-progress-bar-bg">
+					<div class="donation-progress-bar">
+						<div class="donation-progress-fill">
+						</div>
+					</div>
+				</div>
+				<p>{{eventData.filledPer}}% Filled</p>
+				{{#if loadFrom}} {{else}}
+					<button class="btn btn-default btn-orange btn-lg btn-block js-event-signups-btn js-event-signup" data-event_id= {{eventData.id}}>Sign up</button>
+				{{/if}}
+				<div class="statcard">
+					<h3 class="">{{eventData.time_left}}
+						<small>days to go</small>
+					</h3>
+				</div>
+				<div class="statcardinfo hide">
+					<span class="count" style="color:red">Already Expired</span>
+				</div>
+			</div>
+			<div class="campaign-actions">
+				<h4>When:</h4>
+				<span>{{eventData.start_date}} - {{eventData.end_date}}</span>
+				<h4>Where:</h4>
+				<span>{{eventData.location}}</span>
+				<div><a href="https://www.google.co.in/maps/place/{{eventData.location}}" target="_blank">
+				View on google map <i class="fa fa-map-marker"></i></a></div>
+			</div>
+		</div>
+		<div class="col-sm-12 module" style="margin: 10px 0px 0px 0px;">
+			<a class="js-share-event btn col-sm-1"><i class="fa fa-share-alt"></i> Share</a>
+			<a class="js-comment-event btn col-sm-1"><i class="icon-we-star"></i> Comment</a>
+			<span class="benefiting col-sm-8" style="margin-left: 7%;text-align: right;">We#{{eventData.event_text}} <a href="#" class="js-campaignwecode-help icon-circle"><i class="fa fa-question"></i></a></span>
+		</div>
+		<div class="col-sm-12 well js-event-comment-div" style="margin: 10px 0px 0px 0px;display:none">
+		</div>
+	</div>
+</div>
+<div class="campaign-body">
+	<div class="container-fluid wrapper sticker">
+		<div class="affix-mainpage">
+			<div class="col-xs-12 col-sm-3">
+				<div class="module campaign-organizer">
+					<h4>Organizer:</h4>
+					<hr>
+					<h4><a href="/{{eventCreaterData.slug}}" data-charityid="{{eventCreaterData.id}}" class="js-campaign-organization">{{eventCreaterData.name}}</a></h4>
+					<a href="/{{eventCreaterData.slug}}" data-charityid="{{eventCreaterData.id}}" class="js-campaign-organization">
+						<img src="{{constructUrl eventCreaterData.profile_pic_url '200x200'}}" alt="profile image">
+					</a>
+					<div class="profile-header-card">
+						<p id="js-cause-desc">{{{eventCreaterData.description}}}</p>
+					</div>
+					<div class="photorail" id="js-photorail">
+					</div>
+				</div>
+				<div class="footer inappfooter">
+				</div>
+			</div>
+			<!-- /col-sm-3 -->
+			<div class="col-sm-6">
+				<div class="module">
+					<ul class="event-card-container">
+						<li class="js-event-nav active" data-tab="1"><a id="js-event-overview">Overview</a></li>
+						{{#if eventTickets.length}}
+							<li class="js-event-nav" data-tab="2"><a id="js-event-attendance-tickets">Attendance tickets</a></li>
+						{{/if}}
+						{{#if eventShifts.length}}
+							<li class="js-event-nav" data-tab="3"><a id="js-event-volunteer-shifts">Volunteer shifts</a></li>
+						{{/if}}
+						<li class="js-event-nav" data-tab="4"><a id="js-event-comments">Comments <span id="js-event-comments-count">2</span></a></li>
+					</ul>
+					<hr>
+					<div class="js-event-content row" id="js-event-description">{{{eventData.description}}}</div>
+					{{#if eventTickets.length}}
+						<div class="js-event-content row" id="js-event-tickets" style="display:none">
+							<div class="js-ticket-style col-sm-12">
+								{{#each eventTickets}}
+									<div class="js-ticket-div col-sm-12">
+										<div class="col-sm-12">
+											<h4>{{ticket_name}}</h4>
+										</div>
+										<div class="col-sm-12">
+											<p>{{description}}</p>
+										</div>
+										<div class="col-sm-12">
+											<h5 class="col-sm-3"><b>Price:</b></h5>
+											<h5 class="col-sm-9">{{prise}}</h5>
+										</div>
+										<div class="col-sm-12">
+											<h5 class="col-sm-3"><b>Available:</b></h5>
+											<h5 class="col-sm-9">{{difference quantity_required quantity_sold}}</h5>
+										</div>
+										<div class="col-sm-12">
+											<h5 class="col-sm-3"><b>Sales end on:</b></h5>
+											<h5 class="col-sm-9">{{formatdate end_date 'LL'}}</h5>
+										</div>
+										<div class="col-sm-12"><a class="btn btn-primary js-book-ticket js-event-signups-btn col-sm-2 {{disable quantity_required quantity_sold}}" data-event_name="{{event_name}}" data-ticket_name="{{ticket_name}}" data-description="{{description}}" data-price="{{prise}}"
+											data-quantity_required="{{quantity_required}}" data-event_text="{{event_text}}" data-quantity_sold="{{quantity_sold}}" data-event_id="{{event_id}}" data-ticket_id="{{id}}">Book Now</a></div>
+									</div>
+								{{/each}}
+							</div>
+						</div>
+					{{/if}}
+					{{#if eventShifts.length}}
+						<div class="js-event-content row" id="js-event-shifts" style="display:none">
+							<div class="js-volunteer-style col-sm-12">
+								{{#each eventShifts}}
+									<div class="js-volunteer-div col-sm-12">
+										<div class="col-sm-12">
+											<h4>{{shift_name}}</h4>
+										</div>
+										{{#if responsibilities}}
+											<div class="col-sm-12">
+												<p>{{responsibilities}}</p>
+											</div>
+										{{/if}}
+										<div class="col-sm-12">
+											<h5 class="col-sm-3"><b>Requirement:</b></h5>
+											<h5 class="col-sm-9">{{volunteers_required}}</h5>
+										</div>
+										<div class="col-sm-12">
+											<h5 class="col-sm-3"><b>Filled:</b></h5>
+											<h5 class="col-sm-9">{{{link volunteers_filled id}}} </h5>
+										</div>
+										<div class="col-sm-12">
+											<h5 class="col-sm-3"><b>Open:</b></h5>
+											<h5 class="col-sm-9">{{difference volunteers_required volunteers_filled}}</h5>
+										</div>
+										<div class="col-sm-12"><a class="btn btn-primary js-shift-signup js-event-signups-btn col-sm-2 {{disable volunteers_required volunteers_filled}}" data-event_name="{{event_name}}" data-shift_name="{{shift_name}}" data-responsibilities="{{responsibilities}}" data-volunteers_required="{{volunteers_required}}"
+											data-volunteers_filled="{{volunteers_filled}}" data-event_text="{{event_text}}" data-event_id="{{event_id}}" data-shift_id="{{id}}">Sign up</a></div>
+									</div>
+								{{/each}}
+							</div>
+						</div>
+					{{/if}}
+					<div class="js-event-content" id="js-event-comments-list" style="display:none">{{{eventData.description}}}</div>
+				</div>
+			</div>
+			<!-- /col-sm-6 -->
+			<div class="col-sm-3 lg-noOverflow">
+				<div class="module">
+					<h4>People going {{eventParticipants.length}}</h4>
+					<hr>
+					<ul class="donor-wall">
+						{{#if eventParticipants.length}}
+							{{#each eventParticipants}}
+								{{#if active}}
+									<li>
+								{{else}}
+									<li style="position: relative;cursor: text;pointer-events: none;">
+								{{/if}}
+								{{#if active}}
+									<a href="/{{slug}}">
+										<img src="{{constructUrl profile_pic_url '48x48'}}" class="img-circle" alt="profile image">
+									</a>
+								{{else}}
+									<img src="{{constructUrl profile_pic_url '48x48'}}" class="img-circle" alt="profile image">
+								{{/if}}
+								{{#if active}}
+									<a href="/{{slug}}">
+										<h5>{{name}}</h5>
+									</a>
+								{{else}}
+									<h5>{{name}}</h5>
+								{{/if}}
+								{{date_signup}}
+								</li>
+							{{/each}}
+						{{else}}
+							<img src="/images/norsvps.png" alt="This event doesn't yet have any volunteers" class="img-responsive">
+							<div class="clearfix"></div>
+						{{/if}}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

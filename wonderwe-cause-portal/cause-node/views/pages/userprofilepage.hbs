@@ -1,0 +1,282 @@
+<div id="data-info" data-id="{{user.id}}" data-entitytype="user" data-slug="{{user.userSlug}}" data-entityid="{{user.entityid}}" data-userid="{{user.id}}">
+</div>
+<div class="profile-page">
+<div id="followalertdiv" class="alert alert-info" style="margin-top:100px;display:none;">
+        <button type="button" class="close js-close-alert" aria-hidden="true"> &times;</button>
+        <span id="spanid"></span>
+    </div>
+	{{#if user.background_pic_url}}
+	<div class="profile-canopy with-org-banner" style="background-image:url({{constructUrl user.background_pic_url '1500x500'}})"></div>
+	{{else}}
+	<div class="profile-canopy with-org-banner"></div>
+	{{/if}}
+	<div class="container-fluid">
+		<div class="profile-avatar">
+			<img src="{{constructUrl user.profile_pic_url '200x200'}}" class="" alt="profile image">
+		</div>
+	</div>
+	<div class="filterbar">
+		<div class="container-fluid">
+			<div class="filter-choice">
+				<div class="col-sm-offset-3 pull-left">
+					<a class="js-donor active js-userPostsData" data-userId="{{user.user_id}}">
+						<span class="text-heading">Posts</span>
+						<span class="count">{{numPosts}}</span>
+					</a>
+					<a class="js-donor js-fundraiseData" data-userId="{{user.user_id}}">
+						<span class="text-heading">Fundraising</span>
+						<span class="count">{{totalFundraisersCount}}</span>
+					</a>
+					<a class="js-donor js-userFollowingData" data-userId="{{user.user_id}}">
+						<span class="text-heading">Following</span>
+						<span class="count">{{numfollowing}}</span>
+					</a>
+					<a class="js-donor js-userFollowerData" data-userId="{{user.user_id}}">
+						<span class="text-heading">Followers</span>
+						<span class="count">{{numfollowers}}</span>
+					</a>
+				</div>
+				<!-- <div class="pull-right">
+					<a class="js-share" role="button" data-description="{{user.description}}" data-image="{{constructUrl user.profile_pic_url '200x200'}}" data-toggle="collapse" href="#share-content" data-type="user" data-title="{{title}}" data-id="{{user.id}}" aria-expanded="false" data-url="{{shareObject.url}}" data-name="{{shareObject.name}}" data-via="{{shareObject.via}}" aria-controls="share-content">
+						<i class="fa fa-share-alt"></i> Share -->
+					</a>
+					{{#if user.is_following}}
+					<a class="pull-right other-link-type btn btn-subtle follow-user-main btn-following js-followbutton" data-slug="{{user.userSlug}}" data-id="{{user.id}}" data-type="user">
+						<span class="follow-text"><i class="fa fa-plus"></i> Follow</span>
+						<span class="unfollow-text">Unfollow</span>
+						<span class="following-text">Following</span>
+					</a>
+					{{else}}
+					<a class="pull-right other-link-type btn btn-subtle follow-user-main btn-follow js-followbutton" data-slug="{{user.userSlug}}" data-id="{{user.id}}" data-type="user">
+						<span class="follow-text"><i class="fa fa-plus"></i> Follow</span>
+						<span class="unfollow-text">Unfollow</span>
+						<span class="following-text">Following</span>
+					</a>
+					{{/if}}
+				</div>
+				<!-- /pull-right -->
+			</div>
+			<!-- /filter-choice -->
+		</div>
+	</div>
+	<!-- /filterbar -->
+	<div class="container-fluid">
+		<div class="col-sm-3">
+			<div class="profile-header-card">
+				<h4>{{user.name}}</h4>
+				<small>
+					@{{user.userSlug}}
+				</small>
+				<p>{{{user.description}}}</p>
+				<small>
+					{{#if user.city}}
+					  <i class="fa fa-map-marker"></i>{{ifconcat user.city user.state}}
+						<br>
+					{{/if}}
+
+					{{#if date_created}}<i class="fa fa-clock-o"></i> Joined {{date_created}}
+						<br>
+					{{/if}}
+				</small>
+				<br /> {{#if accountUser}}
+				<a class="js-public-editprofile btn btn-subtle btn-block" data-userId="{{user.id}}" style="display: none"><i class="fa fa-pencil"></i> Edit Profile</a> {{else}}
+				<a class="js-posttobtn btn btn-subtle btn-block" role="button" data-id="{{user.id}}" data-entityid="{{user.entityid}}" data-type="user" data-image="{{user.profile_pic_url}}" data-type="user" data-name="{{user.name}}" data-slug="{{user.userSlug}}">Post to @{{user.userSlug}}</a> {{/if}}
+			</div>
+			<div class="photorail js-photorail">
+			</div>
+		</div>
+		<!-- / col-sm-3 -->
+		<div class="col-sm-offset-3 actionbar">
+			<div class="collapse" id="share-content"></div>
+			<div class="collapse" id="writepost-content"></div>
+		</div>
+		<div class="col-sm-offset-3">
+			<div class="col-sm-8 profile-spacing">
+				<div class="module discover-card-container">
+					<div class="js-userPostsInformations js-org-posts">
+					</div>
+					<div class="js-fundraiseInformation" class="profile-cards" style="display: none;">
+						<div class="profileheading">
+							<ul>
+								<li><a class="js-donorFollowPeople active js-donorUI js-donorFundraisers" data-count="{{numPeopleFollowing}}">Fundraisers (<span>{{nooffundraisecampaigns}}</span>)</a></li>
+								<li><a class="js-donorTeams js-donorUI" data-count="{{teamCount}}">Peer-to-peer (<span>{{teamsCount}}</span>)</a></li>
+								<li><a class="js-userTeams js-donorUI" data-count="{{numOfTeams}}">Teams (<span>{{numOfTeams}}</span>)</a></li>
+								<!-- <li><a class="js-donorFollowOrganization js-donorUI" data-count="{{numOrgsFollowing}}">Teams (<span>{{numOrgsFollowing}}</span>)</a></li>
+                                <li><a class="js-donorFollowCampaigns js-donorUI" data-count="{{numCamFollowing}}">Challenges (<span>{{numCamFollowing}}</span>)</a></li> -->
+							</ul>
+						</div>
+						<div class="js-donor-fund-campaigns">
+
+						</div>
+					 	<div class="js-user-teams" style="display: none">
+					 						<ul class="discover-card-container">
+					 							{{#if userTeams}}{{#each userTeams}}
+					 							<li class="camp-prev campaignCard js-teamView" data-slug="{{slug}}">
+					 								<div class="gradient">
+					 									<div class="personororgname">
+					                     {{#if beneficiary}}
+					                     <h4 class="fa fa-users">{{{greater beneficiary 37}}}</h4>
+					                     {{else}}
+					                     {{#if charity_name}}
+					                     <h4 class="fa fa-users">{{{greater charity_name 37}}}</h4>
+					                      {{else}}
+					 										<h4 class="fa fa-users">{{{greater team_name 37}}}</h4>
+					 										{{/if}}
+					 										{{/if}}
+					 									</div>
+					 								</div>
+					 								<div class="img-bg-card" style="background-image:url({{constructUrl team_logo '283x283'}})">
+					 								</div>
+					 								<div class="dollor">
+					 								<div class="bottom-card">
+					 									<h4>{{{greater team_name 41}}}</h4>
+					 									<h5>We#{{slug}}</h5>
+					 									<h5>Created by:{{greater creator_name 20}}</h5>
+					 								</div>
+					 								<div class="donorstats">
+					 									<div class="statcard">
+					 										<span>Raised</span>
+					 										<span class="count">{{noof_donations}}</span>
+					 									</div>
+					 									<div class="statcard">
+					 										<span>Donors</span>
+					 										<span class="count">{{noof_donors}}</span>
+					 									</div>
+					 									<div class="statcard">
+					 										<span>Fundraisers</span>
+					 										<span class="count">
+					 									 {{campaigns_count}}
+					 									</span>
+					 									</div>
+					 								</div>
+					 							</div><div class="camp-btns js-actionsBar">
+					 								<a class="btn btn-subtle  js-teamView" data-slug="{{slug}}" style="padding:7px;">View Page</a>
+					 							</div>
+					 							</li>
+					 							{{/each}} {{else}} <img src="/images/no_teams.png" alt="This user has not started any teams" class="img-responsive">{{/if}}
+					 						</ul>
+					 					</div>
+						<div class="js-donor-team-campaigns" style="display: none">
+							<ul class="discover-card-container">
+								{{#if teams}}{{#each teams}}
+								<li class="camp-prev campaignCard js-org-campaignsPage" data-slug="{{campaignSlug}}">
+									<div class="gradient">
+										<div class="personororgname">
+											<h4>{{{greater organization_name 37}}}</h4>
+										</div>
+										{{#if group_title}}
+										<div><i class="fa fa-tag"></i> {{group_title}}</div>
+										{{/if}}
+									</div>
+									<div class="img-bg-card" style="background-image:url({{constructUrl team_picture_url '283x283'}})">
+									</div>
+									<div class="dollor">
+										<div class="top-card">
+											<h3 class="text-center">{{currencyFormat currency_symbol donation}}</h3>
+										</div>
+										<div class="bottom-card">
+											<div class="donation-progress-bar-bg">
+												<div class="donation-progress-bar">
+													<div class="donation-progress-fill" style="width: {{donation_progress}}%;">
+													</div>
+												</div>
+											</div>
+											<h4>{{{greater team_name 41}}}</h4>
+											<h5>We#{{code_text}}</h5>
+											<h5>Created by: {{#if campaign_creator}} {{greater campaign_creator 20}} {{else}} {{greater organization_name 20}} {{/if}}</h5>
+										</div>
+										<div class="donorstats">
+											<div class="statcard">
+												<span>Donors</span>
+												<span class="count">{{noof_donors}}</span>
+											</div>
+											<div class="statcard">
+												<span>Goal</span>
+												<span class="count">{{currencyFormat currency_symbol  goal}}</span>
+											</div>
+											<div class="statcard">
+												<span>Days to go</span>
+												<span class="count">
+														{{#equal type 'ongoing'}}
+															<span class="count">
+																<img src="/images/infinity.png" width="25" height="10">
+															</span>
+														{{else}}
+														{{days_togo}}
+												</span>
+												{{/equal}}
+											</div>
+										</div>
+									</div>
+									<div class="camp-btns-actions row">
+										<div class="col-sm-12">
+											{{#if time_left}}
+											<button type="submit" class="btn btn-block btn-default" data-charityid="{{charity_id}}" data-charitytitle="{{../charityInfo.name_tmp}}" data-codeid="{{id}}" data-donations="{{suggested_donation}}" data-title="{{title}}" data-wecode="{{code_text}}" data-payment_gateway="{{payment_gateway}}" data-currency_code="{{currency_code}}" data-currency_symbol="{{currency_symbol}}" data-status="{{status}}" style="color:red">Event Expired</button> {{else}}
+											<button type="submit" class="btn btn-block btn-default charity-donate-model" data-charityid="{{charity_id}}" data-charitytitle="{{../charityInfo.name_tmp}}" data-codeid="{{id}}" data-donations="{{suggested_donation}}" data-title="{{team_name}}" data-wecode="{{code_text}}" data-payment_gateway="{{payment_gateway}}" data-currency_code="{{currency_code}}" data-currency_symbol="{{currency_symbol}}" data-fundraiseruserid="{{fundraiser_userid}}" data-fundraisercodeid="{{fundraiser_codeid}}" data-fundraiser="{{fundraiser}}" data-referenceuserid="{{reference_userid}}" data-slug="{{campaignSlug}}">Donate</button> {{/if}}
+										</div>
+									</div>
+								</li>
+								{{/each}} {{else}} <img src="/images/nofundraising-p2p.png" alt="This user has not started any peer to peer fundraisers" class="img-responsive">{{/if}}
+							</ul>
+						</div>
+					</div>
+					<div class="js-userFollowingInformation" style="display:none">
+						<div class="profileheading">
+							<ul>
+								<li><a class="js-donorFollowPeople active js-donorUI" data-count="{{numPeopleFollowing}}">People (<span>{{numPeopleFollowing}}</span>)</a></li>
+								<li><a class="js-donorFollowOrganization js-donorUI" data-count="{{numOrgsFollowing}}">Organizations (<span>{{numOrgsFollowing}}</span>)</a></li>
+								<li><a class="js-donorFollowCampaigns js-donorUI" data-count="{{numCamFollowing}}">Campaigns (<span>{{numCamFollowing}}</span>)</a></li>
+							</ul>
+						</div>
+						<div id="js-following-wizard">
+							<div class="js-followpeopleDiv">
+								<ul>
+								</ul>
+							</div>
+							<div class="js-followOrgDiv" style="display: none">
+								<ul>
+								</ul>
+							</div>
+							<div class="js-followcampDiv" style="display: none;">
+								<ul>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- profile-cards -->
+					<div class="js-userFollowersInformation profile-cards" style="display: none;">
+						<div id="js-follow-wizard">
+							<ul class="js-users-list">
+								<!-- publicpage_controller will dynamically append current user when user clicks follow -->
+							</ul>
+							<div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /col-sm-9 -->
+			</div>
+			<div class="col-sm-4">
+				{{#if donornav}}
+				<div class="module">
+				  <h4>New to WonderWe?</h4>
+				  <hr>
+				  <p>Sign up now to create action and raise money for social impact.</p>
+				  <a class="btn btn-block btn-subtle" href="/signup">Sign up</a>
+				</div>
+				  {{/if}}
+        <div class="module js-whotofollowId">
+				</div>
+				<div class="module js-trendingId">
+				</div>
+			</div>
+		</div>
+		<!-- /col-sm-offset-3 -->
+	</div>
+	<!-- /container -->
+</div>
+{{#if videoData}}
+<div id="videoModal" class="modal" data-backdrop="static" data-keyboard="false">
+	{{> showvideo}}
+</div>
+{{/if}}

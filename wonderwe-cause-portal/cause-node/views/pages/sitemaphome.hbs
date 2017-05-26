@@ -1,0 +1,42 @@
+<link href="https://lipis.github.io/flag-icon-css/css/flag-icon.css" rel="stylesheet">
+
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 hidden-xs">
+
+               <div class="module">
+
+                    <div class="sitemap">
+                      <a href="/">Home ></a>
+                      Sitemap
+                    </div>
+
+                    {{#each sitemapData}}
+                    <div class="sitemap-country">
+                        <div class="sitemap-country-title">
+                            <span class="flag-icon flag-icon-{{country_code}}"></span>
+                            {{country_name}}
+                        </div>
+
+
+                        <div class="sitemap-country-content">
+                            <div class="row">
+                                {{#each cityList}}
+                                <div class="col-sm-4">
+                                    <ul>
+                                        <li><a href="{{convertToHyphenSlug country_city}}/cause-directory">{{country_city}}</a></li>
+                                    </ul>
+                                </div>
+                                {{/each}}
+                              </div>
+                        </div>
+
+
+                    </div>
+
+                   {{/each}}
+
+                </div>
+            </div>
+        </div>
+    </div>

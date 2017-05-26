@@ -1,0 +1,31 @@
+<div class="row signup-box">
+	<div class=" success col-sm-7 col-md-6 col-lg-5 col-centered whitebox">
+	{{#if denied}}
+	<p>This invitation already denied</p>
+	{{/if}}
+	{{#if created}}
+	    <p>You have already created fundraiser for this invitation</p>
+	    {{/if}}
+{{#if denynow}}
+    <p>Your activation is denied</p>
+    {{/if}}
+    {{#if denyalready}}
+        <p>Your activation is denied {{denyalready}}</p>
+    {{/if}}
+    {{#if noTeam}}
+    <p>No team details found, please contact your team captain</p>
+    {{/if}}
+    {{#if noInvite}}
+    <p>No invitation found, please contact your team captain</p>
+    {{/if}}
+    {{#if deniedinvitaion}}
+    <p>Team invitation denied successfuly</p>
+    {{/if}}
+    {{#if deniedinvitaionalready}}
+    <p>You have already denied team approval</p>
+    {{/if}}
+    {{#if approved}}
+    <p>This invitation already approved</p>
+    {{/if}}
+</div>
+</div>

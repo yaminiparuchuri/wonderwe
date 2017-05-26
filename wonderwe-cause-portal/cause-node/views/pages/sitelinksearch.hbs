@@ -1,0 +1,357 @@
+<div id="data-info" data-pagetype="searchpage" value="{{searchQuery}}"></div>
+<div class="container-fluid wrapper" id="js-search-div" style="display: block;top: 51px;">
+	<!-- <div class="col-sm-3"> -->
+	<aside class="col-sm-3" id="js-sidebar-profile">
+		<!-- Profile -->
+		<div class="module" id="js-sitelink-usercard-sidebar" style="display: none;">
+			<div class="donorwelcome"></div>
+		</div>
+		<div class="module create-fundraisers" id="js-fundraisers-sidebar" style="display: none;">
+		</div>
+		<div id="js-promotions-sidebar" style="display:none">
+			<div class="js-teams-campaigns">
+			</div>
+		</div>
+		<div class="module" id="js-fundraiser-offline-donation-div" style="display:none;">
+			<h4>Helpful Links</h4>
+			<hr />
+			<div class="row">
+				<ul>
+					<li id="js-fundraiser-add-offline-donations-list" style="display:none;">
+						<a class="blue" role="button">View Offline Donations</a></li>
+					<li id="js-fundraiser-add-offline-donation" style="display:none;">
+						<a class="blue">Add Offline Donation</a></li>
+					<li id="js-fundraiser-email-notification">
+                    <a class="blue" role="button">Email Notifications</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="module" id="js-sitelink-newuser" style="display: none;">
+		</div>
+		<div id="js-settings-sidebar">
+		</div>
+		<div class="sitelink-footer inappfooter" id="js-sitelink-left-footer" style="display: none;"></div>
+		<!-- </div> -->
+	</aside>
+	<!-- / container-sm-3 -->
+	<!-- <div id="elastic_content" class="col-sm-9"> -->
+	<!-- <section  class="col-sm-9" id="elastic_content"> -->
+	<section class="col-sm-9 col-xs-12" id="js-main">
+		<div class="js-main-content">
+			<div class="filterbar">
+				<div class="filter-choice">
+					<div class="input-group">
+						<input type="text" class="form-control search-again js-sitelink-search-again searchCode" value="{{searchQuery}}"><span class="input-group-btn"><button type="button" class="btn btn-subtle search-button" id="weSitelinkSearchAgain"><i class="fa fa-search"></i></button></span></div>
+					<!-- <a class="js-discover-toggle" data-type="code">Campaigns</a>
+          <a class="js-discover-toggle" data-type="user">People</a>
+          <a class="js-discover-toggle" data-type="charity">Organizations</a> -->
+				</div>
+			</div>
+			<!-- <div class="discover-container"> -->
+			<!-- Campaign result -->
+			<div class="filterbar">
+				<div class="filter-choice">
+					<a class="js-search-campaigns {{#equal activetab 'code'}}active{{/equal}} js-campaigns empty">
+          Campaigns</a>
+					<a class="js-search-people js-people empty {{#equal activetab 'user'}}active{{/equal}}">
+          People</a>
+					<a class="js-search-organizations js-organizations empty {{#equal activetab 'charity'}}active{{/equal}}">
+         Organizations</a>
+					 <a class="js-search-teams js-teams empty {{#equal activetab 'team'}}active{{else}}hide{{/equal}}">
+Teams</a>
+				</div>
+			</div>
+			<div class="discover-card-container elastic-search-container js-campaigns empty {{#notequal activetab 'code'}}hide{{/notequal}}">
+				{{#if campaigns.length}}
+					<ul class="search-list">
+						{{#each campaigns}}
+							<li class="camp-prev campaignCard js-campaignsPage js-elastic-campaignsPage" data-codeId="{{id}}" data-codeId="{{_source.id}}" data-slug="{{_source.username}}">
+								<div class="gradient">
+									<div class="personororgname">
+										<!-- {{#if _source.beneficiary}}
+											<h4><i class="icon ion-speedometer"></i> {{{greater _source.beneficiary 35}}}</h4> {{/if}} -->
+										{{#if _source.teamid}}
+											<h4><i class="fa fa-tag"></i>{{_source.teamname}}</h4>
+                                        {{else}}
+										{{#if _source.charity_name}}
+											<h4><i class="icon ion-ios-people"></i> {{{greater _source.charity_name 35}}}</h4>{{else}}
+                                    {{#if _source.beneficiary}}
+											<h4><i class="icon ion-speedometer"></i> {{{greater _source.beneficiary 35}}}</h4>
+										{{/if}}
+											 {{/if}}
+											{{/if}}
+										<!-- {{#if _source.teamid}}
+											<h4><i class="fa fa-tag"></i>{{_source.teamname}}</h4>
+                                        {{else}}
+                       					{{#if _source.beneficiary}}
+											<h4><i class="icon ion-speedometer"></i> {{{greater _source.beneficiary 35}}}</h4>
+										{{/if}}
+                      {{/if}} -->
+										<!-- <h4>{{{greater _source.charity_name 35}}}</h4> -->
+									</div>
+								</div>
+								<div class="img-bg-card" style="background-image:url({{constructUrl _source.profilepic '299x150'}})">
+								</div>
+								<div class="dollor">
+									<div class="top-card">
+										<h3 class="text-center">{{_source.currency_symbol}}{{_source.donation}} <small>{{_source.currency_code}}</small></h3>
+									</div>
+									<div class="bottom-card">
+										<div class="donation-progress-bar-bg">
+											<div class="donation-progress-bar">
+												<div class="donation-progress-fill" style="width:{{_source.donation_progress}}%;">
+												</div>
+											</div>
+										</div>
+										<h4>{{{greater _source.fullname 75}}}</h4>
+										{{#if _source.teamid}}
+										<h5>We#{{_source.wecode}}</h5>
+										<h5>Team: {{_source.teamname}}</h5>{{else}}
+										<h5>Created by: {{#if _source.campaign_creator}} {{_source.campaign_creator}} {{else}} {{_source.charity_name}} {{/if}}</h5>
+										<h5>We#{{_source.wecode}}</h5>{{/if}}
+									</div>
+								</div>
+								<div class="donorstats">
+									<div class="statcard"><span>Donors</span><span class="count">{{_source.donors}}</span></div>
+									<div class="statcard"><span>Goal</span><span class="count">{{_source.currency_symbol}}{{_source.goal}}</span></div>
+									<div class="statcard"><span>Days to go</span><span class="count">
+                {{#equal _source.campaigntype 'ongoing'}}
+                <span class="count">
+              <img src="/images/infinity.png" width="25" height="10">
+            </span>
+				{{else}}{{_source.time_left}}
+					</span>
+					{{/equal}}
+									</div>
+								</div>
+								<div class="camp-btns">
+									<!-- <div class="js-follow-campign-donate" data-slug="{{_source.username}}" data.charityid="{{charity_id}}" data-charitytitle="{{name}}" data-codeid="{{id}}"> -->
+									<div>
+										{{#equal _source.team_campaign 'yes'}}
+				{{else}}
+					{{#if _source.is_following}}
+						<a class="btn btn-subtle btn-following js-follow-sitelink" data-slug="{{_source.username}}" data-id="{{_source.id}}" data-charityid="{{_source.charity_id}}" data-type="code">
+							<span class="follow-text">Follow</span>
+							<span class="unfollow-text">Unfollow</span>
+							<span class="following-text">Following</span>
+						</a>
+					{{else}}
+						<a class="btn btn-subtle btn-follow js-follow-sitelink" data-slug="{{_source.username}}" data-id="{{_source.id}}" data-charityid="{{_source.charity_id}}" data-type="code">
+							<span class="follow-text">Follow</span>
+							<span class="unfollow-text">Unfollow</span>
+							<span class="following-text">Following</span>
+						</a>
+					{{/if}}
+										{{/equal}}
+										<a class="btn btn-subtle donate-model js-sitelink-donate" data-slug="{{_source.username}}" data-codeId="{{_source.id}}" data-charityid="{{_source.charity_id}}" data-title="{{_source.username}}" data-donations="{{_source.suggested_donation}}" data-wecode="{{_source.wecode}}"
+												data-type="code" data-payment_gateway="{{_source.payment_gateway}}" data-currency_code="{{_source.currency_code}}" data-fundraiser="{{_source.fundraiser}}" data-fundraiseruserid="{{_source.fundraiser_userid}}" data-currency_symbol="{{_source.currency_symbol}}">Donate</a>
+									</div>
+								</div>
+							</li>
+						{{/each}}
+				{{else}}
+					<div class="page-content empty text-center">
+						<img src="/images/search-noresults.png" class="img_responsive">
+					</div>
+				{{/if}}
+				</ul>
+			</div>
+			<div id="publicModal" class="modal" data-backdrop="static" data-keyboard="false"></div>
+			<div class="discover-card-container elastic-search-container js-organizations empty {{#notequal activetab 'charity'}}hide{{/notequal}}">
+				{{#if charities.length}}
+					<ul>
+						{{#each charities}}
+							<li class="camp-prev js-organizationProfileView" data-charityId="{{_id}}" data-slug="{{_source.username}}">
+								<div class="gradient">
+									<div class="personororgname">{{raisedDonations}}</div>
+								</div>
+								{{#if _source.background_pic_url}}
+									<div class="img-bg-card" style="background-image:url({{constructUrl _source.background_pic_url '258x258'}})"></div>
+								{{else}}
+									<div class="img-bg-card">
+									</div>
+								{{/if}}
+								<div class="org-card-section">
+									<div class="top-card">
+										<a class="profile-card-avatar">
+											<img src="{{constructUrl _source.profilepic '74x74'}}" class="img-rounded" alt="user profile image">
+										</a>
+									</div>
+									<div class="bottom-card">
+										<h4>{{_source.fullname}}</h4>
+										<h5>@{{_source.username}}</h5>
+										<h5>{{ifconcat _source.city _source.state}}</h5>
+									</div>
+								</div>
+								<div class="donorstats">
+									<div class="statcard"><span>Posts</span><span class="count">{{_source.noofposts}}</span></div>
+									<div class="statcard"><span>Campaigns</span><span class="count">{{_source.campaigns}}</span></div>
+									<div class="statcard js-followers-stat"><span>Followers</span><span class="count">{{_source.nooffollowers}}</span></div>
+								</div>
+								<div class="camp-btns">
+									<!-- <div data-charityId="{{_source.id}}" data-entityId="{{_source.id}}" data-charitytitle="{{_source.username}}"> -->
+									<div>
+										{{#if _source.is_following}}
+											<a class="btn btn-subtle btn-following js-follow-sitelink" data-slug="{{_source.username}}" data-id="{{_source.id}}" data-type="charity">
+												<span class="follow-text">Follow</span>
+												<span class="unfollow-text">Unfollow</span>
+												<span class="following-text">Following</span>
+											</a>
+										{{else}}
+											<a class="btn btn-subtle btn-follow js-follow-sitelink" data-slug="{{_source.username}}" data-id="{{_source.id}}" data-charityid="{{_source.id}}" data-type="charity">
+												<span class="follow-text">Follow</span>
+												<span class="unfollow-text">Unfollow</span>
+												<span class="following-text">Following</span>
+											</a>
+										{{/if}}
+										<a class="btn btn-subtle donate-model js-sitelink-donate" data-slug="{{_source.username}}" data-charityId="{{_source.id}}" data-entityId="{{_source.code}}" data-codeid="{{_source.code_id}}" data-charitytitle="{{_source.username}}" data-donations="{{_source.suggested_donation}}"
+												data-title="{{_source.username}}" data-wecode="{{_source.code}}" data-type="charity" data-payment_gateway="{{_source.payment_gateway}}" data-currency_code="{{_source.currency_code}}" data-fundraiser="{{_source.fundraiser}}" data-fundraiseruserid="{{_source.fundraiser_userid}}"
+												data-currency_symbol="{{_source.currency_symbol}}">Donate</a>
+									</div>
+								</div>
+							</li>
+						{{/each}}
+				{{else}}
+					<div class="page-content empty text-center" style="background-color: white; margin-top:0px;">
+						<img src="/images/search-noresults.png" class="img_responsive">
+					</div>
+				{{/if}}
+				</ul>
+			</div>
+			<!-- Person result -->
+			<div class="discover-card-container elastic-search-container js-people empty {{#notequal activetab 'user'}}hide{{/notequal}}">
+				{{#if users.length}} {{!--
+                <h3>People</h3> --}}
+					{{#each users}}
+						<li class="camp-prev js-showUserProfile js-elastic-showUserProfile" data-userId="{{_source.id}}" data-slug="{{_source.username}}">
+							<div class="gradient">
+								<div class="personororgname"></div>
+							</div>
+							{{#if _source.background_pic}}
+								<div class="img-bg-card" style="background-image:url({{constructUrl _source.background_pic '258x258'}})"></div>
+							{{else}}
+								<div class="img-bg-card">
+								</div>
+							{{/if}}
+							<div class="people-card-section">
+								<div class="top-card">
+									<a class="profile-card-avatar">
+										<img src="{{constructUrl _source.profilepic '74x74'}}" class="img-rounded" alt="user profile image">
+									</a>
+								</div>
+								<div class="bottom-card">
+									<h4>{{_source.fullname}}</h4>
+									<h5>@{{_source.username}}</h5>
+								</div>
+								<div class="donorstats">
+									<div class="statcard"><span>Fundraising</span><span class="count">{{_source.campaigns}}</span></div>
+									<div class="statcard js-following-stat"><span>Following</span><span class="count">{{_source.following}}</span></div>
+									<div class="statcard js-followers-stat"><span>Followers</span><span class="count">{{_source.nooffollowers}}</span>
+									</div>
+								</div>
+							</div>
+							<div class="camp-btns">
+								{{#equal _source.id ../../sessionid}}
+				{{else}}
+					{{#if _source.is_following}}
+						<a class="btn btn-subtle btn-following js-follow-sitelink" data-slug="{{_source.username}}" data-id="{{_source.id}}" data-type="user">
+							<span class="follow-text">Follow</span>
+							<span class="unfollow-text">Unfollow</span>
+							<span class="following-text">Following</span>
+						</a>
+					{{else}}
+						<a class="btn btn-subtle btn-follow js-follow-sitelink" data-slug="{{_source.username}}" data-id="{{_source.id}}" data-type="user">
+							<span class="follow-text">Follow</span>
+							<span class="unfollow-text">Unfollow</span>
+							<span class="following-text">Following</span>
+						</a>
+					{{/if}}
+								{{/equal}}
+								{{#equal _source.id ../../sessionid}}
+									<a id="searceditprofile" class="js-public-editprofile btn-editprofile btn btn-subtle" data-userId="{{user.id}}" style="width: 100%;"><i class="fa fa-pencil"></i> Edit Profile</a>
+				{{else}}
+					<a class="js-showUserProfile btn-editprofile btn btn-subtle" data-userId="{{_source.id}}" data-slug="{{_source.username}}"> View Profile</a> {{/equal}}
+							</div>
+						</li>
+					{{/each}}
+				{{else}}
+					<div class="page-content empty text-center" style="background-color: white; margin-top:0px;">
+						<img src="/images/search-noresults.png" class="img_responsive">
+					</div>
+				{{/if}}
+			</div>
+			<!--teams in eatic-->
+			 <div class="discover-card-container elastic-search-container js-teams empty {{#notequal activetab 'team'}}hide{{/notequal}}">
+				{{#if teams}}
+					<ul class="search-list">
+						{{#each teams}}
+							<li class="camp-prev js-teamView" data-slug="{{_source.wecode}}">
+								<div class="gradient">
+									<div class="personororgname">
+									</div>
+									<!-- {{#if _source.camp_name}}
+											<h4><i class="fa fa-users"></i>{{_source.camp_name}}</h4>
+											{{/if}} -->
+											{{#if _source.beneficiary}}
+											<h4><i class="fa fa-users"></i>{{_source.beneficiary}}</h4>
+											{{else}}
+											{{#if _source.charity_name}}
+											<h4><i class="fa fa-users"></i>{{_source.charity_name}}</h4>
+											{{else}}
+											<h4><i class="fa fa-users"></i>{{_source.teamname}}</h4>
+											{{/if}}
+											{{/if}}
+								</div>
+								<div class="img-bg-card" style="background-image:url({{constructUrl  _source.team_pic_url '283x283'}})">
+								</div>
+								<div class="dollor">
+									<div class="bottom-card">
+										<h4>{{{greater _source.fullname 41}}}</h4>
+										<h5>We#{{ _source.wecode}}</h5>
+										<h5>Created by: {{#if _source.creator_name}} {{greater _source.creator_name 20}} {{else}} {{greater organization_name 20}} {{/if}}</h5>
+									</div>
+									<div class="donorstats">
+										<div class="statcard">
+											<span>Raised</span>
+											<span class="count">{{currencyFormat currency_symbol  _source.noOfDonations}}</span>
+										</div>
+										<div class="statcard">
+											<span>Donors</span>
+											<span class="count">{{_source.noOfDonors}}</span>
+										</div>
+										<div class="statcard">
+											<span>Fundraisers</span>
+											<span class="count">
+                         {{_source.noOfFundraisers}}
+                        </span>
+										</div>
+									</div>
+								</div>
+								<div class="camp-btns-actions row">
+									<div class="col-sm-12">
+										<a class="btn btn-block btn-default js-teamView" data-slug="{{_source.wecode}}">View Page</a>
+									</div>
+								</div>
+							</li>
+						{{/each}}
+					</ul>
+				{{else}}
+					<div class="page-content empty text-center" style="background-color: white; margin-top:0px;">
+						<img id="campWithOutTeams" class="img_responsive" src="/images/search-noresults.png" alt="your campaign don't have any teams">
+				{{/if}}
+				</div>
+				<!--teams end-->
+			</div>
+	</section>
+	<!-- / container-sm-9 -->
+	<!-- <button class="btn btn-block btn-default js-elastic-seemore" style="display: none; margin-top:20px;">
+    see more
+</button> -->
+	<aside class="col-sm-3 col-xs-12" id="js-sidebar-info" style="display: none;">
+		<!--                 <div class="module js-campaignSmallPreview module-campaign-preview"></div>
+ -->
+		<div class="module hidden-xs js-preview-div"></div>
+		<div class="module hidden-xs js-member-faq"></div>
+		<div class="module hidden-xs js-settings-info"></div>
+		<div class="inappfooter footer"></div>
+	</aside>

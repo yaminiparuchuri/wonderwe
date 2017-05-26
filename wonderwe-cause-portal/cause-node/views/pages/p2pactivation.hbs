@@ -1,0 +1,16 @@
+<div class="row signup-box">
+	<div class=" success col-sm-7 col-md-6 col-lg-5 col-centered whitebox">
+		{{#if approvedby}}
+		  <div><p>This Peer-to-Peer campaign has been already approved by {{approvedby}}.</p></div>
+        {{/if}}
+        {{#if deletedby}}
+		  <div><p>This Peer-to-Peer campaign has been already denied by {{deletedby}}.</p></div>
+        {{/if}}
+        {{#if newApprovedby}}
+		  <div><p> Peer-to-Peer campaign has been approved successfully.</p></div>
+        {{/if}}
+        {{#if newDeletedby}}
+		  <div><p> Peer-to-Peer campaign has been denied successfully.</p></div>
+        {{/if}}
+	</div>
+</div>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+<testsuite name="Frisby Test: Register User" errors="0" tests="1" failures="1" time="50.026" timestamp="2015-07-22T22:06:29">
+  <testcase classname="Frisby Test: Register User" name="
+	[ POST http://localhost:3005/auth/register ]" time="50.024"><failure type="expect" message="Expected 500 to equal 200.">Error: Expected 500 to equal 200.
+    at new jasmine.ExpectationResult (/usr/lib/node_modules/jasmine-node/lib/jasmine-node/jasmine-1.3.1.js:114:32)
+    at null.toEqual (/usr/lib/node_modules/jasmine-node/lib/jasmine-node/jasmine-1.3.1.js:1316:29)
+    at null.&amp;lt;anonymous&amp;gt; (/home/anusha/anusha/projects/wonderwe-cause-portal/node_modules/frisby/lib/frisby.js:493:42)
+    at null.&amp;lt;anonymous&amp;gt; (/home/anusha/anusha/projects/wonderwe-cause-portal/node_modules/frisby/lib/frisby.js:1074:43)
+    at jasmine.Block.execute (/usr/lib/node_modules/jasmine-node/lib/jasmine-node/jasmine-1.3.1.js:1145:17)
+    at jasmine.Queue.next_ (/usr/lib/node_modules/jasmine-node/lib/jasmine-node/jasmine-1.3.1.js:2177:31)
+    at null._onTimeout (/usr/lib/node_modules/jasmine-node/lib/jasmine-node/jasmine-1.3.1.js:2167:18)
+    at Timer.listOnTimeout [as ontimeout] (timers.js:110:15)</failure><failure type="expect" message="Error: Error parsing JSON string: Unexpected token D
+	Given: Destination URL may be down or URL is invalid, Error: ETIMEDOUT">Error: Error parsing JSON string: Unexpected token D
+	Given: Destination URL may be down or URL is invalid, Error: ETIMEDOUT
+    at _jsonParse (/home/anusha/anusha/projects/wonderwe-cause-portal/node_modules/frisby/lib/frisby.js:1219:11)
+    at Frisby.&amp;lt;anonymous&amp;gt; (/home/anusha/anusha/projects/wonderwe-cause-portal/node_modules/frisby/lib/frisby.js:950:20)
+    at null.&amp;lt;anonymous&amp;gt; (/home/anusha/anusha/projects/wonderwe-cause-portal/node_modules/frisby/lib/frisby.js:1112:18)
+    at jasmine.Block.execute (/usr/lib/node_modules/jasmine-node/lib/jasmine-node/jasmine-1.3.1.js:1145:17)
+    at jasmine.Queue.next_ (/usr/lib/node_modules/jasmine-node/lib/jasmine-node/jasmine-1.3.1.js:2177:31)
+    at null._onTimeout (/usr/lib/node_modules/jasmine-node/lib/jasmine-node/jasmine-1.3.1.js:2167:18)
+    at Timer.listOnTimeout [as ontimeout] (timers.js:110:15)</failure></testcase>
+</testsuite>
+</testsuites>

@@ -1,0 +1,64 @@
+
+{{#if sitemapData}}
+			<div class="container-fluid">
+  			<div class="row">
+				 <div class="col-sm-12 col-md-12 hidden-xs">
+					<div class="module">
+						<div class="sitemap">
+							<a href="/"> Home > </a>
+							<a href="/sitemap/cause-directory">Sitemap Home > </a> {{city}}
+						</div>
+						<div class="sitemap-city">
+							<div class="sitemap-city-title">
+								{{city}} Sitemap
+							</div>
+							<div class="sitemap-city-content">
+
+								<div class="row">
+									<div class="col-sm-6">
+										<h2>Organization</h2>
+
+
+										{{#each sitemapData}}
+
+											{{#equaltoo entity_type 'charity'}}
+
+												<ul>
+													<li>
+														<a href="/{{charitySlug}}">{{charityShortTitle}}</a>
+														<br/>
+														<small>by: {{organization_name}}
+                            </small>
+													</li>
+												</ul>
+											{{/equaltoo}}
+										{{/each}}
+
+
+									</div>
+
+									<div class="col-sm-6">
+										<h2>Campaign</h2>
+										{{#each sitemapData}}
+											{{#equaltoo entity_type 'code'}}
+
+												<ul>
+													<li>
+														<a href="/{{campaignSlug}}">{{campaignTitle}}</a>
+
+														<!-- <br/>
+														<small>by: peoples</small> -->
+													</li>
+												</ul>
+											{{/equaltoo}}
+										{{/each}}
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	{{/if}}

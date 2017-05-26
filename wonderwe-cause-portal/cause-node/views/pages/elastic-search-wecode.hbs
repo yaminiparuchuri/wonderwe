@@ -1,0 +1,161 @@
+<div class="profileheading-container ">
+    <div class="container-fluid color-swatch gray-lighter">
+        <h3 class="text-center active">{{searchQuery}}</h3>
+    </div>
+</div>
+<div class="row">
+<div class="col-sm-12 col-md-offset-1 col-md-10">
+{{#if charities.length}}
+<h3>Organizations</h3> {{#each charities}}
+<li class="col-sm-6 col-md-4 js-organizationProfileView" data-charityId="{{_id}}" data-slug="{{_source.username}}">
+    <div class="profile-card">
+        <a class="profile-card-bg" style="background-image:url({{constructUrl _source.background_pic_url '290x110'}})">
+        </a>
+        <div class="profile-card-content">
+            <a class="profile-card-avatar">
+                <img src="{{constructUrl _source.profilepic '74x74'}}" class="img-rounded" alt="organization profile image">
+            </a>
+            <div class="profile-card-actions" data-charityId="{{_source.id}}" data-entityId="{{_source.id}}" data-charitytitle="{{_source.username}}">
+                
+                <a class="btn btn-subtle js-elastic-donate" data-charityId="{{_source.id}}" data-entityId="{{_source.code}}" data-codeid="{{_source.code_id}}" data-charitytitle="{{_source.username}}" data-donations="{{_source.suggested_donation}}" data-title="{{_source.username}}" data-wecode="{{_source.code}}" data-type="charity" data-currency_code="{{_source.currency_code}}" data-currency_symbol="{{_source.currency_symbol}}" data-payment_gateway="{{_source.payment_gateway}}" data-fundraiser="{{_source.fundraiser}}" data-fundraiseruserid="{{_source.fundraiser_userid}}">Donate</a> {{#if _source.is_following}}
+                <a class="btn btn-subtle btn-following js-follow-elastic" data-id="{{_source.id}}" data-type="charity">
+                    <span class="follow-text">Follow</span>
+                    <span class="unfollow-text">Unfollow</span>
+                    <span class="following-text">Following</span>
+                </a>
+                {{else}}
+                <a class="btn btn-subtle btn-follow js-follow-elastic" data-id="{{_source.id}}" data-type="charity">
+                    <span class="follow-text">Follow</span>
+                    <span class="unfollow-text">Unfollow</span>
+                    <span class="following-text">Following</span>
+                </a>
+                {{/if}} 
+            </div>
+            <div class="profile-card-fields">
+                <h4>{{_source.fullname}}</h4>
+                <small>
+                @{{_source.username}}<br>
+                {{ifconcat _source.city _source.state}}</small>
+                <p>{{{greater _source.description 103}}}</p>
+            </div>
+        </div>
+</li>
+{{/each}}
+<div class="clearfix"></div>
+{{/if}}
+<!-- Campaign result -->
+{{#if campaigns.length}}
+<h3>Campaigns</h3> {{#each campaigns}}
+<li data-codeId="{{id}}" class="camp-prev col-sm-6 col-md-3" id="js-elastic-campaigns" data-codeId="{{_source.id}}" data-slug="{{_source.username}}" style="padding-bottom: 10px;">
+<div class="gradient">
+                                <div class="personororgname">
+                                    <h4>{{{greater _source.fullname 75}}}</h4></div>
+                            </div>
+    <div class="img-bg-card" style="background-image:url({{constructUrl _source.profilepic '283x283'}})">
+    </div>
+    <div class="dollor">
+        <div class="top-card">
+            <h3 class="text-center">{{_source.currency_symbol}}{{_source.goal}}</h3>
+        </div>
+        <div class="bottom-card">
+            <div class="donation-progress-bar-bg">
+                <div class="donation-progress-bar">
+                    <div class="donation-progress-fill" style="width: {{_source.donation_progress}}%;">
+                    </div>
+                </div>
+            </div>
+            <h4>Benefiting {{{greater _source.charity_name 15}}}</h4>
+            <h6 class="wecode">We#{{_source.wecode}}</h6>
+        </div>
+    </div>
+  
+    <div class="camp-btns-actions row">
+        <div class="col-sm-6">
+        {{#if _source.is_following}}
+                <button type="submit" class="btn btn-subtle btn-following js-follow-campaign-user" data-id="{{_source.id}}" data-charityid="{{_source.charity_id}}" data-type="code">
+                    <span class="follow-text">Follow</span>
+                    <span class="unfollow-text">Unfollow</span>
+                    <span class="following-text">Following</span>
+                </button>
+                {{else}}
+                <button type="submit" class="btn btn-subtle btn-follow js-follow-campaign-user" data-id="{{_source.id}}" data-charityid="{{_source.charity_id}}" data-type="code" data-slug="{{_source.username}}">
+                    <span class="follow-text">Follow</span>
+                    <span class="unfollow-text">Unfollow</span>
+                    <span class="following-text">Following</span>
+                </button>
+                {{/if}}
+        </div>
+        <div class="col-sm-6">
+            <button type="submit" class="btn btn-subtle js-campaign-donate" data-codeId="{{_source.id}}" data-charityid="{{_source.charity_id}}" data-title="{{_source.username}}" data-donations="{{_source.suggested_donation}}" data-wecode="{{_source.wecode}}" data-type="code" data-currency_code="{{_source.currency_code}}" data-currency_symbol="{{_source.currency_symbol}}" data-payment_gateway="{{_source.payment_gateway}}" data-fundraiser="{{_source.fundraiser}}" data-fundraiseruserid="{{_source.fundraiser_userid}}">Donate</button>
+        </div>
+    </div>
+</li>
+{{/each}}
+<div class="clearfix"></div>
+{{/if}}
+<!-- Person result -->
+{{#if users.length}}
+<h3>People</h3> {{#each users}}
+<li class="col-sm-6 col-md-4 js-elastic-showUserProfile" data-userId="{{_source.id}}" data-slug="{{_source.username}}">
+    <div class="profile-card">
+        <a class="profile-card-bg" style="background-image:url({{constructUrl _source.background_pic '290x110'}})">
+        </a>
+        <div class="profile-card-content">
+            <a class="profile-card-avatar">
+                <img src="{{constructUrl _source.profilepic '74x74'}}" class="img-rounded" alt="user profile image">
+            </a>
+            <div class="profile-card-actions">
+                 {{#if accountUser}}
+                <a class="js-public-editprofile btn-socialheight btn btn-subtle" data-userId="{{user.id}}"><i class="fa fa-pencil"></i> Edit Profile</a> {{else}}{{#if _source.is_following}}
+                <a class="btn btn-subtle js-follow-elastic btn-following" data-id="{{_source.id}}" data-type="user">
+                    <span class="follow-text">Follow</span>
+                    <span class="unfollow-text">Unfollow</span>
+                    <span class="following-text">Following</span>
+                </a>
+                {{else}}
+                <a class="btn btn-subtle js-follow-elastic btn-follow" data-id="{{_source.id}}" data-type="user">
+                    <span class="follow-text">Follow</span>
+                    <span class="unfollow-text">Unfollow</span>
+                    <span class="following-text">Following</span>
+                </a>
+                {{/if}}{{/if}} 
+            </div>
+            <div class="profile-card-fields">
+                <h4>{{_source.fullname}}</h4>
+                <small>@{{_source.username}}<br> {{ifconcat _source.city _source.state}}</small>
+                <p>{{greater _source.description 103}}</p>
+            </div>
+        </div>
+    </div>
+</li>
+{{/each}}
+<div class="clearfix"></div>
+{{/if}} {{#if hashcodes.length}}
+<h3>Hashtags</h3> {{#each hashcodes}}
+<li class="col-sm-6 col-md-4 js-hashTagView" data-charityId="{{_source.id}}" data-slug="{{_source.text}}">
+    <div class="profile-card hashtag-container">
+        <div class="profile-card-content">
+            <div class="profile-card-actions" data-charityId="{{_source.id}}" data-entityId="{{_source.id}}" data-charitytitle="{{_source.text}}">
+            </div>
+            <div class="profile-card-fields">
+                <h4>#{{_source.text}}</h4>
+            </div>
+        </div>
+    </div>
+</li>
+{{/each}}
+<div class="clearfix"></div>
+{{/if}} {{#empty}}
+<p>Your search did not match any donors, organizations, or campaigns.</p>
+<p>Suggestions:</p>
+<ul class="bullets">
+    <li>Make sure all words are spelled correctly</li>
+    <li>Try different keywords</li>
+    <li>Try more general keywords</li>
+    <li>Try fewer keywords</li>
+</ul>
+{{/empty}}
+<button class="btn btn-block btn-default js-elastic-seemore" style="display: none; margin-top:20px;">
+    see more
+</button>
+</div></div>

@@ -1,0 +1,9 @@
+<sql-queries>
+    <sql-query id="login_sql">
+        <![CDATA[SELECT * FROM user_tbl u INNER JOIN user_profile_tbl up ON up.user_id = u.id
+        INNER JOIN charity_admin_tbl ca ON ca.user_id = u.id
+        INNER JOIN charity_tbl c ON c.id = ca.charity_id
+        WHERE u.email =? and u.password=?]]></sql-query>
+    <sql-query id="charity_details"><![CDATA[INSERT INTO accounts]]></sql-query>
+    <sql-query id="charity_stats"><![CDATA[INSERT INTO news]]></sql-query>
+</sql-queries>

@@ -1,0 +1,148 @@
+1.Auth_spec File
+register
+autoactivation
+tokenverification
+login
+
+2.getAllCharity_spec File
+getAllCharity
+
+3.charityclaim_spec.js
+charityClaimAction
+clamedRegisterAction
+afterTokenValidationAction
+globalTokenSetAfter
+afterClaimLoginAction
+
+4.charitydetails_spec.js
+useridForCharityAction
+getInitialsCodesAction
+
+5.campaign_spec.js
+createCampaignEventAction
+createCampaignOngoingAction
+updateCampaignEventAction
+updateCampaignOngoingAction
+
+6.charityadmin_spec.js
+adminDeleteAction
+updateAdminAction
+createAdminNewAction
+createAdminExistingAction
+charityUpdateAction
+
+7.feed_spec.js
+postFeedAction
+postFeedAction2
+postFeedAction3
+postFeedAction4
+deleteFeedAction
+mentionUserAction
+mentionCharityAction
+mentionCodeAction
+mentionHashtagAction
+adminexistloginAction
+adminexistglobalTokenSet
+adminexisttokenValidationAction
+getAllmentionsForCharity
+getMentionsAndReplysforcharity
+getCodeMentionsAndreplies
+charityMentionsReply
+
+8.charityanalytics_spec.js
+totalYearDonationDetails
+
+9.charityprofile_spec.js
+charityProfileAction
+
+10.donordashboard_spec.js
+donorDashbordAction
+
+11.donordonation_spec.js
+onetimeDonationAction
+monthlyDonationAction
+getSavedCardsAction
+donorDonationsHistory
+
+12.donorlogin_spec.js
+donorLoginglobalTokenSet
+donorLoginloginAction
+donorLoginTokenValidationAction
+
+13.donorprofile_spec.js
+donorProfileGetAction
+donorProfileUpdateAction
+donorProfileResetPasswordAction
+
+14.donorreg_spec.js
+donorglobalTokenSetAdmin
+donorLoginActionAdmin
+donorTokenValidationActionAdmin
+donorAutoActivationActionAdmin
+donorRegisterUserAdmin
+donorglobalTokenSetDonor
+donorLoginActionDonor
+donorTokenValidationActionDonor
+donorAutoActivationActionDonor
+donorRegisterUserDonor
+
+15.followers_spec.js
+charityFollowersAction
+followDonorAction
+followCodeAction
+followCharityAction
+followCharityAction2
+unFollowCharityAction
+
+16.login_spec.js
+charityglobalTokenSet
+charityloginAction
+charityTokenValidationAction
+
+17.repostorreply_spec.js
+repostAction
+repostGetAction
+replyAction
+
+---- End of files and methods -----
+
+--------- variables used -----------------------
+
+token  --  sets global token.
+
+tokenuserobject  --  first user who loggs in as a donor his user data is set to this array.
+
+(suppose in this flow kusuma.isolvers+donor20@gmail.com data)
+
+totalCharity  --  all the charities from guide star is set to this array.
+
+clamedresponse -- after sending clamed request response is set to this object.
+
+existClaimDoner and tokenuserobject --- contains user data who logs in after clamedresponse.
+
+charitylistuser -- contains number of charities list.
+
+createcampeventresponse -- contains created event campaign response.
+
+createcampongoingresponse -- contains created ongoing campaign response.
+
+charityinitialcodes -- contains created campaigns list it is a array
+
+newUseradmin -- contains response (adding New user as admin kusuma.isolvers+donor22@gmail.com)
+
+donoruserdata -- user data  (suppose in this flow kusuma.isolvers+donor23@gmail.com data)
+
+adminExistingresponse -- it has response came back from Adding Exisiting user
+
+
+
+
+
+
+
+
+
+
+
+
+

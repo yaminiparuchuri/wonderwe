@@ -1,0 +1,151 @@
+<div class="campaign-canopy" style="background-color:#efefef;">
+	<div class="app-inner">
+		<div class="container-fluid wrapper">
+			<aside class="col-sm-8 col-xs-12" id="js-leftsidebar-profile">
+				<div class="module row">
+					<div class="formheader report-form text-center">
+						<h3>Report a Campaign</h3>
+					</div>
+					<form class="form-horizontal" id="report-campaign-form">
+						<div id="successalertdiv" class="alert alert-success alert-dismissable" style="display:none">
+							<button type="button" class="close js-close-alert" aria-hidden="true"> &times;</button>
+							<span id="successspanid"></span>
+						</div>
+						<div id="alertdiv" class="alert alert-danger alert-dismissable" style="display:none">
+							<button type="button" class="close js-close-alert" aria-hidden="true"> &times;</button>
+							<span id="spanid"></span>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 text-left control-label" for="fullname">Full Name<span class="required-asterisk">*</span></label>
+							<div class="col-sm-8">
+								<input type="text" name="fullname" id="fullname" class="form-control" value="{{name}}" title="Full Name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label" for="email">Email<span class="required-asterisk">*</span></label>
+							<div class="col-sm-8">
+								<input type="text" name="email" id="email" value="{{email}}" class="form-control" title="Email">
+							</div>
+						</div>
+						<div class="form-group">
+		                    <label class="col-sm-3 control-label" for="country">Country<span class="required-asterisk">*</span> </label>
+		                   <div class="col-sm-8">
+			                  <select name="country" id="country" class="form-control country">
+			                <option value="select">--select--</option>
+
+			                  {{#each countries}}
+				              <option value={{id}}>{{name}}</option>
+				              {{/each}}
+			                  </select>
+		                   </div>
+	                    </div>
+						<!-- <div class="form-group">
+							<label class="col-sm-3 control-label" for="phone">Phone<span class="required-asterisk">*</span></label>
+							<div class="col-sm-8">
+								<input type="text" name="phone" id="phonenumber" class="form-control" value="{{phone}}" title="Phone">
+							</div>
+						</div> -->
+						<div class="form-group">
+		                 <label class="col-sm-3 control-label" for="phone">Phone
+		                 <span class="required-asterisk">*</span></label>
+		                  <div class="col-sm-8">
+			              <input type="text" name="phone" id="phone" value="{{home_phone}}" class="form-control tooltipbtn js-maskedphone" data-toggle="tooltip" data-placement="right" trigger="focus" title="phone" placeholder="+__(____)___-___" maxlength="15">
+		                  </div>
+	                    </div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label" for="slug">Page Url<span class="required-asterisk">*</span></label>
+							<div class="col-sm-8">
+								<input type="text" name="slug" id="slug" class="form-control" title="slug" value="{{url}}" readonly="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label" for="reason">Reason to report<span class="required-asterisk">*</span></label>
+							<div class="col-sm-8">
+								<textarea type="text" name="reason" id="reason" class="form-control" title="slug"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label" for="reason">Evidence to support claim</label>
+							<div class="col-sm-8">
+								<a class="btn btn-lg btn-2-block btn-subtle" id="js-evidence-image"> Upload a file</a>
+							</div>
+							<i id='imageUpload' class="col-sm-offset-3 alert-success" style="display:none;">Image uploaded successfully</i>
+							<small class="error-text" id="js-evidence-image-error"></small>
+							<input id="evidence_picture_url" name="evidence_picture_url" value="{{evidence_picture_url}}" type="hidden" class="form-control">
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-4">
+								<button class="btn btn-lg btn-orange" data-codeid={{codeid}} data-slug={{slug}} id="js-report-campaign">Submit</button>
+								<a class="btn btn-lg btn-2-block btn-subtle" href="{{url}}"> Cancel</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</aside>
+			<aside class="col-sm-4 col-xs-12" id="js-rightsidebar-report">
+				<div class="module">
+					<h4>Trust and Safety Questions</h4>
+					<hr>
+					<div class="panel-group" id="reportaccordion" role="tablist" aria-multiselectable="true">
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="reportheadingOne">
+								<h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#reportaccordion" href="#reportcollapseOne" aria-expanded="true" aria-controls="reportcollapseOne">
+                         When should I report fraud?
+        </a>
+      </h4>
+							</div>
+							<div id="reportcollapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="reportheadingOne">
+								<div class="panel-body">
+									<p>Contact WonderWe anytime when you feel a campaign is being falsely represented by the campaign organizer and funds are not directed to the beneficiary listed on the campaign page.
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="reportheadingTwo">
+								<h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#reportaccordion" href="#reportcollapseTwo" aria-expanded="false" aria-controls="reportcollapseTwo">
+          Does WonderWe settle personal disputes?
+        </a>
+      </h4>
+							</div>
+							<div id="reportcollapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="reportheadingTwo">
+								<div class="panel-body">
+									<p>WonderWe does not settle personal disputes. We recommend resolving issues in civil court or with the assistance of law enforcement.
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="reportheadingThree">
+								<h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#reportaccordion" href="#reportcollapseThree" aria-expanded="false" aria-controls="reportcollapseThree">Can law enforcement request information regarding campaigns from WonderWe?
+        </a>
+      </h4>
+							</div>
+							<div id="reportcollapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="reportheadingThree">
+								<div class="panel-body">
+									<p>Yes, please reach out to us at support@wonderwe.com</p>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="reportheadingFour">
+								<h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#reportaccordion" href="#reportcollapseFour" aria-expanded="false" aria-controls="reportcollapseFour">Will law enforcement be shared information regarding my report of fraud?
+        </a>
+      </h4>
+							</div>
+							<div id="reportcollapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="reportheadingFour">
+								<div class="panel-body">
+									<p>If law enforcement requests personal info, WonderWe will share the information requested but otherwise will protect your privacy and will not share with other parties.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</aside>
+		</div>
+	</div>
+</div>

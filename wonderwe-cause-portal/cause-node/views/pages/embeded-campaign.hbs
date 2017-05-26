@@ -1,0 +1,252 @@
+
+<!-- Todo : Need to change all inline styles to classes .But present we have to give like this because bootstrap styles not applying in iframes
+-->
+
+
+{{#equal widgetId "250x500_l"}}
+<div id="250x500_l">
+            <div class="l_250x500">
+                <div class="row width_250 pad10">
+                <h3>
+                  <a href="" style="cursor:default !important;"/> {{name}} </a>
+                  <br/><br/>                  
+                </h3>
+                    <span>{{beneficiary}}</span>
+                    <h3> 
+                      <b>{{currencyFormat currency_symbol donation}}</b> donated
+                    </h3>
+                    <h3>
+                      <b>{{currencyFormat currency_symbol goal}}</b> goal
+                    </h3>
+                </div>
+                <div class="img_250 width_250">
+                  <img src="{{constructUrl profile_pic_url '200x200'}}" 
+                  width="100%" height="100%">
+                  </img>
+                </div>
+                <div class="row width_250 pad10">
+                    <a class="btn btn-dark btn-lg" href="{{domain}}/{{code_text}}?donate=true" target="_blank">Donate</a>
+                </div>
+            </div>
+</div>
+{{/equal}}
+
+{{#equal widgetId "250x500_d"}}
+<div class="d_250x500">
+        <div class="row width_250 pad10">
+          <h3>
+            <a href="" style="cursor:default !important;"/>
+              {{name}}              
+            </a>
+            <br/><br/>
+            {{beneficiary}}
+          </h3>
+          <h3><b>{{currencyFormat currency_symbol donation}}</b> donated</h3>
+          <h3>
+            <b>{{currencyFormat currency_symbol goal}}</b> goal
+          </h3>
+        </div>
+        <div class="img_250 width_250">
+          <img src="{{constructUrl profile_pic_url '200x200'}}" 
+                  width="100%" height="100%">
+          </img>
+        </div>
+        <div class="row width_250 pad10">
+                    <a class="btn btn-dark btn-lg" href="{{domain}}/{{code_text}}?donate=true" target="_blank">Donate</a>
+      </div>
+      </div>
+{{/equal}}
+
+
+{{#equal widgetId "650x200_l"}}
+          <div class="row l_650x200" style="display:table;margin:0px;">
+              <div class="col-sm-3 " style="width:200px;float:left;padding:0px;">
+                <div class="img_650">
+                <img src="{{constructUrl profile_pic_url '200x200'}}" 
+                  width="100%" height="100%">
+                  </img>
+                </div>
+              </div>
+              <div class="col-sm-8" style="width:430px;float:right;">
+                <div class="pad_tb" style="padding:0px;">
+                <h3 class="mar_t0">
+                  <a href="" style="cursor:default !important;">
+                    {{name}}
+                  </a>
+                </h3>
+                <p> {{beneficiary}} </p>
+                <div class="col-sm-12">
+                  <div class="row">
+                    <div class="col-sm-7">
+                      <div class="widget-progress-bg">
+                      <p class="progress" style="width:{{donatePer}}%"></p>
+                      </div>                      
+                      <div class="row">
+                       <div style="float:left"><b>{{currencyFormat currency_symbol donation}}</b> donated</div>
+                       <div style="float:right;"><b>{{currencyFormat currency_symbol goal}}</b> goal</div>
+                       </div>
+                    </div>
+                    <div col-sm-5 style="margin-top:10px;">
+                      <a class="btn btn-dark btn-lg" href="{{domain}}/{{code_text}}?donate=true" target="_blank" style="padding:6px 12px;">Donate</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+{{/equal}}
+
+{{#equal widgetId "650x200_d"}}
+<div class="row d_650x200" style="display:table;margin:0px;">
+              <div class="col-sm-3" style="width:200px;float:left;padding:0px;">
+                <div class="img_650">
+                <img src="{{constructUrl profile_pic_url '200x200'}}" 
+                  width="100%" height="100%">
+                </img>
+                </div>
+              </div>
+              <div class="col-sm-8" style="width:430px;float:right;">
+              <div class="pad_tb" style="padding:0px;">
+                <h3 class="mar_t0">
+                  <a href="" style="cursor:default !important;">
+                   {{name}} 
+                  </a>
+                </h3>
+                <p> {{beneficiary}}</p>
+                <div class="col-sm-12">
+                  <div class="row">
+                    <div class="col-sm-7">
+                      <div class="widget-progress-bg">
+                        <p class="progress" style="width:{{donatePer}}%"></p>
+                      </div> 
+                       <div class="row">
+                          <div style="float:left"><b>{{currencyFormat currency_symbol donation}}</b> donated</div>
+                          <div style="float:right;"><b>{{currencyFormat currency_symbol goal}}</b> goal</div>
+                       </div>
+                    </div>
+                    <div col-sm-5>
+                      <a class="btn btn-dark btn-lg" href="{{domain}}/{{code_text}}?donate=true" target="_blank" style="padding:6px 12px;">Donate</a>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+{{/equal}}
+
+
+{{#equal widgetId '730x120_l'}}
+<div class="row l_730x120"  style="display:table;margin:0px;">
+            <div class="col-sm-3" style="width:230px;float:left;padding:0px;">
+              <div class="img_730">
+              <img src="{{constructUrl profile_pic_url '200x200'}}" 
+                  width="100%" height="100%">
+                  </img>
+              </div>
+            </div>
+            <div class="col-sm-8 " style="width:470px;float:right;">
+              <div class="pad_tb" style="padding:0px;">
+              <h3 class="mar_t0">
+                <a href="" style="cursor:default !important;">
+                  {{name}}
+                </a>
+              </h3>
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-9">
+                     <div class="widget-progress-bg">
+                      <p class="progress" style="width:{{donatePer}}%"></p>
+                      </div>
+                      <div class="row">
+                        <div style="float:left"><b>{{currencyFormat currency_symbol donation}}</b> donated</div>    
+                        <div style="float:right;">
+                          <b>{{currencyFormat currency_symbol goal}}</b> goal
+                        </div>
+                      </div>
+                    
+                  </div>
+                  <div col-sm-3>
+                    <a class="btn btn-dark btn-lg" href="{{domain}}/{{code_text}}?donate=true" target="_blank" style="padding:6px 12px;">Donate</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+{{/equal}}
+
+
+{{#equal widgetId '730x120_d'}}
+<div class="row d_730x120" style="display:table;margin:0px;">
+            <div class="col-sm-3" style="width:230px;float:left;padding:0px;">
+              <div class="img_730">
+              <img src="{{constructUrl profile_pic_url '200x200'}}" 
+                  width="100%" height="100%">
+                  </img>
+              </div>
+            </div>
+            <div class="col-sm-8" style="width:470px;float:right;">
+              <div class="pad_tb" style="padding:0px;">
+              <h3 class="mar_t0">
+                <a href="" style="cursor:default !important;">
+                  {{name}}
+                </a>
+              </h3>
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-9">
+                     <div class="widget-progress-bg">
+                      <p class="progress" style="width:{{donatePer}}%"></p>
+                      </div>
+                    <div class="row">
+                        <div style="float:left">
+                        <b>{{currencyFormat currency_symbol donation}}</b> donated
+                        </div>   
+                        <div style="float:right;">
+                          <b>{{currencyFormat currency_symbol goal}}</b> goal
+                        </div>
+                    </div>
+                  </div>
+                  <div col-sm-3>
+                    <a class="btn btn-dark btn-lg" href="{{domain}}/{{code_text}}?donate=true" target="_blank" style="padding:6px 12px;">Donate</a>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+{{/equal}}          
+
+
+{{#equal widgetId '650x50_l'}}
+<div class="row l_650x50" style="display:table;height:50px;margin:0px;padding-bottom:0px;">
+        <div class="col-sm-9" style="width:500px;float:left;">
+          <div class="widget-progress-bg">
+            <p class="progress" style="width:{{donatePer}}%"></p>
+          </div>
+          <div class="row" style="display:table;">
+            <div class="col-sm-6" style="width:250px;float:left;">{{name}}</div>
+            <div class="col-sm-6" style="width:250px;float:right;"><b>{{currencyFormat currency_symbol goal}}</b> goal</div>
+          </div>
+        </div>
+        <div class="col-sm-3" style="width:100px;float:right;">
+          <a class="btn btn-dark btn-sm" href="{{domain}}/{{code_text}}?donate=true" style="padding:5px 10px;" target="_blank">Donate</a>
+        </div>
+      </div>      
+{{/equal}}
+
+{{#equal widgetId '650x50_d'}}
+<div class="row d_650x50" style="display:table;height:50px;margin:0px;padding-bottom:0px;">
+        <div class="col-sm-9" style="width:500px;float:left;">
+          <div class="widget-progress-bg">
+            <p class="progress" style="width:{{donatePer}}%"></p>
+          </div>
+          <div class="row" style="display:table;">
+            <div class="col-sm-6" style="width:250px;float:left;">{{name}}</div>
+            <div class="col-sm-6" style="width:250px;float:right"><b>{{currencyFormat currency_symbol goal}}</b> goal</div>
+          </div>
+        </div>
+        <div class="col-sm-3" style="width:100px;float:right;">
+        <a class="btn btn-dark btn-sm" href="{{domain}}/{{code_text}}?donate=true" target="_blank" style="padding:5px 10px;">Donate</a>
+        </div>
+      </div>      
+{{/equal}}

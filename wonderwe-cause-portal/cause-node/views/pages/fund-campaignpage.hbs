@@ -1,0 +1,735 @@
+<span id='js-public-donate-click' data-donate="{{donatePopup}}"> </span>
+<span id='js-team-create-stop' data-teamid="{{campaignInfo.team_id}}"></span>
+<span id='js-peertopeer-campaign-click' data-p2p="{{p2pPopup}}" data-usertype="{{usertype}}" data-id="{{p2puserid}}" data-slug="{{campaignInfo.campaignSlug}}"> </span>
+<div class="alert alert-info alert-dismissable" id="teamMainCampAlert" style="display:none;margin-top:60px"></div>
+<div id="sharealertdiv" class="alert alert-info" style="margin-top:100px;display:none;">
+	<button type="button" class="close js-close-alert" aria-hidden="true"> &times;</button>
+	<span id="spanid"></span>
+</div>
+<span id="data-info" data-id="{{campaignInfo.id}}" data-type="campaign" data-slug="{{campaignInfo.campaignSlug}}" data-entitytype="code" data-donatePer="{{donatePer}}" data-entityid="{{campaignInfo.entityid}}" data-codeid="{{campaignInfo.id}}" data-wecode="{{campaignInfo.code_text}}" data-donations="{{campaignInfo.suggested_donation}}" data-status="{{campaignInfo.status}}" data-campaigntype="{{campaignInfo.type}}" data-timeleft="{{campaignInfo.time_left}}" data-fundraiser="{{fundraiser}}" data-teamcampaign="{{campaignInfo.team_campaign}}" data-campaign="{{#toJson campaignInfo}}{{/toJson}}" data-p2papprovalrequired="{{campaignInfo.p2p_approval_required}}" data-individual="{{campaignInfo.individual}}" data-notallowp2p="{{campaignInfo.donotallow_p2p_campaigns}}" data-teamcampaign="{{campaignInfo.team-campaign}}" data-title="{{campaignInfo.title}}" data-campaignowneremail="{{campaignInfo.campaign_creator_email}}" data-noofgivinglevels="{{getGivingLevelsCount}}" data-noofdonors="{{donorscount}}" data-userid="{{campaignInfo.user_id}}" data-teamapproval="{{campaignInfo.team_approve}}" data-creatorname="{{campaignInfo.creator_name}}"></span>
+<div class="campaign-canopy">
+	<div class="container-fluid">
+		<div class="alert alert-danger alert-dismissable" id="alertAccept" style="z-index: 1000;display:none">You already created a team fundraiser for this campaign.</div>
+		<div id="reportalertdiv" class="alert alert-success alert-dismissable" style="display:none">
+		</div>
+		<div id="teamdeletealertdiv" class="alert alert-info alert-dismissable" style="display:none">
+		</div>
+		<div class="alert alert-danger alert-dismissable" id="alerttimeleftDiv" style="z-index: 1000;display:none">Sorry this event has already expired.</div>
+		<div id="p2palertdiv" class="alert alert-info alert-dismissable" style="display:none">
+		</div>
+		<div id="teamalertdiv" class="alert alert-info alert-dismissable" style="display:none">
+		</div>
+		<div id="followalertdiv" class="alert alert-info" style="margin-top:100px;display:none;">
+			<button type="button" class="close js-close-alert" aria-hidden="true"> &times;</button>
+			<span id="spanid"></span>
+		</div>
+		<div class="alert alert-info alert-dismissable" id="GivingtimeleftDiv" style="z-index: 1000;display:none">Since you are viewing your campaign page as an organization,you can not make donations.</div>
+		<div class="alert alert-info alert-dismissable" id="teamCreationAlertDiv" style="z-index: 1000;display:none">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> The peer-to-peer campaign <strong>{{teamAdmin.team_name}}</strong> has been created successfully for <strong>{{teamAdmin.mainCampaignName}} </strong>.</div>
+		<div class="alert alert-warning alert-dismissable" id="alertdraftdiv" style="z-index: 1000;display:none"><strong>This is a draft only viewable by you.</strong> To publish this campaign click on "Manage" link above.</div>
+		{{#if videoData}}
+		<div class="share-video-link alert alert-info" style="margin-top:15px;text-align:center; z-index: 1000;display:none"><strong>{{videoData.name}}</strong> recorded a personalized video just for you. <a href="#" class="vide-show-click">  Click here to watch it again</a></div>
+		{{/if}}
+		<div class="campaign-header">
+			<div class="col-sm-9 campaign-title">
+				{{#if teamAdmin}}
+				<div class="p2p-creator">
+					<a href="{{domain}}/{{teamAdmin.slug}}"><img src="{{constructUrl teamAdmin.profile_pic_url '74x74'}}" class="pull-left img-rounded" alt="user profile image"></a>
+					<h1><small><a href="{{domain}}/{{teamAdmin.slug}}">{{teamAdmin.name}}</a>'s peer-to-peer campaign:</small></h1>
+				</div>
+				<h1>{{teamAdmin.team_name}} <small>is a fundraiser for</small> <strong><a href="/{{teamAdmin.mainCampaignSlug}}"> {{teamAdmin.mainCampaignName}} </a></strong></h1> {{else}} {{#if newteamCampaignAdmin}}
+				<div>
+					<!-- <a href="{{domain}}/{{teamAdmin.slug}}"><img src="{{constructUrl teamAdmin.profile_pic_url '74x74'}}" class="pull-left img-rounded" alt="user profile image"></a> -->
+					<h1><small><b>{{newteamCampaignAdmin.title}}</b> is a fundraiser for <a href="{{domain}}/{{newteamCampaignAdmin.mainCampaignSlug}}">{{newteamCampaignAdmin.maincampaignname}}</a></small></h1>
+				</div>
+				<!-- <h1>{{newteamCampaignAdmin.team_name}} <small>is a fundraiser for</small> <strong><a href="/{{teamAdmin.mainCampaignSlug}}"> {{campaignInfo.title}} </a></strong></h1> -->
+				{{else}}
+				<h1>{{campaignInfo.title}}</h1> {{/if}}{{/if}}
+			</div>
+			<div class="col-sm-3 campaign-location">
+				<p>
+					{{#if campaignInfo.city}}<i class="fa fa-map-marker"></i> {{ifconcat campaignInfo.city campaignInfo.state}}{{/if}}
+				</p>
+			</div>
+		</div>
+		<!-- <h3>We#{{campaignInfo.code_text}} <a href="#" class="js-campaignwecode-help icon-circle"><i class="fa fa-question"></i></a></h3> -->
+		<div class="col-sm-9">
+			<div class="js-mediaLoad" style="width: 900; height: 506px;"></div>
+			<div class="js-campaignVideo" style="display:none"></div>
+			<div class="js-campaignPic" style="display:none">
+				{{#if teamAdmin}} {{#if teamAdmin.code_picture_url}}<img src="{{constructUrl teamAdmin.code_picture_url '900x506'}}" class="stretch"> {{else}}<img src="{{constructUrl campaignInfo.code_picture_url '900x506'}}" class="stretch" />{{/if}}{{else}}
+				<img src="{{constructUrl campaignInfo.code_picture_url '900x506'}}" class="stretch" /> {{/if}}
+			</div>
+		</div>
+		<div class="js-join-team" data-currency_code="{{charityData.currency_code}}" data-image="{{campaignInfo.code_picture_url}}" data-description="{{campaignInfo.description}}" data-currency_symbol="{{charityData.currency_symbol}}" data-codeid="{{campaignInfo.id}}" data-title="{{campaignInfo.title}}" data-userid="{{campaignInfo.user_id}}" data-campaignadmin="{{campaignInfo.campaignAdmin}}" data-canmailing="{{campaignInfo.can_mailing_required}}" data-campadmin="{{campaignAdmin}}" data-teamcampuserid="{{teamcampuserid}}" data-maincampstatus="{{campaignInfo.status}}"></div>
+		<div class="col-sm-3">
+			<div class="module contribute-box">
+				<div class="amount-raised">{{currencyFormat charityData.currency_symbol campaignInfo.noof_donations}}<span class="campaign-currency-code">{{charityData.currency_code}}</span> {{#equal campaignInfo.userCountryCode charityData.currency_code}} {{else}}
+					<p>Approx. {{campaignInfo.userCurrencySymbol}}{{campaignInfo.donationConversion}} {{campaignInfo.userCountryCode}} <a href="#" class="js-currency-conversion blue" data-amount="{{campaignInfo.suggested_donation}}" data-campaign_country="{{charityData.currency_code}}" data-country_name="{{charityData.country_name}}" data-country_symbol="{{charityData.currency_symbol}}">Currency calculator </a></p>
+					{{/equal}}
+				</div>
+				<div class="donation-progress-bar-bg">
+					<div class="donation-progress-bar">
+						<div class="donation-progress-fill" style="width:{{donatePer}}%;">
+						</div>
+					</div>
+				</div>
+				<p>{{donatePer}}% funded</p>
+				{{#if emailpage}}
+				<a class="btn btn-default btn-orange btn-lg btn-block js-campaign-donateFund" data-charityid="{{charityData.charity_id}}" data-charitytitle="{{charityData.title}}" data-codeid="{{campaignInfo.id}}" data-donations="{{campaignInfo.suggested_donation}}" data-timeleft="{{campaignInfo.time_left}}" data-payment_gateway="{{campaignInfo.payment_gateway}}" data-title="{{campaignInfo.title}}" data-wecode="{{campaignInfo.code_text}}" data-currency_code="{{charityData.currency_code}}" data-currency_symbol="{{charityData.currency_symbol}}" data-fundraiseruserid="{{fundraiser_userid}}" data-fundraisercodeid="{{fundraiser_codeid}}" data-fundraiser="{{fundraiser}}" data-referenceuserid="{{reference_userid}}" data-furl="{{furl}}" data-email="{{email}}" data-turl="{{turl}}" data-inviteuserid="{{inviteuserid}}" data-active="{{active}}" data-team="{{campaignInfo.team_campaign}}" data-canmailing="{{campaignInfo.can_mailing_required}}" data-teamid="{{campaignInfo.team_id}}" data-countrycode="{{campaignInfo.countrycode}}" data-appFee="{{campaignInfo.app_fee}}" data-givinglevels="{{#toJson givingLevelsTotal}}{{/toJson}}">Donate Now</a>
+
+				{{else}}
+
+				<a class="btn btn-default btn-orange btn-lg btn-block js-campaign-donate" data-charityid="{{charityData.charity_id}}" data-charitytitle="{{charityData.title}}" data-codeid="{{campaignInfo.id}}" data-donations="{{campaignInfo.suggested_donation}}" data-timeleft="{{campaignInfo.time_left}}" data-payment_gateway="{{campaignInfo.payment_gateway}}" data-title="{{campaignInfo.title}}" data-wecode="{{campaignInfo.code_text}}" data-currency_code="{{charityData.currency_code}}" data-currency_symbol="{{charityData.currency_symbol}}" data-fundraiseruserid="{{fundraiser_userid}}" data-fundraisercodeid="{{fundraiser_codeid}}" data-fundraiser="{{fundraiser}}" data-referenceuserid="{{reference_userid}}" data-furl="{{furl}}" data-email="{{email}}" data-turl="{{turl}}" data-inviteuserid="{{inviteuserid}}" data-active="{{active}}" data-team="{{campaignInfo.team_campaign}}" data-canmailing="{{campaignInfo.can_mailing_required}}" data-teamid="{{campaignInfo.team_id}}" data-countrycode="{{campaignInfo.countrycode}}" data-appFee="{{campaignInfo.app_fee}}" data-givinglevels="{{#toJson givingLevelsTotal}}{{/toJson}}">Donate Now</a>
+				{{/if}}
+				<div class="stats-below-donate">
+					<div class="statcard">
+						<span class="count" id="js-campaign-goal" data-goal="{{campaignInfo.goal}}">{{currencyFormat charityData.currency_symbol campaignInfo.goal}} {{charityData.currency_code}}</span>
+						<span>goal</span>
+					</div>
+					<div class="statcard">
+						{{#equal campaignInfo.type "ongoing"}}
+						<span class="count">
+							<img src="/images/infinity.png">
+						</span> {{else}}
+						<span class="count">{{campaignInfo.time_left}}</span> {{/equal}}
+						<span>days to go</span>
+					</div>
+					<div class="statcard statcard-full">
+						{{#equal campaignInfo.userCountryCode charityData.currency_code}} {{else}}
+						<span class="count">Approx. {{campaignInfo.userCurrencySymbol}}{{campaignInfo.goalConversion}} {{campaignInfo.userCountryCode}} goal</span> {{/equal}}
+					</div>
+				</div>
+				<div class="statcardinfo hide">
+					<span class="count" style="color:red">Campaign ended.</span>
+				</div>
+			</div>
+			<div class="campaign-actions hidden-sm">
+				<a class="btn btn-social btn-facebook" id="js-facebook-share" data-href="https://www.facebook.com/sharer/sharer.php?u={{domain}}/{{campaignInfo.campaignSlug}}">
+					<i class="fa fa-facebook"></i> Share
+				</a>
+				<a href="#share-content" class="btn btn-subtle js-createViralVideo"><i class="fa fa-video-camera"></i> Viral Video</a>
+			</div>
+			{{#if teamAdmin}} {{else}} {{#equal campaignInfo.donotallow_p2p_campaigns 'no'}}
+			<div class="hidden-sm js-team-campaign-text">
+				<h3 class="hidden-md">Peer-to-peer fundraising</h3>
+				<p>Create a personal goal to help raise money for this fundraiser. <a href="#" class="js-peertopeer-help">Learn more</a></p>
+				<a class="btn btn-block btn-subtle js-fundraising-team" data-currency_code="{{charityData.currency_code}}" data-image="{{campaignInfo.code_picture_url}}" data-description="{{campaignInfo.description}}" data-currency_symbol="{{charityData.currency_symbol}}" data-codeid="{{campaignInfo.id}}" data-title="{{campaignInfo.title}}" data-userid="{{campaignInfo.user_id}}" data-campaignadmin="{{campaignInfo.campaignAdmin}}" data-canmailing="{{campaignInfo.can_mailing_required}}" data-campadmin="{{campaignAdmin}}" data-teamcampuserid="{{teamcampuserid}}">Create a peer-to-peer fundraiser</a>
+			</div>
+			{{/equal}} {{/if}}
+			<!--  {{#equal campaignInfo.donotallow_team_campaigns 'no'}}
+						<div class="hidden-sm js-team-text">
+							<h3 class="hidden-md">Team Support</h3>
+							<p>Form a team and invite team members to support this fundraiser.</p>
+							<a class="btn btn-block btn-subtle js-team-create" data-currency_code="{{charityData.currency_code}}" data-image="{{campaignInfo.code_picture_url}}" data-description="{{campaignInfo.description}}" data-currency_symbol="{{charityData.currency_symbol}}"
+											data-codeid="{{campaignInfo.id}}" data-title="{{campaignInfo.title}}" data-userid="{{campaignInfo.user_id}}" data-campaignadmin="{{campaignInfo.campaignAdmin}}" data-canmailing="{{campaignInfo.can_mailing_required}}" data-campadmin="{{campaignAdmin}}" data-teamcampuserid="{{teamcampuserid}}" data-campteamcaptains="{{campteamuserid}}">Support as a Team</a>
+						</div>
+						{{/equal}} -->
+		</div>
+		<!-- /col-sm-3 -->
+		<div class="visible-sm">
+			<div class="campaign-actions">
+				<a class="btn btn-social btn-facebook" id="js-facebook-share" data-href="https://www.facebook.com/sharer/sharer.php?u={{domain}}/{{campaignInfo.campaignSlug}}">
+					<i class="fa fa-facebook"></i> Share
+				</a>
+				<a href="#share-content" class="btn btn-subtle js-createViralVideo"><i class="fa fa-video-camera"></i> Viral Video</a>
+			</div>
+			{{#equal campaignInfo.donotallow_p2p_campaigns 'no'}}
+			<div class="js-team-campaign-text">
+				<h3>Peer-to-peer fundraising</h3>
+				<p>Create a personal goal to help raise money for this fundraiser. <a href="#" class="js-peertopeer-help">Learn more</a></p>
+				<a class="btn btn-block btn-subtle js-fundraising-team" data-currency_code="{{charityData.currency_code}}" data-image="{{campaignInfo.code_picture_url}}" data-description="{{campaignInfo.description}}" data-currency_symbol="{{charityData.currency_symbol}}" data-codeid="{{campaignInfo.id}}" data-title="{{campaignInfo.title}}" data-userid="{{campaignInfo.user_id}}" data-campaignadmin="{{campaignInfo.campaignAdmin}}" data-canmailing="{{campaignInfo.can_mailing_required}}" data-campadmin="{{campaignAdmin}}" data-teamcampuserid="{{teamcampuserid}}">Create a peer-to-peer fundraiser</a>
+			</div>
+			{{/equal}}
+			<!--  {{#equal campaignInfo.donotallow_team_campaigns 'no'}}
+						<div class="js-team-text">
+							<h3>Team Support</h3>
+							<p>Form a team and invite team members to support this fundraiser.</p>
+							<a class="btn btn-block btn-subtle js-team-create" data-currency_code="{{charityData.currency_code}}" data-image="{{campaignInfo.code_picture_url}}" data-description="{{campaignInfo.description}}" data-currency_symbol="{{charityData.currency_symbol}}"
+											data-codeid="{{campaignInfo.id}}" data-title="{{campaignInfo.title}}" data-userid="{{campaignInfo.user_id}}" data-campaignadmin="{{campaignInfo.campaignAdmin}}" data-canmailing="{{campaignInfo.can_mailing_required}}" data-campadmin="{{campaignAdmin}}" data-teamcampuserid="{{teamcampuserid}}" data-campteamcaptains="{{campteamuserid}}">Support as a Team</a>
+						</div>
+						{{/equal}} -->
+		</div>
+	</div>
+</div>
+<!-- /campaign-canopy -->
+<div class="campaign-body">
+	<div class="headerbar" id="headerbar">
+		<div class="affix-headerbar">
+			<div class="container-fluid">
+				<div class="row affix-hoverbar">
+					<div class="col-sm-6">
+						<h1>{{campaignInfo.title}}</h1>
+					</div>
+					<div class="col-sm-3 text-right">
+						<h2>{{currencyFormat charityData.currency_symbol campaignInfo.noof_donations}}
+							<span class="campaign-currency-code">{{charityData.currency_code}}</span>
+						</h2>
+						<p>{{donatePer}}% funded</p>
+					</div>
+					<div class="col-sm-3">
+						{{#if emailpage}}
+						<button class="animated bounceInDown btn btn-default btn-orange btn-lg btn-block js-campaign-donateFund" data-charityid="{{charityData.charity_id}}" data-charitytitle="{{charityData.title}}" data-codeid="{{campaignInfo.id}}" data-donations="{{campaignInfo.suggested_donation}}" data-timeleft="{{campaignInfo.time_left}}" data-payment_gateway="{{campaignInfo.payment_gateway}}" data-title="{{campaignInfo.title}}" data-wecode="{{campaignInfo.code_text}}" data-currency_code="{{charityData.currency_code}}" data-currency_symbol="{{charityData.currency_symbol}}" data-fundraiseruserid="{{fundraiser_userid}}" data-fundraisercodeid="{{fundraiser_codeid}}" data-fundraiser="{{fundraiser}}" data-referenceuserid="{{reference_userid}}" data-furl="{{furl}}" data-email="{{email}}" data-turl="{{turl}}" data-inviteuserid="{{inviteuserid}}" data-active="{{active}}" data-team="{{campaignInfo.team_campaign}}" data-canmailing="{{campaignInfo.can_mailing_required}}" data-teamid="{{campaignInfo.team_id}}" data-appFee="{{campaignInfo.app_fee}}" data-givinglevels="{{#toJson givingLevelsTotal}}{{/toJson}}">Donate Now</button>
+						{{else}}
+						<button class="animated bounceInDown btn btn-default btn-orange btn-lg btn-block js-campaign-donate" data-charityid="{{charityData.charity_id}}" data-charitytitle="{{charityData.title}}" data-codeid="{{campaignInfo.id}}" data-donations="{{campaignInfo.suggested_donation}}" data-timeleft="{{campaignInfo.time_left}}" data-payment_gateway="{{campaignInfo.payment_gateway}}" data-title="{{campaignInfo.title}}" data-wecode="{{campaignInfo.code_text}}" data-currency_code="{{charityData.currency_code}}" data-currency_symbol="{{charityData.currency_symbol}}" data-fundraiseruserid="{{fundraiser_userid}}" data-fundraisercodeid="{{fundraiser_codeid}}" data-fundraiser="{{fundraiser}}" data-referenceuserid="{{reference_userid}}" data-furl="{{furl}}" data-email="{{email}}" data-turl="{{turl}}" data-inviteuserid="{{inviteuserid}}" data-active="{{active}}" data-team="{{campaignInfo.team_campaign}}" data-canmailing="{{campaignInfo.can_mailing_required}}" data-teamid="{{campaignInfo.team_id}}" data-appFee="{{campaignInfo.app_fee}}" data-givinglevels="{{#toJson givingLevelsTotal}}{{/toJson}}">Donate Now</button>
+						{{/if}}
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /affix-headerbar -->
+	</div>
+	<div class="campaign-margin-fix">
+		<div class="container-fluid">
+			<div class="filterbar">
+				<div class="wecode-callout pull-left">We#{{campaignInfo.code_text}} <a href="#" class="other-link-type js-campaignwecode-help icon-circle"><i class="fa fa-question"></i></a></div>
+				{{#if teamAdmin}} {{else}} {{#if campaignInfo.is_following}}
+				<a class="pull-right btn btn-subtle btn-following js-follow-campaign-user" data-slug="{{campaignInfo.campaignSlug}}" data-id="{{campaignInfo.id}}" data-charityId="{{charityData.charity_id}}" data-type="code">
+					<span class="follow-text"><i class="fa fa-plus"></i> Follow</span>
+					<span class="following-text">Following</span>
+					<span class="unfollow-text">Unfollow</span>
+				</a>
+				{{else}}
+				<a class="pull-right btn btn-subtle btn-follow js-follow-campaign-user" data-slug="{{campaignInfo.campaignSlug}}" data-id="{{campaignInfo.id}}" data-charityId="{{charityData.charity_id}}" data-type="code">
+					<span class="follow-text"><i class="fa fa-plus"></i> Follow</span>
+					<span class="following-text">Following</span>
+					<span class="unfollow-text">Unfollow</span>
+				</a>
+				{{/if}} {{/if}}
+				<div class="filter-choice">
+					<a class="js-share pull-right" role="button" data-image="{{constructUrl campaignInfo.code_picture_url '900x506'}}" data-type="campaign" data-toggle="collapse" data-codeid="{{campaignInfo.id}}" data-campaignSlug="{{campaignInfo.campaignSlug}}" data-charityname="{{charityData.title}}" data-campaignName="{{campaignInfo.title}}" data-charityid="{{charityData.charity_id}}" data-teamcampaign="{{campaignInfo.team_campaign}}" href="#share-content" data-url="{{shareObject.url}}" data-name="{{shareObject.name}}" data-title="{{campaigninfo.title}}" data-via="{{shareObject.via}}" aria-expanded="false" aria-controls="share-content">
+						<i class="filter-icon fa fa-share-alt"></i> Share
+					</a>
+					{{#if teamAdmin}} {{else}}
+					<a class="js-writepost pull-right" role="button" href="#writepost-content" aria-expanded="false" aria-controls="writepost-content" data-toggle="collapse" data-id="{{campaignInfo.id}}" data-entityid="{{campaignInfo.entityid}}" data-type="code" data-image="{{campaignInfo.code_picture_url}}" data-wecode="{{campaignInfo.code_text}}" data-name="{{campaignInfo.title}}" data-slug="{{campaignInfo.campaignSlug}}" data-type="code"> <i class="filter-icon icon-we-star"></i> Comment</a>
+					{{/if}}
+					<a class="js-widgets pull-right" role="button" href="#widgets-content" aria-expanded="false" aria-controls="widgets-content" data-toggle="collapse" data-id="{{campaignInfo.id}}" data-entityid="{{campaignInfo.entityid}}" data-type="code" data-image="{{campaignInfo.code_picture_url}}" data-wecode="{{campaignInfo.code_text}}" data-name="{{campaignInfo.title}}" data-slug="{{campaignInfo.campaignSlug}}" data-type="code"><i>
+										<img src="/images/icon2.png" width="20" height="20"/></i>Widgets</a>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+	</div>
+	<!-- /profileheading-container -->
+	<div class="container-fluid">
+		<div class="actionbar">
+			<div class="collapse actionbar-content" id="share-content"></div>
+			{{#if teamAdmin}} {{else}}
+			<div class="collapse actionbar-content" id="writepost-content"></div>
+			{{/if}}
+			<div id="widgets-content" class="collapse actionbar-content">
+			</div>
+		</div>
+		<div class="col-sm-3">
+			{{#if charityData.title}}
+			<div class="module campaign-organizer">
+				<h4>This campaign benefits:</h4>
+				<hr> {{#equal charityData.charity_from 'system'}}
+				<img src="{{constructUrl charityData.profile_pic_url '200x200'}}" alt="profile image"> {{else}}
+				<a href="/{{charityData.charitySlug}}" data-charityid="{{charityData.charity_id}}" class="js-campaign-organization">
+					<img src="{{constructUrl charityData.profile_pic_url '200x200'}}" alt="profile image">
+				</a>
+				{{/equal}}
+				<div class="profile-header-card">
+					{{#equal charityData.charity_from 'system'}}
+					<h4>{{charityData.title}}</h4> {{else}}
+					<h4><a href="/{{charityData.charitySlug}}" data-charityid="{{charityData.charity_id}}" class="js-campaign-organization">{{charityData.title}}</a></h4> {{/equal}}
+					<p id="js-cause-desc">{{{charityData.full_description }}}</p>
+				</div>
+				<p>Category: {{campaignInfo.category}}</p>
+				<hr>
+				<p>Created By:</p>
+				<a href="/{{fundraiseUser.slug}}" data-charityid="{{fundraiseUser.id}}" class="js-campaign-organization">
+				</a>
+				<div class="profile-header-card">
+					<h4><a href="/{{fundraiseUser.slug}}" data-charityid="{{fundraiseUser.id}}" class="js-campaign-organization">{{fundraiseUser.name}}</a></h4>
+				</div>
+				<img src="/images/badge.png" class="camp-badge" alt="Nonprofit-organization">
+			</div>
+			{{#if campaignAdminDetails.length}}
+			<div class="module campaign-organizer">
+				<h4>Admins</h4>
+				<hr>
+				<p>
+					<ul class="donor-wall">
+						{{#each campaignAdminDetails}}
+						<li style="padding-bottom:15px">
+							{{#equal active 'yes'}}
+							<a href="/{{slug}}">
+								<img src="{{constructUrl profile_pic_url '32x32'}}" class="img-circle pull-left" alt="profile image" style="margin-right:15px;margin-top: -15px;">
+							</a>
+							{{else}}
+							<img src="{{constructUrl profile_pic_url '32x32'}}" class="img-circle pull-left" alt="profile image" style="margin-right:15px;margin-top: -15px;"> {{/equal}} {{#equal active 'yes'}}
+							<a href="/{{slug}}">
+								<h5>{{name}}</h5>
+							</a>
+							{{else}}
+							<h5>{{name}}</h5> {{/equal}}
+						</li>
+						{{/each}}
+					</ul>
+				</p>
+			</div>
+			{{/if}} {{else}}
+			<div class="module campaign-organizer">
+				<h4>Campaign beneficiary:</h4>
+				<hr>
+				<h4>{{campaignInfo.beneficiary}}</h4>
+				<br>
+				<p>Created By:</p>
+				<a href="/{{fundraiseUser.slug}}" data-charityid="{{fundraiseUser.id}}" class="js-campaign-organization">
+					<img src="{{constructUrl fundraiseUser.profile_pic_url '200x200'}}" alt="profile image">
+				</a>
+				<div class="profile-header-card">
+					<h4><a href="/{{fundraiseUser.slug}}" data-charityid="{{fundraiseUser.id}}" class="js-campaign-organization">{{fundraiseUser.name}}</a></h4>
+					<p id="js-cause-desc">{{{fundraiseUser.full_description}}}</p>
+				</div>
+				<div class="photorail" id="js-photorail">
+				</div>
+				<p>Category: {{campaignInfo.category}}</p>
+			</div>
+			{{#if campaignAdminDetails.length}}
+			<div class="module campaign-organizer">
+				<h4>Admins</h4>
+				<hr>
+				<p>
+					<ul class="donor-wall">
+						{{#each campaignAdminDetails}}
+						<li style="padding-bottom:15px;">
+							{{#equal active 'yes'}}
+							<a href="/{{slug}}">
+								<img src="{{constructUrl profile_pic_url '32x32'}}" class="img-circle pull-left" alt="profile image" style="margin-right:15px;margin-top: -15px;">
+							</a>
+							{{else}}
+							<img src="{{constructUrl profile_pic_url '32x32'}}" class="img-circle pull-left" alt="profile image" style="margin-right:15px;margin-top: -15px;"> {{/equal}} {{#equal active 'yes'}}
+							<a href="/{{slug}}">
+								<h5>{{name}}</h5>
+							</a>
+							{{else}}
+							<h5>{{name}}</h5> {{/equal}}
+						</li>
+						{{/each}}
+					</ul>
+				</p>
+			</div>
+			{{/if}} {{/if}}
+			<div class="module campaign-organizer">
+				<a class="btn btn-block btn-subtle js-reporting" data-codeid="{{campaignInfo.id}}" data-userid="{{campaignInfo.user_id}}">Report this campaign</a>
+				<br>
+				<a class="btn btn-block btn-subtle js-contact-organizer">Contact the organizer</a>
+			</div>
+		</div>
+		<!-- /col-sm-3 -->
+		<div class="col-sm-6 profile-spacing">
+			<div class="module discover-card-container">
+				<div class="profileheading">
+					<ul class="profileheading-toggle">
+						<li>
+							<a class="js-campaign-donor active js-campaignOverviewBtn" href="#headerbar" data-userId="">
+								<span class="heads">Overview</span>
+								<span class="count heads-count"><i class="fa fa-comment"></i></span>
+							</a>
+						</li>
+						{{#if teamAdmin}} {{else}}
+						<li>
+							<a class="js-campaign-donor js-campaignPostsBtn" href="#headerbar" data-userId="">
+								<span class="heads">Comments</span>
+								<span class="count heads-count">{{numOfPosts}}</span>
+							</a>
+						</li>
+						<li>
+							<a class="js-campaign-donor js-campaignUpdates" href="#headerbar" data-userId="">
+								<span class="heads">Updates</span>
+								<span class="count heads-count">{{noofupdates}}</span>
+							</a>
+						</li>
+						{{#equal campaignInfo.donotallow_p2p_campaigns 'no'}}
+						<li>
+							<a class="js-campaign-donor js-teamcampaignBtn" href="#headerbar" data-userId="">
+								<span class="heads">Peer-to-peer</span>
+								<span class="count heads-count">{{teamsCount}}</span>
+							</a>
+						</li>
+						{{else}} {{#notequal teamsCount 0}}
+						<li>
+							<a class="js-campaign-donor js-teamcampaignBtn" href="#headerbar" data-userId="">
+								<span class="heads">Peer-to-peer</span>
+								<span class="count heads-count">{{teamsCount}}</span>
+							</a>
+						</li>
+						{{/notequal}} {{/equal}}
+						<li>
+							<a class="js-campaign-donor js-campaignFollowersBtn" href="#headerbar" data-userId="">
+								<span class="heads">Followers</span>
+								<span class="count heads-count">{{numOfFollowers}}</span>
+							</a>
+						</li>
+						{{#equal campaignInfo.donotallow_team_campaigns 'no'}}
+						<li>
+							<a class="js-campaign-donor js-campaignTeamsBtn" href="#headerbar" data-userId="">
+								<span class="heads">Teams</span>
+								<span class="count heads-count">{{noOfTeams}}</span>
+							</a>
+						</li>
+						{{/equal}} {{/if}}
+					</ul>
+				</div>
+				<div class="js-campaignDescription">
+					{{#equal campaignInfo.individual "challenge"}}
+					<div class="profileheading">`
+						<ul class="profileheading-toggle">
+							<li>
+								<a class="js-campaign-donor active js-campaignOverviewBtn" href="#headerbar" data-userId="">
+									<span>Overview</span>
+									<span class="count"><i class="fa fa-comment"></i></span>
+								</a>
+							</li>
+							<li>
+								<a class="js-campaign-donor" href="#headerbar" data-userId="">
+									<span>Updates</span>
+									<span class="count">{{numOfPosts}}</span>
+								</a>
+							</li>
+							<li>
+								<a class="js-campaign-donor" href="#headerbar" data-userId="">
+									<span>comments</span>
+									<span class="count">{{numOfFollowers}}</span>
+								</a>
+							</li>
+							<li>
+								<a class="js-campaign-donor" href="#headerbar" data-userId="">
+									<span>Teams</span>
+									<span class="count">{{numOfFollowers}}</span>
+								</a>
+							</li>
+							<li>
+								<a class="js-campaign-donor" href="#headerbar" data-userId="">
+									<span>Followers</span>
+									<span class="count">{{numOfFollowers}}</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<hr>
+					<div class="campaign-description">{{{campaignInfo.description}}}</div>
+					{{else}}
+					<div class="campaign-description">{{{campaignInfo.description}}}</div>
+					{{/equal}}
+				</div>
+				<div class="campaignfeed js-campaignsFeed">
+				</div>
+				<div class="js-campaignFollowers" style="display: none">
+					<ul class="js-follower-list">
+					</ul>
+				</div>
+				<div class="js-campaign-updateslist" style="display: none">
+					<ul class="js-updates-list">
+						{{#if campaignUpdates.length}} {{#each campaignUpdates}}
+						<li class="status-update">
+							<div class="feed-panel-normal">
+								<div class="stream-item-header">
+									<span>{{title}}</span>
+									<p>Created by:<a href="/{{slug}}">{{username}}</a> </p>
+								</div>
+								<div class="post-body">
+									{{description}}
+								</div>
+							</div>
+						</li>
+						{{/each}} {{else}}
+						<img src="/images/campaign-noupdate.jpg" alt="This campaign doesn't  have any Updates yet" class="img-responsive">
+						<div class="clearfix"></div>
+						{{/if}}
+					</ul>
+				</div>
+				<div class="js-team-campaigns" style="display: none">
+					{{#if teams}}
+					<div class="section-stats">
+						<div class="row">
+							<!-- /.col-md-3 -->
+							<div class="col-md-4 col-sm-6">
+								<div class="dashboard-stat">
+									<div class="visual">
+										<i class="fa fa-signal"></i>
+									</div>
+									<!-- /.visual -->
+									<div class="details">
+										<span class="fixstast">Total P2P Raised</span>
+										<span class="value">{{currencyFormat ../charityData.currency_symbol  ../campaignInfo.p2pTotal}}</span>
+									</div>
+								</div>
+								<!-- /.dashboard-stat -->
+							</div>
+							<!-- /.col-md-3 -->
+							<div class="col-md-4 col-sm-6">
+								<div class="dashboard-stat">
+									<div class="visual">
+										<i class="fa fa-pie-chart"></i>
+									</div>
+									<!-- /.visual -->
+									<div class="details">
+										<span class="fixstast">% of Main Goal</span>
+										<span class="value">{{../campaignInfo.p2pGoalPercent}}%</span>
+									</div>
+								</div>
+								<!-- /.dashboard-stat -->
+							</div>
+							<!-- /.col-md-3 -->
+							<div class="col-md-4 col-sm-6">
+								<div class="dashboard-stat">
+									<div class="visual">
+										<i class="fa fa-money"></i>
+									</div>
+									<!-- /.visual -->
+									<div class="details">
+										<span class="fixstast">Average P2P Raised</span>
+										<span class="value">{{currencyFormat ../charityData.currency_symbol  ../campaignInfo.p2pAverage}}</span>
+									</div>
+								</div>
+								<!-- /.dashboard-stat -->
+							</div>
+							<!-- /.col-md-9 -->
+						</div>
+						<hr>
+					</div>
+					<ul class="discover-card-container">
+						{{#each teams}}
+						<li class="camp-prev campaignCard js-org-campaignsPage" data-slug="{{campaignSlug}}">
+							<div class="gradient">
+								<div class="personororgname">
+								</div>
+								{{#if group_title}}
+								<div><i class="fa fa-tag"></i> {{group_title}}</div>
+								{{/if}}
+							</div>
+							<div class="img-bg-card" style="background-image:url({{constructUrl team_picture_url '283x283'}})">
+							</div>
+							<div class="dollor">
+								<div class="top-card">
+									<h3 class="text-center">{{currencyFormat currency_symbol donation}}</h3>
+								</div>
+								<div class="bottom-card">
+									<div class="donation-progress-bar-bg">
+										<div class="donation-progress-bar">
+											<div class="donation-progress-fill" style="width: {{donation_progress}}%;">
+											</div>
+										</div>
+									</div>
+									<h4>{{{greater team_name 41}}}</h4>
+									<h5>We#{{code_text}}</h5>
+									<h5>Created by: {{#if campaign_creator}} {{greater campaign_creator 20}} {{else}} {{greater organization_name 20}} {{/if}}</h5>
+								</div>
+								<div class="donorstats">
+									<div class="statcard">
+										<span>Donors</span>
+										<span class="count">{{noof_donors}}</span>
+									</div>
+									<div class="statcard">
+										<span>Goal</span>
+										<span class="count">{{currencyFormat currency_symbol  goal}}</span>
+									</div>
+									<div class="statcard">
+										<span>Days to go</span>
+										<span class="count">
+											{{#equal type 'ongoing'}}
+												<span class="count">
+													<img src="/images/infinity.png" width="25" height="10">
+												</span> {{else}}{{time_left}}
+										</span>
+										{{/equal}}
+									</div>
+								</div>
+							</div>
+							<div class="camp-btns-actions row">
+								<div class="col-sm-12">
+									<button type="submit" class="btn btn-block btn-default charity-donate-model" data-slug="{{campaignSlug}}" data-charityid="{{charity_id}}" data-charitytitle="{{../charityInfo.name_tmp}}" data-codeid="{{id}}" data-donations="{{suggested_donation}}" data-title="{{team_name}}" data-wecode="{{code_text}}" data-payment_gateway="{{payment_gateway}}" data-currency_code="{{currency_code}}" data-currency_symbol="{{currency_symbol}}" data-fundraiseruserid="{{fundraiser_userid}}" data-fundraisercodeid="{{fundraiser_codeid}}" data-fundraiser="{{fundraiser}}" data-referenceuserid="{{reference_userid}}" data-appFee="{{campaignInfo.app_fee}}">Donate</button>
+								</div>
+							</div>
+						</li>
+						{{/each}}
+					</ul>
+					{{else}}
+					<img src="/images/noteams.png">
+					<a class="btn btn-block btn-orange js-fundraising-team" data-currency_code="{{charityData.currency_code}}" data-currency_symbol="{{charityData.currency_symbol}}" data-codeid="{{campaignInfo.id}}" data-title="{{campaignInfo.title}}" data-image="{{campaignInfo.code_picture_url}}" data-description="{{campaignInfo.description}}" data-canmailing="{{campaignInfo.can_mailing_required}}">Promote this campaign!</a> {{/if}}
+				</div>
+				<!-- teams-->
+				<div class="js-team-fundraisers" style="display: none">
+					{{#if teamsForCampaigns}}
+					<ul class="discover-card-container">
+						{{#each teamsForCampaigns}}
+						<li class="camp-prev campaignCard js-teamView" data-slug="{{code_text}}">
+							<div class="gradient">
+								<div class="personororgname">
+								</div>
+								<!-- {{#if team_name}}
+												<div><h4><i class="fa fa-users"></i> {{title}}</h4></div>
+												{{/if}} -->
+								{{#if beneficiary}}
+								<div>
+									<h4><i class="fa fa-users"></i> {{beneficiary}}</h4></div>
+								{{/if}} {{#if charity_name}}
+								<div>
+									<h4><i class="fa fa-users"></i> {{charity_name}}</h4></div>
+								{{/if}}
+							</div>
+							<div class="img-bg-card" style="background-image:url({{constructUrl team_picture_url '283x283'}})">
+							</div>
+							<div class="dollor">
+								<div class="bottom-card">
+									<h4>{{{greater team_name 41}}}</h4>
+									<h5>We#{{code_text}}</h5>
+									<h5>Created by: {{#if team_creator}} {{greater team_creator 20}} {{else}} {{greater organization_name 20}} {{/if}}</h5>
+								</div>
+								<div class="donorstats">
+									<div class="statcard">
+										<span>Raised</span>
+										<span class="count">{{currencyFormat currency_symbol  noOfDonations}}</span>
+									</div>
+									<div class="statcard">
+										<span>Donors</span>
+										<span class="count">{{noOfDonors}}</span>
+									</div>
+									<div class="statcard">
+										<span>Fundraisers</span>
+										<span class="count">
+														 {{noOfFundraisers}}
+														</span>
+									</div>
+								</div>
+							</div>
+							<div class="camp-btns-actions row">
+								<div class="col-sm-12">
+									<a class="btn btn-block btn-default js-teamView" data-slug="{{code_text}}">View Page</a>
+								</div>
+							</div>
+						</li>
+						{{/each}}
+					</ul>
+					{{else}}
+					<img id="campWithOutTeams" src="images/no teams yet.png" alt="your campaign don't have any teams">
+					<!--
+					<a class="btn btn-block btn-orange js-team-create" data-currency_code="{{charityData.currency_code}}" data-image="{{campaignInfo.code_picture_url}}" data-description="{{campaignInfo.description}}" data-currency_symbol="{{charityData.currency_symbol}}" data-codeid="{{campaignInfo.id}}" data-title="{{campaignInfo.title}}" data-userid="{{campaignInfo.user_id}}" data-campaignadmin="{{campaignInfo.campaignAdmin}}" cdata-canmailing="{{campaignInfo.can_mailing_required}}" data-campadmin="{{campaignAdmin}}" data-teamcampuserid="{{teamcampuserid}}" data-campteamcaptains="{{campteamuserid}}">Support as a Team</a> --> {{/if}}
+				</div>
+				<!--teams end	-->
+			</div>
+			<!-- /discover-card-container -->
+		</div>
+		<!-- /col-sm-6 -->
+		<div class="col-sm-3 lg-noOverflow">
+			{{#if donornav}}
+			<div class="module" id="whenLogin">
+				<h4>New to WonderWe?</h4>
+				<hr>
+				<p>Sign up now to create action and raise money for social impact.</p>
+				<a class="btn btn-block btn-subtle" href="/signup">Sign up</a>
+			</div>
+			{{/if}}
+			<!--giving levels card-->
+			{{#if givingLevels.length}}
+			<div class="module">
+				<div class="container-fluid g-level">
+					<div class="row donation">
+						<h4>What your donation accomplishes:</h4> {{#each givingLevels}}
+						<div class="" data-toggle="tooltip" title="Click to donate">
+							<div class="card-all">
+								<div class="card-a" id='gettingGivingLevels' data-id="{{id}}" data-amount="{{amount}}" data-quantityleft="{{quantity_left}}" data-charityid="{{../../charityData.charity_id}}" data-charitytitle="{{../../charityData.title}}" data-codeid="{{../../campaignInfo.id}}" data-donations="{{../../campaignInfo.suggested_donation}}" data-timeleft="{{../../campaignInfo.time_left}}" data-payment_gateway="{{../../campaignInfo.payment_gateway}}" data-title="{{../../campaignInfo.title}}" data-wecode="{{../../campaignInfo.code_text}}" data-currency_code="{{../../charityData.currency_code}}" data-currency_symbol="{{../../charityData.currency_symbol}}" data-fundraiseruserid="{{../../fundraiser_userid}}" data-fundraisercodeid="{{fundraiser_codeid}}" data-fundraiser="{{../../fundraiser}}" data-referenceuserid="{{../../reference_userid}}" data-furl="{{../../furl}}" data-email="{{../../email}}" data-turl="{{../../turl}}" data-inviteuserid="{{../../inviteuserid}}" data-active="{{../../active}}" data-team="{{../../campaignInfo.team_campaign}}" data-canmailing="{{../../campaignInfo.can_mailing_required}}">
+									<h3>{{title}}</h3>
+									<h1 class="f-normal">{{currencyFormat ../../charityData.currency_symbol amount}}</h1>
+									<h5>{{description}}</h5> {{#equal quantity 0}}
+									<h4 style="visibility:hidden">{{quantity_left}} out of {{quantity}}</h4> {{else}}
+									<h4>{{quantity_left}} out of {{quantity}}</h4> {{/equal}}
+								</div>
+								<div class="card-b">
+									<div class="content">
+										<!-- <h3>Title</h3> -->
+										<div id="gettingGivingLevels" class="btn btn-orange btn-block btn-lg" data-id="{{id}}" data-amount="{{amount}}" data-quantityleft="{{quantity_left}}" data-charityid="{{../../charityData.charity_id}}" data-charitytitle="{{../../charityData.title}}" data-codeid="{{../../campaignInfo.id}}" data-donations="{{../../campaignInfo.suggested_donation}}" data-timeleft="{{../../campaignInfo.time_left}}" data-payment_gateway="{{../../campaignInfo.payment_gateway}}" data-title="{{../../campaignInfo.title}}" data-wecode="{{../../campaignInfo.code_text}}" data-currency_code="{{../../charityData.currency_code}}" data-currency_symbol="{{../../charityData.currency_symbol}}" data-fundraiseruserid="{{../../fundraiser_userid}}" data-fundraisercodeid="{{fundraiser_codeid}}" data-fundraiser="{{../../fundraiser}}" data-referenceuserid="{{../../reference_userid}}" data-furl="{{../../furl}}" data-email="{{../../email}}" data-turl="{{../../turl}}" data-inviteuserid="{{../../inviteuserid}}" data-active="{{../../active}}" data-team="{{../../campaignInfo.team_campaign}}" data-canmailing="{{../../campaignInfo.can_mailing_required}}" data-teamid="{{../../campaignInfo.team_id}}" data-appFee="{{campaignInfo.app_fee}}">Donate Now</div>
+										<!-- <a href="" class="btn btn-default">Button</a> -->
+										<!-- <p class="help-text small">Hello content Hello content Hello content Hello content Hello content </p> -->
+									</div>
+								</div>
+							</div>
+						</div>
+						{{/each}} {{#if moreGivingExist}}
+						<a class="btn btn-block btn-default js-seeMoreGivingLevels btn-showmore" data-skip="0">Show More</a> {{/if}}
+					</div>
+				</div>
+			</div>
+			{{/if}}
+			<!-- giving levels card end-->
+			<div class="module">
+				<h4>Donors {{campaignInfo.noof_donors}}</h4>
+				<hr>
+				<ul class="donor-wall">
+					{{#if donors.length}} {{#each donors}} {{#if active}}
+					<li>
+						{{else}}
+						<li style="position: relative;cursor: text;pointer-events: none;">
+							{{/if}} {{#if donor_name}} {{#if active}} {{#if slug}}
+							<a href="/{{slug}}">
+								<img src="{{constructUrl profile_pic_url '48x48'}}" class="img-circle" alt="profile image">
+							</a>
+							{{else}}
+							<img src="{{constructUrl profile_pic_url '48x48'}}" class="img-circle" alt="profile image"> {{/if}} {{else}}
+							<img src="{{constructUrl profile_pic_url '48x48'}}" class="img-circle" alt="profile image"> {{/if}} {{else}}
+							<img src="{{constructUrl profile_pic_url '48x48'}}" class="img-circle" alt="profile image"> {{/if}}
+							<h4 class="{{hide_amount_class}}">{{currencyFormat currency_symbol amount}}
+										<span class="campaign-currency-code">{{currency_code}}</span>
+									</h4> {{#if donor_name}} {{#if active}} {{#if slug}}
+							<a href="/{{slug}}">
+								<h5>{{name}}</h5>
+							</a>
+							{{else}}
+							<h5>{{name}}</h5> {{/if}} {{else}}
+							<h5>{{name}}</h5> {{/if}} {{else}}
+							<h5>{{name}}</h5> {{/if}}
+							<!--	{{#if donor_comment}}
+								<small class="commentless">{{#stringReturnLimit donor_comment}}{{/stringReturnLimit}}<div id="demo{{id}}" class="collapse">
+									{{#stringReturn donor_comment 25}}{{/stringReturn}}</div><div class="commentmore"><a class="{{#greaterthan commentlength }} commentclick {{/greaterthan}} collapsed" data-toggle="collapse" data-target="#demo{{id}}"></a>
+</div>
+									</small>
+								{{/if}} -->
+							<h5>{{donor_comment}}</h5> {{#if donor_comment}}
+							<br/> {{#equal donorflag 'anonymous'}}
+							<a class="icons-sm fb-ic js-facebook-share" data-href="https://www.facebook.com/dialog/feed?app_id={{../../../facebook_app_id}}&name=A Great Donor supported the {{../../../campaignInfo.title}} anonymously and you can support too.&display=popup&caption={{../../../campaignInfo.title}}&description={{donor_comment}}&link={{../../../domain}}/{{../../../campaignInfo.campaignSlug}}&picture={{constructUrl ../../../campaignInfo.code_picture_url '200x200'}}" class="btn btn-sm js-facebook-share" style="color:#3b5998;"><i class="fa fa-facebook" >
+							<b></i> Share</b></a> {{/equal}} {{#equal donorflag 'nameonly'}}
+							<a class="icons-sm fb-ic js-facebook-share" data-href="https://www.facebook.com/dialog/feed?app_id={{../../../facebook_app_id}}&name={{name}} supported the {{../../../campaignInfo.title}} anonymously and you can support too.
+							&display=popup&caption={{../../../campaignInfo.title}}&description={{donor_comment}}&link={{../../../domain}}/{{../../../campaignInfo.campaignSlug}}&picture={{constructUrl ../../../campaignInfo.code_picture_url '200x200'}}" class="btn btn-sm js-facebook-share" style="color:#3b5998;"><i class="fa fa-facebook" >
+							<b></i> Share</b></a> {{/equal}} {{#equal donorflag 'amountonly'}}
+							<a class="icons-sm fb-ic js-facebook-share" data-href="https://www.facebook.com/dialog/feed?app_id={{../../../facebook_app_id}}&name=A Great Donor supported the {{../../../campaignInfo.title}} by giving {{currencyFormat currency_symbol amount}} and you can support too.&display=popup&caption={{../../../campaignInfo.title}}&description={{donor_comment}}&link={{../../../domain}}/{{../../../campaignInfo.campaignSlug}}&picture={{constructUrl ../../../campaignInfo.code_picture_url '200x200'}}" class="btn btn-sm js-facebook-share" style="color:#3b5998;"><i class="fa fa-facebook" >
+							<b></i> Share</b></a> {{/equal}} {{#equal donorflag 'nameandamount'}}
+							<a class="icons-sm fb-ic js-facebook-share" data-href="https://www.facebook.com/dialog/feed?app_id={{../../../facebook_app_id}}&name={{name}} supported the {{../../../campaignInfo.title}} by giving {{currencyFormat currency_symbol amount}} and you can support too.&display=popup&caption={{../../../campaignInfo.title}}&description={{donor_comment}}&link={{../../../domain}}/{{../../../campaignInfo.campaignSlug}}&picture={{constructUrl ../../../campaignInfo.code_picture_url '200x200'}}" class="btn btn-sm js-facebook-share" style="color:#3b5998;"><i class="fa fa-facebook" >
+							<b></i> Share</b></a> {{/equal}}
+							<small style="float:right;">
+										{{#if created_date}}
+											{{created_date}}
+										{{else}}
+											{{transaction_date}}
+										{{/if}}
+									</small> {{else}}
+							<small>
+										{{#if created_date}}
+											{{created_date}}
+										{{else}}
+											{{transaction_date}}
+										{{/if}}
+							</small> {{/if}}
+						</li>
+						{{/each}} {{#if moreDonorsExist}}
+						<a class="btn btn-block btn-default js-seeMoreDonors btn-showmore" data-skip="0">Show More</a> {{/if}} {{else}}
+						<img src="/images/nodonations.png" alt="This campaign doesn't yet have any donations" class="img-responsive">
+						<div class="clearfix"></div>
+						{{/if}}
+				</ul>
+			</div>
+		</div>
+		<!-- / col-sm-3 -->
+	</div>
+	<!-- / container-fluid -->
+</div>
+<!-- /campaign-body -->
+{{#if videoData}}
+<div id="videoModal" class="modal" data-backdrop="static" data-keyboard="false">
+	{{> showvideo}}
+</div>
+{{/if}}
+

@@ -1,0 +1,65 @@
+  <header class="topnavbar navbar navbar-inverse navbar-fixed-top usernav">
+
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a href="/"> <img src="/images/top-logo.png" alt="WonderWe" /> </a> </div>
+
+        <nav id="bs-navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav mainnav" id="global-actions">
+                  <li>
+              <a href="#" class="js-watch-video"><i class="fa fa-play"></i> Watch the video</a>
+            </li>
+                </ul>
+             
+            <ul class="nav navbar-nav navbar-right">
+                <div class="header-action">
+              <a class="btn btn-outline" href="/start">Start a fundraiser</a>
+            </div>
+
+           <li>
+					<a class="btn" id="login-action-public" href="/login">Log In</a>
+				</li>
+				<li>
+					<a class="btn btn-default btn-outline navbar-btn hide" id="dashboard-action" href="/member">Dashboard</a> 
+				</li>
+                
+            </ul>
+            <div class="header-search-expander search-container">
+                <div id="sb-search" class="sb-search">
+                    <form name="sbSearchForm">
+                        <input class="sb-search-input elastic_search js-search-sitelink" value="" name="q" id="search" placeholder="Search WonderWe" type="text">
+                        <input type="submit" class="sb-search-submit">
+                        <span class="sb-icon-search"><i class="fa fa-search"></i></span>
+                        
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+</div>
+    
+
+  </header>
+	   
+<div id="watchVideoModal" class="modal hide" style="z-index:10000"  data-keyboard="true" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+			<img src="/images/wonderwe-dark.png" height="50">
+				<a class="close" data-dismiss="modal" aria-hidden="true">x</a>
+			</div>
+			<div class="modal-body">
+				<!-- begin wistia embed -->
+				<div style="width:560px;margin:0 auto 0 auto;">
+					<script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+					<div class="wistia_responsive_padding" style="padding:56.25% 0 28px 0;position:relative;">
+						<div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+							<div class="wistia_embed wistia_async_dxedhmb8re autoPlay=true videoFoam=true" style="height:100%;width:100%">&nbsp;</div>	
+						</div>
+					</div>
+				</div>
+				<!-- end wistia embed -->
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,12 @@
+{
+	"urls":[
+	{
+		"loc":"http://mythrijobs.com",
+		"changefreq":"monthly",
+		"priority":"0.5"
+	},{
+		"loc":"http://mythrijobs.com",
+		"changefreq":"monthly",
+		"priority":"0.5"		
+	}]
+}

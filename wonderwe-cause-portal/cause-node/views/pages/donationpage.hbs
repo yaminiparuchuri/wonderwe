@@ -1,0 +1,321 @@
+<div id="donationinfodiv" style="display:none" data-appfee="{{appfee}}" data-payment_gateway="{{payment_gateway}}" data-currency_code="{{currency_code}}" data-currency_symbol="{{currency_symbol}}" data-charity_id="{{charityId}}" data-code_id="{{codeId}}" data-donations="{{donations}}" data-title="{{title}}" data-wecode="{{wecode}}" data-canmailing="{{canmailing}}" data-countrycode="{{countrycode}}" data-givingLevelsArray="{{givingLevelsArrayStringfy}}" data-charity_tittle="{{charityTittle}}" data-fundraiser_userid="{{fundraiser_userid}}" data-reference_userid="{{reference_userid}}" data-fundraiser="{{fundraiser}}" data-furl="{{furl}}" data-turl="{{turl}}" data-donateuserid="{{donateuserid}}"></div>
+<div class="campaign-canopy">
+	<div class="container-fluid">
+		<div class="col-md-9 col-sm-12">
+			<div id="alertdiv" class="alert alert-danger alert-dismissable" style="display:none">
+				<button type="button" class="close js-close-alert" aria-hidden="true"> &times;</button>
+				<span id="spanid"></span>
+			</div>
+			<div id="donationalertdiv" class="alert alert-danger alert-dismissable" style="display:none">
+				<button type="button" class="close js-close-alert" aria-hidden="true"> &times;</button>
+				<span id="spanid"></span>
+			</div>
+			<div class="container-fluid wrapper donate-content">
+				<div class="col-md-12 col-xs-12">
+					<div class="donate-right-box">
+						<div id="alertdiv" class="alert alert-danger alert-dismissable" style="display:none">
+							<button type="button" class="close js-close-alert" aria-hidden="true"> &times;</button>
+							<span id="spanid"></span>
+						</div>
+						<div class="" id="js-donate-code-id"> </div>
+						<div class="" id="js-donate-charity-id"> </div>
+						<h2 class="heading"><strong>{{title}}</strong></h2>
+						<form class="form-horizontal" id="donation-form">
+							<div class="donation-amount-select">
+								<!-- givinglevles -->
+								{{#if givingLevelsArray.length}}
+								<div class="row">
+									{{#each givingLevelsArray}}
+									<div class="col-sm-3 col-xs-3 snack-box1 js-public-giving-donation" data-id="{{id}}" data-amount="{{amount}}" data-description="{{description}}" data-quantity="{{quantity}}" data-quantityleft="{{quantity_left}}" data-title="{{title}}" style="width:150px;height:100px">
+										<h4 style="color:#545454">{{currency_symbol}}{{amount}}</h4>
+										<h4 style="color:#545454">{{title}}</h4>
+									</div>
+									{{/each}}
+									<div class="col-sm-3 snack-box1 js-public-giving-amount" style="width:150px;height:100px">
+										<h4 style="color:#545454">Click here to select the amount</h4>
+									</div>
+								</div>
+								<p>Click the above giving levels for donations</p>
+								<hr> {{/if}}
+								<!-- givinglevles end -->
+								<!-- donation amount div -->
+								<div class="row">
+									<label class="control-label col-sm-3 currency-field-label" for="donationamount">Donation Amount</label>
+									<div class="col-sm-4 col-sm-offset-5">
+										<div class="currency-field">
+											<input name="donationamount" maxlength="6" id="js-donation-amount" class="form-control input-lg" type="tel" value="{{donations}}">
+											<label>{{currency_symbol}}</label>
+											<span>{{currency_code}}</span>
+										</div>
+									</div>
+								</div>
+								<!-- donation amount div end -->
+								<!-- Payment type -->
+								<div class="form-group">
+									<label for="typeof_payment" class="control-label col-sm-4">Type of payment: </label>
+									<div class="col-sm-8 col-md-6 inline-radios">
+										<div class="inline-radios">
+											<ul>
+												<li>
+													<input tabindex="3" type="radio" id="onetime" name="typeof_payment" checked>
+													<label for="onetime">One-time</label>
+												</li>
+												<li>
+													<input tabindex="4" type="radio" id="monthly" name="typeof_payment">
+													<label for="monthly">Monthly</label>
+												</li>
+											</ul>
+											<div class="js-monthlyText" style="display:none;">You will be charged today and the {{monthly_date}} of each month</div>
+										</div>
+									</div>
+								</div>
+						</form>
+						<!-- Payment type end-->
+						{{#if user_id}} {{else}}
+						<!-- out side login -->
+						<div class="text-center" id="donate-text">
+							<h4>Are you a new or returning user?</h4>
+							<p>If you're not already a user, you can create a free account after you make your donation.</p>
+							<a href="" id="js-existing-donor-login" class="btn btn-subtle">Log in</a>
+							<a id="js-guest-login" class="btn btn-subtle" data-countrycode="{{countrycode}}">Continue as a guest</a>
+						</div>
+						{{/if}}
+						<div class="js-public-login" id="js-auth-initial" style="display:none">
+							<form class="form-horizontal" id="loginFormId">
+								<div class="form-group" align="center">
+									<div class="input-group col-sm-7">
+										<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+										<input type="email" class="form-control" name="email" placeholder="Email" id="email">
+									</div>
+								</div>
+								<div class="form-group" align="center">
+									<div class="input-group col-sm-7">
+										<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+										<input type="password" class="form-control" id="password-donation" name="password" placeholder="Password">
+									</div>
+								</div>
+								<div class="form-group" align="center">
+									<div class="actions center">
+										<a type="button" data-loginfrom="public-page" data-loading-text="Loading..." class="login btn-lg btn btn-orange" id="publicDonorLoginId"><span class="ladda-label">Log In</span></a>
+									</div>
+								</div>
+							</form>
+						</div>
+						<!-- out side login form end-->
+						<!-- donation with existing cards -->
+						<div id="existing-cards" style="display:none">
+							<div class="form-group  js-donate-public" id="exising-card-type">
+								<label class="col-sm-3 col-xs-12 control-label" for="token">Payment method:
+								</label>
+								<div class="col-sm-6 col-sm-offset-3 col-xs-12">
+									<select class="form-control" name="token" id="card-token">
+									</select>
+								</div>
+							</div>
+							<div id="addDetails-to-existing"></div>
+							<div id="donorcomment-to-existing" class="hide">
+								<div class="form-group" id="donorcomment">
+									<div class="input-group img-holder">
+										<span class="input-group-addon">
+                                          <img class="img-rounded" id="donorpic" class="donorpic" name="donorpic" style="width: 80px;height: 80px;"  alt="" /><br/>
+                                        </span>
+										<textarea class="form-control" id="donor_comment" class="donor_comment" name="donor_comment" rows="4" maxlength="255" placeholder="Comment here"></textarea>
+									</div>
+									<p class="count-explanation">Maximum character limit is 255 characters. Characters remaining: <span id="charcounter" class="js-counter">255</span> </p>
+								</div>
+							</div>
+						</div>
+						<!-- guest donation and also donation with new card after login-->
+						<div id="new-card" style="display:none">
+							<div class="donation-amount-form securepayment">
+								<form class="form-horizontal" id="campaign-payment-form">
+									<div class="secureheading">
+										<img src="/images/secure-lock.png" />
+										<div class="securetext">
+											<h3>Secure credit card payment</h3>
+											<p>This is a secure 128-bit SSL encrypted payment.</p>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+									<div class="form-group text-center">
+										<div id="getfbdetails">
+											<a href="" id="loginWithFacebook"><i class="fa fa-facebook-square fa-lg" style="color: #3b5998;"></i>Get details from Facebook</a>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="name" class="control-label col-sm-4">Name <span class="required-asterisk">*</span></label>
+										<div class="col-sm-8 col-md-6">
+											<input type="text" id="name" name="name" class="form-control" placeholder="Name on Credit Card" required>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="email" class="control-label col-sm-4">Email<span class="required-asterisk">*</span> </label>
+										<div class="col-sm-8 col-md-6">
+											<input type="text" id="js-email" name="email" value="{{email}}" class="form-control" required>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="cc-number" class="control-label col-sm-4">Card Number<span class="required-asterisk">*</span></label>
+										<div class="col-sm-8 col-md-6">
+											<div class="input-group ">
+												<input type="text" class="form-control" name="cc-number" id="cc-number" placeholder="Valid Card Number" maxlength="19" required>
+												<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="cc-month" class="control-label col-xs-12 col-sm-4">Expiration Date<span class="required-asterisk">*</span> </label>
+										<div class="col-xs-4 form-group col-md-3">
+											<input type="text" id="cc-month" name="cc-month" class="form-control" placeholder="MM" required="">
+										</div>
+										<div class="col-xs-4 form-group col-md-3" style="margin-left: 5px;">
+											<input type="text" id="cc-year" name="cc-year" class="form-control" placeholder="YYYY" required="">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="cc-cvv" class="control-label col-xs-12 col-sm-4">CVV <span class="required-asterisk">*</span></label>
+										<div class="col-xs-4 col-md-3">
+											<input type="text" id="cc-cvv" name="cc-cvv" class="form-control" placeholder="" required="">
+										</div>
+									</div>
+									<div class="country-form">
+										<div class="form-group">
+											<label class="control-label col-sm-4" for="country">Country<span class="required-asterisk"></span>
+											</label>
+											<div class="col-sm-8 col-md-6">
+												<select name="country" id="country" class="form-control country">
+													<option value="select">-- Select --</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="add-details">
+									</div>
+									<div class="form-group">
+										<label for="cv" class="control-label col-xs-12 col-sm-4">Postal code <span class="required-asterisk">*</span></label>
+										<div class="col-xs-4 col-md-3">
+											<input type="text" id="zip" name="zip" class="form-control" placeholder="Postal code" required="">
+										</div>
+									</div>
+									<div class="form-group" id="js-donor-card" style="display:none;">
+										<label for="cv" class="control-label col-xs-4 col-sm-4"> </label>
+										<div class="col-xs-4 col-md-8">
+											<label for="checkbox">
+												<div class="icheckbox checked">
+													<input type="checkbox" checked id="js-card-checkbox" name="checkpassword" /> Add card to my account
+												</div>
+											</label>
+										</div>
+									</div>
+									<div class="form-group" id="donorcomment">
+										<div class="input-group img-holder">
+											<span class="input-group-addon">
+                                                <img class="img-rounded" id="donorpicnew" class="donorpic" name="donorpic" style="width: 80px;height: 80px;"  alt="" /><br/>
+                          
+                                             </span>
+											<textarea class="form-control" id="donor_comment_new" class="donor_comment_new" name="donor_comment" rows="4" maxlength="255" placeholder="Comment here"></textarea>
+										</div>
+										<p class="count-explanation">Maximum character limit is 255 characters. Characters remaining: <span id="charcounter" class="js-counter">255</span> </p>
+									</div>
+								</form>
+							</div>
+						</div>
+						<!-- guest donation end -->
+						<div class="col-sm-12 more-options" {{#if user_id}}style="display:block" {{else}}style="display:none" {{/if}}>
+							<div class="inline-radios">
+								<ul>
+									<li>
+										<input type="checkbox" id="hideamount" name="hideamount">
+										<label for="hideamount">Hide amount</label>
+									</li>
+									<li>
+										<input type="checkbox" id="giveanonymous" name="giveanonymous">
+										<label for="giveanonymous">Hide my name</label>
+									</li>
+								</ul>
+							</div>
+						</div>
+						{{#if user_id}}
+						<div class="text-center" id="js-default-button">
+							<button class="btn btn-lg btn-block btn-orange" data-loading-text="Loading..." id="existing-card-payment" data-fundraiseruserid="{{fundraiser_userid}}" data-donateuserid="{{donateuserid}}" data-fundraiser="{{fundraiser}}" data-referenceuserid="{{reference_userid}}" data-charityid="{{charityid}}" data-turl="{{turl}}" data-furl="{{furl}}">Send your gift</button>
+						</div>
+						<div class="row donateaction" id="js-donateaction" style="display:none">
+							<div class="col-sm-offset-4">
+								<button type="submit" class="btn btn-lg btn-orange" data-loading-text="Loading..." id="js-new-card-payment" data-payment_gateway="{{payment_gateway}}" data-charity-id="{{charityId}}" data-code-id="{{codeId}}" data-currency_code="{{currency_code}}" data-currency_symbol="{{currency_symbol}}" data-fundraiseruserid="{{fundraiser_userid}}" data-donateuserid="{{donateuserid}}" data-fundraiser="{{fundraiser}}" data-referenceuserid="{{reference_userid}}" data-turl="{{turl}}" data-furl="{{furl}}" data-countrycode="{{countrycode}}">Send your gift</button>
+							</div>
+						</div>
+						{{else}}
+						<div class="row" id="js-guest-donation-div" style="display:none">
+							<div class="col-sm-offset-4">
+								<button type="submit" class="btn btn-lg btn-orange" data-loading-text="Loading..." id="js-guest-donation" data-payment_gateway="{{payment_gateway}}" data-charity-id="{{charityId}}" data-code-id="{{codeId}}" data-currency_code="{{currency_code}}" data-currency_symbol="{{currency_symbol}}" data-fundraiseruserid="{{fundraiser_userid}}" data-fundraiser="{{fundraiser}}" data-referenceuserid="{{reference_userid}}" data-turl="{{turl}}" data-furl="{{furl}}" data-inviteuserid="{{inviteuserid}}" data-active="{{active}}" data-teamid="{{teamid}}" data-countrycode="{{countrycode}}">Send your gift</button>
+							</div>
+						</div>{{/if}}
+						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 hidden-xs">
+			<div data-codeId="{{codeId}}" class="container-fluid col-md-12 camp-prev campaignCard js-campaignsPage" data-slug="{{wecode}}">
+				<div class="gradient">
+					<div class="personororgname">
+						{{#if beneficiary}} {{#if teamid}}
+						<h4><i class="fa fa-tag"></i>  {{greater teamname 37}}</h4>{{else}}
+						<h4><i class="icon ion-speedometer"></i>  {{greater beneficiary 37}}</h4>{{/if}} {{/if}} {{#if charityTittle}} {{#if teamid}}
+						<h4><i class="fa fa-tag"></i>  {{greater teamname 37}}</h4>{{else}}
+						<h4><i class="icon ion-ios-people"></i> {{greater charityTittle 37}}</h4> {{/if}} {{/if}}
+					</div>
+				</div>
+				<div class="img-bg-card" style="background-image:url({{constructUrl profile_pic_url '299x150'}})">
+				</div>
+				<div class="dollor">
+					<div class="top-card">
+						<h3 class="text-center">{{#currencyFormat currency_symbol donation}} {{/currencyFormat}} <small>{{currency_code}}</small></h3>
+					</div>
+					<div class="bottom-card">
+						<div class="donation-progress-bar-bg">
+							<div class="donation-progress-bar">
+								<div class="donation-progress-fill" style="width:{{donation_progress}}%;">
+								</div>
+							</div>
+						</div>
+						<h4>{{greater name 41}}</h4> {{#if teamid}}
+						<h5>We#{{code_text}}</h5>
+						<h5>Team: {{greater teamname 37}} </h5> {{else}}
+						<h5>Created by: {{#if campaign_creator}} {{greater campaign_creator 20}} {{else}} {{greater organization_name 20}} {{/if}}</h5>
+						<h5>We#{{code_text}}</h5> {{/if}}
+					</div>
+					<div class="donorstats">
+						<div class="statcard"><span>Donors</span><span class="count">{{noof_donors}}</span></div>
+						<div class="statcard"><span>Goal</span><span class="count">{{#currencyFormat currency_symbol goal}} {{/currencyFormat}}</span></div>
+						<div class="statcard"><span>Days to go</span><span class="count">
+                {{#equal type 'ongoing'}}
+                <span class="count">
+              <img src="/images/infinity.png" width="25" height="10">
+            </span> {{else}} {{time_left}}
+							</span>
+							{{/equal}}
+						</div>
+					</div>
+				</div>
+				<div class="camp-btns js-follow-campign-donate" data-charityid="{{charityId}}" data-charitytitle="{{name}}" data-codeid="{{codeId}}">
+					{{#if ../loadFrom}} {{else}} {{#equal teamcampaign 'no'}} {{#if is_following}}
+					<a class="btn btn-subtle btn-following js-follow-discover" data-id="{{id}}" data-type="code" data-slug="{{slug}}">
+						<span class="follow-text">Follow</span>
+						<span class="unfollow-text">Unfollow</span>
+						<span class="following-text">Following</span>
+					</a>
+					{{else}}
+					<a class="btn btn-subtle btn-follow js-follow-discover" data-id="{{id}}" data-type="code" data-slug="{{slug}}">
+						<span class="follow-text">Follow</span>
+						<span class="unfollow-text">Unfollow</span>
+						<span class="following-text">Following</span>
+					</a>
+					{{/if}} {{else}} {{/equal}} {{/if}} {{#if ../loadFrom}} {{else}}
+					<a class="btn btn-subtle donate-model" data-slug="{{slug}}" data-codeId="{{codeId}}" data-charityid="{{charityId}}" data-title="{{name}}" data-donations="{{suggested_donation}}" data-wecode="{{wecode}}" data-type="code" data-payment_gateway="{{payment_gateway}}" data-currency_symbol="{{currency_symbol}}" data-currency_code="{{currency_code}}" data-fundraiseruserid="{{fundraiser_userid}}" data-fundraisercodeid="{{fundraiser_codeid}}" data-fundraiser="{{fundraiser}}">Donate</a> {{/if}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

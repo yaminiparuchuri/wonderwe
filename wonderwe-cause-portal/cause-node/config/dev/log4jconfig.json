@@ -1,0 +1,20 @@
+{
+  "appenders": [
+    {
+      "category": "tests",
+      "type": "dateFile",
+      "filename": "/var/www/html/cause-node/wonderwe-nodejs.log",
+      "pattern": "-from-MM-dd",
+      "layout": {
+        "type": "[%r] [%[%5.5p%]] - %m%n"
+      }
+    },
+    {
+        "type": "gelf",
+        "host": "graylog.scriptbees.com",
+        "hostname":"graylog-server",
+        "port": "12201",
+        "facility": "cause-node"
+    }
+  ]
+}

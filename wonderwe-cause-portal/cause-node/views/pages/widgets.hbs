@@ -1,0 +1,158 @@
+<div id="data-info" data-pagetype="searchpage" value="{{searchQuery}}"></div>
+<div class="container-fluid wrapper" id="js-search-div" style="display: block;top: 51px;">
+    <!-- <div class="col-sm-3"> -->
+    <!-- / container-sm-3 -->
+    <!-- <div id="elastic_content" class="col-sm-9"> -->
+    <!-- <section  class="col-sm-9" id="elastic_content"> -->    
+    <section class="col-sm-12 col-xs-12" id="js-main">
+        <div class="js-main-content">
+            <div class="filterbar widget-container" style="top:40px;" >
+                <div class="filter-choice">
+                    <div class="input-group">
+                        <input type="text" placeholder="Search your campaign name to create widgets" class="form-control search-again js-sitelink-search-again searchCode widget_search" value="{{searchQuery}}"><span class="input-group-btn">
+                        <button type="button" class="btn btn-subtle search-button" id="weSitelinkSearchAgain" style="height:37px;"><i class="fa fa-search"></i></button></span></div>
+                    <!-- <a class="js-discover-toggle" data-type="code">Campaigns</a>
+          <a class="js-discover-toggle" data-type="user">People</a>
+          <a class="js-discover-toggle" data-type="charity">Organizations</a> -->
+                </div>
+            </div>
+            <!-- <div class="discover-container"> -->
+            <!-- Campaign result -->
+            
+<div class="discover-card-container elastic-search-container js-campaigns empty">
+{{#if slug }}
+    <div class="well" role="tabpanel">
+    <form class="form-horizontal row" id="js-widget-form" onsubmit="return false">
+        <div class="form-group" id='widgetform' style="height:60px;">
+            <div class="col-sm-4 col-md-4">
+                <select name="dimentions" id="dimention" class="form-control dimention">
+                    <option value="blog">Blog</option>
+                    <option value="badge">Badge</option>
+                    <option value="button">Button</option>
+                    <option value="mini-button">Donate today</option>
+                </select>
+            </div>
+            <div class="col-sm-4 col-md-4">
+                <select name="shade" id="shade" class="form-control dimention">
+                    <option value="orange">Orange</option>
+                    <option value="red">Red</option>
+                    <option value="lime">Lime</option>
+                    <option value="blue">Blue</option>
+                    <option value="magenta">Magenta</option>
+                    <option value="maroon">Maroon</option>
+                    <option value="green">Green</option>
+                    <option value="navy">Navy</option>
+                </select>
+            </div>
+        <!--    <div class="col-sm-2">
+                <button class="btn btn-primary form-control widget-preview" >Preview</button>
+            </div> -->
+        </div>
+    <div  class="form-group" id="widgettextarea">
+        <div class="form-group">
+            <div class="row">
+                <div class="{{#if widgetClass}} {{widgetClass}} {{else}} col-sm-6 {{/if}}">
+                    <iframe src="{{domain}}/embeded/{{slug}}/{{color}}/{{size}}" width="{{width}}" height="{{height}}" frameborder="0">
+                        <p>Your browser does not support iframes.</p>
+                    </iframe>
+                </div>
+                <div class="{{#if widgetClass}} {{widgetClass}} {{else}} col-sm-6 {{/if}}">
+                    <h5 style="color:orange"><b>Copy and Paste the code in your Website to get these Widgets</b></h5>
+                    <textarea name="url" id="url" class="form-control" readonly rows="3"  cols="40" style="white-space:inherit;">
+                        <iframe src="{{domain}}/embeded/{{slug}}/{{color}}/{{size}}" width="{{width}}" height="{{height}}" frameborder="0">
+                        </iframe>
+                    </textarea>
+                    <div class="form-group">
+                        <div class="col-sm-12 text-right">
+                            <br>
+                            <button class="btn btn-default" data-copytarget="#url" type="button" id="js-copy-domainname" data-toggle="tooltip" data-placement="bottom" title="Copy" data-original-title="Copy to Clipboard">
+                                Copy
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>        
+    </form>
+    </div>   
+    {{else}}
+            <div class="container">
+                  <div class="row wb_styles" >
+                    <h2>How to use a Widget on WonderWe​?</h2>
+                    <br />
+                    <p style="font-size:17px">WonderWe has made it super easy for users to add a widget to a blog or website to help promote a campaign. Simply go to your campaign page and click on Widgets to get started. Select the size and color you would like for your widget. The code is already written for you. You simply need to grab the widget code and share directly on your website or blog page.</p>
+                    <br />
+                <!--  <p style="font-size:17px"><strong>Here's where you'll find the tool to do this:</strong></p>
+                    <ol class="widget-style"  style="font-size:17px">
+                      <li style="list-style:disc;">Login to the WonderWe account.</li>
+                      <li style="list-style:disc;">Go to the <b>Campaign Edit</b> </li>
+                      <li style="list-style:disc;">Click on <b>Promote</b></li>
+                      <li style="list-style:disc;">Click on <b>Widgets</b></li>
+                      <li style="list-style:disc;">Choose which type of widget you required among the available list based on sizes and colors</li>
+                      <li style="list-style:disc;">Click on copy button to copy the widget code to your clipboard</li>
+                    </ol> -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>
+                                <b>
+                                    <h3>Blog</h3>
+                                </b>
+                            </p>                            
+                            <div class="preview-blog">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <p><b><h3>Badge</h3></b></p>
+                            <div class="preview-badge">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <p><b><h3>Button</h3></b></p>
+                            <div class="preview-button"></div>
+                        </div>
+                    </div>
+                    <br/>
+                    <p><strong>Note:</strong> These widgets are not meant to be placed on Facebook or Twitter.</p>
+                    <div> 
+                        <a href="#" id="js-learn-more-widgets">Learn more about Widgets</a>
+                    </div>
+                    <div id="js-widgets-more-content" style="display:none;">
+                      <p style="font-size:17px;">
+                        <b>What is a Widget?</b>
+                      </p>
+                      <p style="font-size:17px;">
+                    It’s something you see online every day, but probably haven’t given much thought to. Or even realized it had a specific name. The icons or logos on a webpage that when clicked on will take you to a specific location in the World Wide Web. It’s called a widget.
+                    More technically described, according to Android Central, a widget is a “self-contained code that displays a program, or a piece of a program, that is also (usually) a shortcut to a larger application.</p>
+                    <p style="font-size:17px;">Widgets can be anything and any size. For example, it could be something like a calendar, clock, weather forecast or bookmark to another site. Its purpose, as described by Wordpress, is togive a user an easy-to-use way of applying design and structure control to a webpage.</p>
+                      <p style="font-size:17px;"><b>HTML</b></p>
+                    <p style="font-size:17px;"> HTML Widgets can include an HTML code such as the following:
+                    address, a, abbr, acronym, area, article, aside, b, big, blockquote, br, caption, cite, class, code, col, del, details, dd, div, dl, dt, em, figure, figcaption, footer, font, h1, h2, h3, h4, h5, h6, header, hgroup, hr, i, img, ins, kbd, li, map, ol, p, pre, q, s, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, tr, tt, u, ul,var .Check out this link <a href="http://www.w3schools.com/tags/default.asp" target="_blank">http://www.w3schools.com/tags/default.asp</a>  for a further explanation of HTML.
+                    There are some HTML codes that could have security issues and are better not to use, such as embed, frame, iframe, form, input, object and textarea.</p>
+                      <p style="font-size:17px;"><b>Javascript</b></p>
+                     <p style="font-size:17px;">Javascript is a programming language of HTML code. It helps program the behavior of a webpage, according to W3Schools. However, Javascript has been used for malicious activity and may be better to avoid within a widget.
+                    For more on Javascript, visit <a href="http://www.w3schools.com/js/" target="_blank">http://www.w3schools.com/js</a>.</p>
+                      <p style="font-size:17px;"><b>Flash</b></p>
+                    <p style="font-size:17px;">Flash is an embed software that helps in streaming multimedia content such as videos and audio. However, using Flash within a widget may not be the best choice. With Flash someone attempting malicious activity could use such an embed to damage a website. It is better to upload multimedia content through a more trusted source such as YouTube, Vimeo, Flickr, Instagram or other such platforms.</p>
+                  </div>
+                  <div style="display:none;" id="js-show-less-widgets">
+                    <a href="#" >Show less</a>
+                  </div>
+                  </div>
+                    <!-- End of how to use embeded widgets -->                 
+            </div>
+        </div>
+    </section>
+    {{/if}}
+    <!-- / container-sm-9 -->
+    <!-- <button class="btn btn-block btn-default js-elastic-seemore" style="display: none; margin-top:20px;">
+    see more
+</button> -->
+    <aside class="col-sm-3 col-xs-12" id="js-sidebar-info" style="display: none;">
+        <!--                 <div class="module js-campaignSmallPreview module-campaign-preview"></div>
+ -->
+        <div class="module hidden-xs js-preview-div"></div>
+        <div class="module hidden-xs js-member-faq"></div>
+        <div class="module hidden-xs js-settings-info"></div>
+        <div class="inappfooter footer"></div>
+    </aside>

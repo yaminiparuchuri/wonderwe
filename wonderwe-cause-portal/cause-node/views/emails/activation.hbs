@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style type="text/css">
+    /* CLIENT-SPECIFIC STYLES */
+    
+    #outlook a {
+        padding: 0;
+    }
+    /* Force Outlook to provide a "view in browser" message */
+    
+    .ReadMsgBody {
+        width: 100%;
+    }
+    
+    .ExternalClass {
+        width: 100%;
+    }
+    /* Force Hotmail to display emails at full width */
+    
+    .ExternalClass,
+    .ExternalClass p,
+    .ExternalClass span,
+    .ExternalClass font,
+    .ExternalClass td,
+    .ExternalClass div {
+        line-height: 100%;
+    }
+    /* Force Hotmail to display normal line spacing */
+    
+    body,
+    table,
+    td,
+    p,
+    a,
+    li,
+    blockquote {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+    }
+    /* Prevent WebKit and Windows mobile changing default text sizes */
+    
+    table,
+    td {
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+    }
+    /* Remove spacing between tables in Outlook 2007 and up */
+    
+    img {
+        -ms-interpolation-mode: bicubic;
+    }
+    /* Help Microsoft platforms smoothly render resized images */
+    /* RESET STYLES */
+    
+    body,
+    #bodyTable,
+    #bodyCell {
+        height: 100% !important;
+        width: 100% !important;
+        margin: 0;
+        padding: 0;
+    }
+    
+    table {
+        border-collapse: collapse !important;
+    }
+    /* MOBILE STYLES */
+    
+    @media only screen and (max-width: 480px) {
+        /* CLIENT-SPECIFIC STYLES */
+        
+        body {
+            width: 100% !important;
+            min-width: 100% !important;
+        }
+        /* Prevent iOS Mail from adding padding to the body */
+        /* RESET STYLES */
+        
+        td[id="bodyCell"] {
+            padding: 30px 0 !important;
+        }
+        table[id="emailContainer"] {
+            max-width: 600px !important;
+            width: 100% !important;
+        }
+        /* ELEMENT STYLES */
+        
+        h1 {
+            font-size: 32px !important;
+        }
+        td[class="bodyContent"] {
+            font-size: 18px !important;
+        }
+        table[class="emailButton"] {
+            max-width: 480px !important;
+            width: 100% !important;
+        }
+        td[class="emailButtonContent"] {
+            font-size: 18px !important;
+        }
+        td[class="emailButtonContent"] a {
+            display: block;
+        }
+        td[class="emailColumn"] {
+            display: block !important;
+            max-width: 600px !important;
+            width: 100% !important;
+        }
+        td[class="footerContent"] {
+            font-size: 15px !important;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+    }
+    </style>
+</head>
+
+<body style="background-color:#F2F2F2;">
+    <center>
+        <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable" style="background-color:#F2F2F2;">
+            <tr>
+                <td align="center" valign="top" id="bodyCell" style="padding:40px 20px;">
+                    <table border="0" cellpadding="0" cellspacing="0" id="emailContainer" style="width:600px;">
+                        <tr>
+                            <td align="center" valign="top" style="padding-top:30px; padding-bottom:30px;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" id="emailBody" style="background-color:#FFFFFF; border-collapse:separate !important; border-radius:4px;">
+                                    <tr style="background-color:#505050;padding:5px;">
+                                        <td align="center" valign="top" style="padding:5px;">
+                                            <img src="https://s3.amazonaws.com/wonderwe/static/top-logo-beta.png" alt="WonderWe" class="logoImage" style="border:0; color:#6DC6DD !important; font-family:Helvetica, Arial, sans-serif; font-size:60px; font-weight:bold; height:auto !important; letter-spacing:-4px; line-height:100%; outline:none; text-align:center; text-decoration:none;" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" valign="top" class="bodyContent" style="color:#606060; font-family:Helvetica, Arial, sans-serif; font-size:15px; line-height:150%; padding-top:40px; padding-right:40px; padding-bottom:30px; padding-left:40px; text-align:left;">
+                                            <h1 style="color:#606060 !important; font-family:Helvetica, Arial, sans-serif; font-size:40px; font-weight:bold; letter-spacing:-1px; line-height:115%; margin:0; padding:0; text-align:left;">Just one more step...</h1>
+                                            <br/>
+                                            <h3 style="color:#606060!important;font-family:Helvetica,Arial,sans-serif;font-size:18px;letter-spacing:-.5px;line-height:115%;margin:0;padding:0;text-align:left">
+                                            {{name}}
+                                          </h3>
+                                            <br/> Click the big button below to activate your WonderWe account.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" valign="middle" style="padding-right:40px; padding-bottom:40px; padding-left:40px;">
+                                            <table border="0" cellpadding="0" cellspacing="0" class="emailButton" style="background-color:#F7921E; border-collapse:separate !important; border-radius:3px;">
+                                                <tr>
+                                                    <td align="left" valign="middle" class="emailButtonContent" style="color:#FFFFFF; font-family:Helvetica, Arial, sans-serif; font-size:15px; font-weight:bold; line-height:100%; padding-top:18px; padding-right:15px; padding-bottom:15px; padding-left:15px;">
+                                                        <a href="{{verification_key}}" style="color:#ffffff;text-decoration:none" target="_blank">
+                                                          Activate Account
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="top">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" id="emailFooter">
+                                    <tr>
+                                        <td align="center" valign="top" class="footerContent" style="color:#606060; font-family:Helvetica, Arial, sans-serif; font-size:13px; line-height:125%;">
+                                            &copy; 2015 WonderWe<span style="font-size:10px !important; vertical-align:super;">&reg;</span>, All Rights Reserved.
+                                            <br/>
+                                            <a href="#" style="color:#606060 !important; text-decoration:none !important;">
+                                                <span style="color:#606060 !important;">118 Southwest Boulevard, Kansas City, Missouri 64108</span>
+                                            </a>
+                                            <br />
+                                            <br /> Note: If you received this message but did not attempt to register, you can safely disregard this email -- no further action is required.
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </center>
+</body>
+
+</html>

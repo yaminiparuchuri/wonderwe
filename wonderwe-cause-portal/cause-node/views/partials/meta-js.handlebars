@@ -1,0 +1,60 @@
+
+
+{{#equaltoo metadata.seoPageType 'campaign'}}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "SocialEvent",
+  "name": "{{metadata.seoLJCampaignName}}",
+  "image": "{{metadata.seoLJCampaignImageUrl}}",
+  "description": "{{metadata.seoLJCampaignDesc}}",
+  "alternateName":"{{metadata.seoLJCampaignOrgName}}",
+  "organizer": {
+    "@type": "{{metadata.seoLJCampaignOrgType}}",
+    "name": "{{metadata.seoLJCampaignCreator}}"
+  },
+  "location": {
+    "@type": "place",
+    "name": "{{metadata.seoLJCampaignName}}",
+    "address" : "{{metadata.seoLJAddressLocality}}"
+     },
+    "startDate" : "{{metadata.seoLJCampaignStartDate}}",
+    "potentialAction" : {
+    "@type":"DonateAction",
+    "target":"{{metadata.domain}}/{{metadata.seoLJCampaignSlugUrl}}"
+    }
+
+}
+</script>
+{{/equaltoo}}
+
+{{#equaltoo metadata.seoPageType 'organization'}}
+<script type="application/ld+json">
+{ "@context" : "http://schema.org",
+  "@type" : "Organization",
+  "url" : "{{metadata.seoLJWebUrl}}",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "{{metadata.seoLJAddressLocality}}"
+  },
+"description": "{{metadata.seoLJDescription}}",
+"name": "{{metadata.seoLJName}}"
+ }
+</script>
+{{/equaltoo}}
+
+
+{{#equaltoo metadata.seoPageType 'user'}}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "name": "{{metadata.seoLJPersonName}}",
+  "image": "{{metadata.seoLJPersonImageUrl}}",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "{{metadata.seoLJAddressLocality}}"
+    }
+}
+</script>
+{{/equaltoo}}

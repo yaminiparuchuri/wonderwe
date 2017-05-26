@@ -1,0 +1,83 @@
+<!-- widgets start -->
+<div class="widgets" style="background:#fff;">
+  <!-- Blog size -->
+
+  {{#equal size 'blog'}}
+  <div class="{{color}} all">
+    <div class="blog">
+      <div class="title">{{name}}</div>
+      <div class="pic" style="background:url({{profile_pic_url}});background-size:454px 300px;"></div>
+      <div class="progress">
+        <div class="progress-status percent" style="width:{{donation_progress}}%"></div>
+      </div>
+      <div>
+        <p>
+          <b>{{currencyFormat currency_symbol donation}}</b> of {{currencyFormat currency_symbol goal}}
+        </p>
+      </div>
+      <a href="{{domain}}/{{slug}}?donate=true" target="_blank"><div class="donate_button">Donate</div>
+      </a>
+       <div class="logo">
+        <a href="{{domain}}" target="_blank">
+           <b>Embrace the power of 
+             
+        <img src="/images/we_logo.svg" width="20" height="20">
+             at WonderWe.com </b>
+        </a>
+      </div>
+    </div>
+   
+  </div>
+  {{/equal}}
+
+
+  <!-- Badge size -->
+  {{#equal size 'badge'}}
+  <div class="{{color}} all">
+    <div class="embeded-badge">
+      <div class="title">{{name}}</div>
+      <div class="pic" style="background:url({{profile_pic_url}});background-size:255px 155px;"></div>
+      <div class="progress">
+        <div class="progress-status percent" style="width:{{donation_progress}}%;">
+        </div>
+      </div>
+      <div>
+        <p>
+          <b>{{currencyFormat currency_symbol donation}}</b> of     {{currencyFormat currency_symbol goal}}
+        </p>
+      </div>      
+      <a href="{{domain}}/{{slug}}?donate=true" target="_blank">
+        <div class="donate_button">Donate</div>
+      </a>
+      <div class="logo">
+        <a href="{{domain}}" target="_blank">
+             <b>Donations are</b> <img src="/images/poweredby.png" width="15" height="15">
+            <b>by</b>
+         <img src="/images/we_logo.svg" width="20" height="20">
+        </a>
+      </div>
+    </div>
+  </div>
+  {{/equal}}
+  
+  <!-- Button size -->
+  {{#equal size 'button'}}
+  <div class="{{color}} all">
+    <div class="btn-size">
+      <div class="title">{{name}}</div>
+      <a href="{{domain}}/{{slug}}?donate=true"  target="_blank">
+        <div class="donate_button" >Donate</div></a>
+      <div class="progress">
+        <div class="progress-status percent" style="width:{{donation_progress}}%"></div>
+      </div>
+      
+    </div>
+  </div>
+  {{/equal}}
+
+  {{#equal size 'mini-button'}}
+  <a href="{{domain}}/{{slug}}?donate=true" class="{{color}}" style="color:white;padding:15px;width:100%;font-size:16px;font-weight:bold;text-align:center;cursor:pointer;background-color:{{color}};width:190px;height:50px;" target="blank">
+   DONATE TODAY
+  </a>
+  {{/equal}}
+</div>

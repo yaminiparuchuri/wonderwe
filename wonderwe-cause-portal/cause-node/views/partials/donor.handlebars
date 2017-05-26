@@ -1,0 +1,67 @@
+<header class="topnavbar navbar navbar-inverse navbar-fixed-top usernav">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+            <a href="/member"> <img src="/images/top-logo.png" alt="WonderWe" /> </a>
+        </div>
+        <nav id="bs-navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav mainnav" id="global-actions">
+                    <li class="js-manageall">
+                        <a href="/member/#!manage" data-url="manage"><i class="fa fa-lg fa-tachometer"></i> Manage</a>
+                    </li>
+                    <li class="js-home">
+                        <a href="/member/#!home" data-url="home"><i class="fa fa-lg fa-newspaper-o"></i> Activity</a>
+                    </li>
+                    <li class="js-impact">
+                        <a href="/member/#!impact" data-url="impact"><i class="fa fa-lg fa-line-chart"></i> Impact</a>
+                    </li>
+                    <li class="js-discover">
+                        <a href="/member/#!discover" data-url="discover"><i class="fa fa-lg fa-th-large"></i> Discover</a>
+                    </li>
+          </ul>
+           
+            <ul class="nav navbar-nav navbar-right">
+                <li class="js-notification">
+                   <a href="/member/#!notification/followers" data-url="notification"><i class="fa fa-lg fa-bell"></i><sub
+                                class="badge alert-warning js-notificationCount"></sub> </a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img src="/images/default-user-32x32.png" height="32px" width="32px" class="img-circle js-menuavatar" /></a>
+                    <div class="dropdown-menu donor-dropdown" role="menu">
+                        <div class="settings-active-user">
+                            <div class="settings-active-avatar">
+                                <img src="/images/default-user-96x96.png" height="96px" width="96px" class="img-rounded js-menuavatarBig" />
+                            </div>
+                            <div class="settings-details">
+                              <strong>{{name}}</strong>
+                              <small>{{email}}</small>
+                              <a href="/member/#settings" data-url="settings">Edit Profile</a>
+                              <a class="btn btn-orange btn-sm" href="{{userSlug}}">View Profile</a>
+                            </div>
+                        </div>
+                        <div id="js-charitiesAsociated">
+                        <!--  {{#each charities}} {{>/js/views/menu/choosecharity.mustache}} {{/each}}-->
+                        </div>
+                        <div class="js-manage hidden">
+                            <a href="/member/#manage" class="extra-items" data-url="manage"><i class="fa fa-lg fa-lock"></i>
+                                                Manage</a>
+                        </div>
+                        <div class="settings-footer">
+                            <a class="btn btn-default sign-out js-logout">Log out</a>
+                        </div>
+                    </div>
+                </li>
+            </ul> 
+             <div class="header-search-expander search-container">
+                <div id="sb-search" class="sb-search">
+                    <form name="sbSearchForm">
+                        <input class="sb-search-input elastic_search js-search-sitelink" value="" name="q" id="search" placeholder="Search WonderWe" type="text">
+                        <input type="submit" class="sb-search-submit">
+                        <span class="sb-icon-search"><i class="fa fa-search"></i></span>
+                        </input>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>

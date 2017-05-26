@@ -1,0 +1,39 @@
+agrigold:
+  ponzi_new:
+    :columns:
+    - id:
+      :source: _id
+      :type: TEXT
+    - bond_id:
+      :source: bondId
+      :type: TEXT
+    - deposited_amount:
+      :source: depositedAmount
+      :type: TEXT
+    - refund_amount:
+      :source: refoundAmount
+      :type: TEXT
+    - balance_amount:
+      :source: balanceAmount
+      :type: TEXT
+    - referrence_id:
+      :source: referenceId
+      :type: TEXT
+    - created_date:
+      :source: created_date
+      :type: TEXT
+    - updated_date:
+      :source: updated_date
+      :type: TEXT
+    - uid:
+      :source: uid
+      :type: TEXT
+    - title:
+      :source: title
+      :type: TEXT
+    - depositor_id:
+      :source: depositor
+      :type: TEXT
+    :meta:
+      :table: ponzi_new
+      :extra_props: true

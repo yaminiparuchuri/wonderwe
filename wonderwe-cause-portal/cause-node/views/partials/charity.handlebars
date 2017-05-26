@@ -1,0 +1,97 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="topbarnav">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mobilenavbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/a/#!dashboard"> <img src="/images/top-logo.png" alt="WonderWe" /> </a>
+            </div>
+            <div id="navbar">
+                <div class="col-sm-offset-2">
+                    <ul class="nav navbar-nav mainnav" id="global-actions">
+                        <li class="js-dashboard">
+                            <a href="/a/#!dashboard" data-url="dashboard">Dashboard</a>
+                        </li>
+                        <li class="js-campaigns">
+                            <a href="/a/#!campaigns" data-url="campaigns">Campaigns</a>
+                        </li>
+                        <li class="js-engagement">
+                            <a href="/a/#!engagement" data-url="engagement">Engagement</a>
+                        </li>
+                        <li class="js-followers">
+                            <a href="/a/#!followers" data-url="followers">Followers</a>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img src="/images/default-charity-32x32.png" height="32px" width="32px" class="profiledrop js-menuavatar" />
+                        </a>
+                        <div class="dropdown-menu charity-dropdown" role="menu">
+                            <div class="settings-active-user">
+                                <div class="settings-active-avatar">
+                                    <img src="/images/default-charity-96x96.png" height="96" width="96" class="img-rounded profiledrop js-menuavatarBig" />
+                                </div>
+                                <div class="settings-details">
+                                </div>
+                            </div>
+                            <div id="js-charitiesAsociated" >
+                                <div class="settings-inactive-user">
+                                    <a class="js-switchToDonor switchUser">
+                                        <div class="settings-inactive-avatar">
+                                            <img src="/images/default-user-48x48.png" height="48" width="48" class="img-rounded js-donorProfPic" />
+                                        </div>
+                                        <div class="settings-details-inactive">
+                                            <p class="js-donorName"></p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="settings-footer">
+                                <a class="btn btn-default sign-out js-logout" href="#">Log out</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Mobile only -->
+        <div id="mobilenavbar" class="navbar-collapse collapse">
+            <div class="switch-user visible-xs">Switch to:</div>
+            <ul class="nav navbar-nav visible-xs js-charitiesAsociatedMobile" role="menu">
+                <li><a class="js-switchToDonor"><span class="js-donorName">Switch to Donor Profile</span></a></li>
+                <li class="divider"></li>
+                <li class="js-editSettings"></li>
+                <li><a href="#" class="js-logout">Log out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<nav class="lowernavbar navbar navbar-default visible-xs">
+    <div class="container-fluid">
+        <div id="navbar" class="navbar-collapse no-collapse">
+            <ul class="nav navbar-nav mainnav">
+                <li class="js-dashboard active">
+                    <a href="/a/#!dashboard" data-url="dashboard">Dashboard</a>
+                </li>
+                <li class="js-campaigns">
+                    <a href="/a/#!campaigns" data-url="campaigns">Campaigns</a>
+                </li>
+                <li class="js-engagement">
+                    <a href="/a/#!engagement" data-url="engagement">Engagement</a>
+                </li>
+                <li class="js-followers">
+                    <a href="/a/#!followers" data-url="followers">Followers</a>
+                </li>
+                <li class="js-vieworgProfile">
+                    <a href="/a/#!profile" data-url="profile">View Profile</a>
+                </li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>

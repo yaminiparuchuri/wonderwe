@@ -1,0 +1,216 @@
+<div id="js-chooseCharityIds">
+    <span id="js-campaigndata" data-id='{{id}}' data-country="{{country}}" data-state="{{state}}" data-description="{{description}}" data-type="{{type}}" data-end_date="{{end_date}}" data-start_date="{{start_date}}" data-userid="{{userid}}" data-codeslug="{{slug}}" data-charityid="{{charityId}}"></span>
+    <div class="onboarding-wizard">
+        <nav class="topnavbar navbar navbar-inverse publicnav">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="/"> <img src="/images/top-logo.png" alt="WonderWe" /> </a>
+                </div>
+                <div id="navbar">
+                    <div class="col-sm-offset-3 hidden-xs">
+                        <ul class="nav navbar-nav mainnav">
+                            <li>
+                                <p><strong>Let's Create A Campaign</strong></p>
+                            </li>
+                        </ul>
+                    </div>
+                    <p class="visible-xs onboarding-stepText"><strong>Let's Create A Campaign</strong></p>
+                    <div class="nav navbar-nav navbar-right">
+                        <p>Step 4 of 5</p>
+                    </div>
+                </div>
+        </nav>
+        <div class="container-fluid">
+            <div class="row onboarding-step">
+                <div id="alertdiv" class="alert alert-danger alert-dismissable" style="display:none">
+                    <button type="button" class="close js-close-alert" aria-hidden="true"> &times;</button>
+                    <span id="spanid"></span>
+                </div>
+                <div class="col-sm-6 onboarding-campaignform">
+                    <form id="campaign-creation-form">
+                        <div class="form-group">
+                            <label for="title">I want to create a campaign for...</label>
+                            <input type="text" name="title" id="title" value="{{title}}" class="form-control" placeholder="Your campaign title">
+                        </div>
+                        <div class="form-group">
+                            <label for="code_text">My WeCode...</label>
+                            <div class="input-group"><span class="input-group-addon">We#</span>
+                                <input name="code_text" data-original="{{slug}}" maxlength="20" id="code_text" placeholder="Any unique alphanumeric code" class="form-control" type="text" value="{{code_text}}">
+                            </div>
+                            <span>{{domain}}/{{slug}}<span id="js-campaign-url"></span></span>
+                            </br>
+                            <span class="js-code-error" style="color:red"> </span>
+                        </div>
+                        <!--<div class="form-group">
+                        <label for="slug">Share Url</label>
+                        <input name="slug" id="js-campaign-slug" placeholder="Any unique alphanumeric code" class="form-control" type="text" value="">
+                        
+                        </br>
+                        <span class="js-org-error" style="color:red"> </span>
+                    </div> -->
+                        <div class="form-group settings">
+                            <label for="code_picture_url">My campaign cover image
+                                <br> (Recommended size is 900x500 pixels)</label>
+                            <div class="photoupload tooltipbtn" data-toggle="tooltip" id="wecode_logo_div" data-placement="right" trigger="hover" title="Upload image 900x500 pixels">
+                                <!--  <div class="fileupload pull-left fileupload-new" id="wecode_logo_div" data-provides="fileupload"></div> -->
+                                <label for="fileImg" style="position:relative;">
+                                    <div class="choose-value" style="position:absolute;top:50%;left:50%;transform: translateX(-50%) translateY(-50%);">
+                                        <center>
+                                            <i class="fa fa-camera" style="font-size:25px;color:#fff;"></i>
+                                            <br>
+                                            <span style="font-size:18px;text-align:center;color:#fff;">Change Photo</span>
+                                        </center>
+                                    </div>
+                                    <img class="org-img" id="codeimage" src="{{code_picture_url}}" width="299px" heigth="150px"> </label>
+                            </div>
+                            <input id="wecode_logo" name="code_picture_url" value="{{code_picture_url}}" type="hidden" class="form-control">
+                            <!-- <div id="error" class="error">
+                                <span></span>
+                                <br clear="all">
+                            </div> -->
+                        </div>
+                        <div class="form-group">
+                            <label for="videoUrl" class="control-label">Youtube or Vimeo Video URL</label>
+                            <input type="text" name="code_video_url" id="code_video_url" value="{{code_video_url}}" class="form-control tooltipbtn" placeholder="Video for your campaign" data-toggle="tooltip" data-placement="right" trigger="focus" title="Youtube/Vimeo URL" />
+                            </br>
+                            <span class="js-video-error" style="color:red"> </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">My campaign story...</label>
+                            <div id="description">
+                                <div id="summernote"></div>
+                            </div>
+                            <small class="campdesc-error">
+                   Campaign description is required. 
+               </small>
+                        </div>
+                        <div class="form-group">
+                            <div class="dualcolumns">
+                                <label for="suggested_donation">Suggest donation</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">{{currency_symbol}}</div>
+                                    <input type="text" name="suggested_donation" id="suggested_donation" value="{{suggested_donation}}" class="form-control tooltipbtn" placeholder="A donation amount">
+                                    <div class="input-group-addon" style="font-size:14px;">{{currency_code}}</div>
+                                </div>
+                            </div>
+                            <div class="dualcolumns">
+                                <label for="goal">My goal amount</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">{{currency_symbol}}</div>
+                                    <input type="text" name="goal" id="goal" value="{{goal}}" class="number form-control" placeholder="Campaign goal">
+                                    <div class="input-group-addon">{{currency_code}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="type">Type</label>
+                            <div class="inline-radios">
+                                <ul>
+                                    <li class="radio">
+                                        <input tabindex="3" type="radio" id="ongoing" name="type" value="ongoing" class="js-event-change" checked>
+                                        <label for="ongoing">Ongoing</label>
+                                    </li>
+                                    <li class="radio" style="margin-left: 4%;">
+                                        <input tabindex="4" type="radio" name="type" id="event" value="event" class="js-event-change">
+                                        <label for="event">Event</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="js-EventCode" class="hide">
+                            <div class="form-group">
+                                <div class="dualcolumns">
+                                    <label for="start_date">Start Date</label>
+                                    <input type="text" name="start_date" id="start_date" value="{{start_date}}" class="form-control tooltipbtn" data-toggle="tooltip" data-placement="right" trigger="focus" title="Start Date">
+                                </div>
+                                <div class="dualcolumns">
+                                    <label for="end_date">End Date</label>
+                                    <input type="text" name="end_date" id="end_date" value="{{end_date}}" class="form-control tooltipbtn" data-toggle="tooltip" data-placement="right" trigger="focus" title="End Date">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="address_1">Address 1
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="address_1" id="address_1" class="form-control tooltipbtn" data-toggle="tooltip" data-placement="right" trigger="focus" title="Campaign Address 1" value="{{address_1}}">
+                                    <!-- optional help text here -->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="address_2">Address 2
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="address_2" id="address_2" value="{{address_2}}" class="form-control tooltipbtn" data-toggle="tooltip" data-placement="right" trigger="focus" title="Campaign Address 2">
+                                    <!-- optional help text here -->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="city">City
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="city" id="city" class="form-control tooltipbtn" data-toggle="tooltip" data-placement="right" value="{{city}}" trigger="focus" title="Campaign City">
+                                    <!-- optional help text here -->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="country">Country
+                                </label>
+                                <div class="col-sm-6">
+                                    <select name="country" id="country" class="form-control country">
+                                        <option value="select">Country</options>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="state">State
+                                </label>
+                                <div class="col-sm-6">
+                                    <select name="state" id="state" class="form-control state">
+                                        <option value="select">State</options>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="campaign_zip">ZIP
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="campaign_zip" id="organization_zip" class="form-control tooltipbtn" data-toggle="tooltip" data-placement="right" trigger="focus" value="{{campaign_zip}}" title="Campaign Zipcode">
+                                    <!-- optional help text here -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <a id="js-onboarding-camp-comment" class="col-sm-offset-3 blue" style="font-size: 1.1em;">Please give a Thank you message
+                            <span id="js-edit-icon"></span></a>
+                        </div>
+                    </form>
+                </div>
+                <div class="hidden-xs col-sm-6 onboarding-message">
+                    <img src="/images/browser-with-campaign.jpg" alt="Example campaign in browser" class="img-responsive" />
+                </div>
+                <div class="col-xs-12 col-sm-6 onboarding-message">
+                    <h2>Start a campaign</h2>
+                    <p>Raise funds for anything, from special projects to scholarships.</p>
+                    <div class="onboarding-teasers emptyspace">
+                        <img src="/images/story.png" alt="">
+                        <div class="onboarding-bullet">
+                            <p><strong>Tell Stories</strong></p>
+                            <p>Make a connection with your supporters. Successful campaigns are easy for people to identify with your need.</p>
+                        </div>
+                    </div>
+                    <div class="onboarding-teasers">
+                        <img src="/images/wecode.png" alt="">
+                        <div class="onboarding-bullet">
+                            <p><strong>Promote using We#[Code]</strong></p>
+                            <p>Share your campaign's unique WeCode to enable donors to quickly access your online giving page. Print your WeCode and put it on newsletters, flyers, and business cards.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="onboarding-buttons">
+                    <a class="skip skipbtn" href="/pages/onboarding/organization/stepfive/{{charityId}}/{{userid}}">Skip</a>
+                    <a class="btn btn-orange" id="js-createCampaignId" data-loading-text="Loading..." data-userid="{{userid}}" data-charityid="{{id}}" data-codeid={{id}} data-name="{{title}}">Save and Continue <i class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>

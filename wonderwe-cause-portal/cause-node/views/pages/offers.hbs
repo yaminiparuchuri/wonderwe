@@ -1,0 +1,65 @@
+
+<ul>
+	<!-- do not add class="row" -->
+	{{#each campaigns}}
+	<li data-codeId="{{id}}" class="camp-prev campaignCard js-campaignsPage col-sm-4" data-codeId="{{id}}" data-slug="{{slug}}">
+		<div class="gradient">
+			<div class="personororgname">
+				{{#if beneficiary}}
+				<h4><i class="icon ion-speedometer"></i>  {{greater beneficiary 37}}</h4> {{/if}} {{#if organization_name}}
+				<h4><i class="icon ion-ios-people"></i> {{greater organization_name 37}}</h4> {{/if}}
+			</div>
+			<!-- <div><i class="fa fa-tag"></i> Arts, Culture and Humanities</div> -->
+		</div>
+		<div class="img-bg-card" style="background-image:url({{constructUrl profile_pic_url '299x150'}})">
+		</div>
+		<div class="dollor">
+			<div class="top-card">
+				<h3 class="text-center">{{#currencyFormat currency_symbol donation}} {{/currencyFormat}} <small>{{currency_code}}</small></h3>
+			</div>
+			<div class="bottom-card">
+				<div class="donation-progress-bar-bg">
+					<div class="donation-progress-bar">
+						<div class="donation-progress-fill" style="width:{{donation_progress}}%;">
+						</div>
+					</div>
+				</div>
+				<h4>{{greater name 41}}</h4>
+				<h5>Created by: {{#if campaign_creator}} {{greater campaign_creator 20}} {{else}} {{greater organization_name 20}} {{/if}}</h5>
+				<h5>We#{{code_text}}</h5>
+			</div>
+			<div class="donorstats">
+				<div class="statcard"><span>Donors</span><span class="count">{{noof_donors}}</span></div>
+				<div class="statcard"><span>Goal</span><span class="count">{{#currencyFormat currency_symbol goal}} {{/currencyFormat}}</span></div>
+				<div class="statcard"><span>Days to go</span><span class="count">
+                {{#equal type 'ongoing'}}
+                <span class="count">
+              <img src="/images/infinity.png" width="25" height="10">
+            </span> {{else}} {{time_left}}
+					</span>
+					{{/equal}}
+				</div>
+			</div>
+		</div>
+		<div class="camp-btns js-follow-campign-donate" data-charityid="{{charity_id}}" data-charitytitle="{{name}}" data-codeid="{{id}}">
+			{{#if ../loadFrom}} {{else}} {{#equal teamcampaign 'no'}} {{#if is_following}}
+			<a class="btn btn-subtle btn-following js-follow-discover" data-id="{{id}}" data-type="code" data-slug="{{slug}}">
+				<span class="follow-text">Follow</span>
+				<span class="unfollow-text">Unfollow</span>
+				<span class="following-text">Following</span>
+			</a>
+			{{else}}
+			<a class="btn btn-subtle btn-follow js-follow-discover" data-id="{{id}}" data-type="code" data-slug="{{slug}}">
+				<span class="follow-text">Follow</span>
+				<span class="unfollow-text">Unfollow</span>
+				<span class="following-text">Following</span>
+			</a>
+			{{/if}} {{else}} {{/equal}} {{/if}} {{#if ../loadFrom}} {{else}}
+			<a class="btn btn-subtle donate-model" data-slug="{{slug}}" data-codeId="{{id}}" data-charityid="{{charity_id}}" data-title="{{name}}" data-donations="{{suggested_donation}}" data-wecode="{{wecode}}" data-type="code" data-payment_gateway="{{payment_gateway}}" data-currency_symbol="{{currency_symbol}}" data-currency_code="{{currency_code}}" data-fundraiseruserid="{{fundraiser_userid}}" data-fundraisercodeid="{{fundraiser_codeid}}" data-fundraiser="{{fundraiser}}">Donate</a> {{/if}}
+		</div>
+	</li>
+	{{/each}}
+</ul>
+<button class="js-show-morecampaigns" data-skip="0">Show More</button>
+<select class="js-list-campaigns-category">
+</select>

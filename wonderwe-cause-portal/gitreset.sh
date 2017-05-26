@@ -1,0 +1,1 @@
+git checkout website/out/about/index.html website/out/ambassadors/index.html website/out/cookies/index.html website/out/how-it-works/index.html website/out/index2/index.html website/out/partners/index.html website/out/start/index.html nodejobs/config website/out/about.html

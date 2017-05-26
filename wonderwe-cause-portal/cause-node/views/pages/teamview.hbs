@@ -1,0 +1,175 @@
+<span id='js-team-time-left' data-teamtimeleft="{{campaignInfo.daysRemaining}}" data-codeid="{{campaignInfo.id}}" data-teamstatus="{{teamDetails.status}}"></span>
+<div class="js-main-content">
+</div>
+<span id='js-team-captains' data-teamadmins="{{teamCaptainsIds}}"></span>
+<span id='js-team-status' data-teamstatus="{{teamDetails.status}}" data-approve="{{teamDetails.approved_by}}" data-codeid="{{teamDetails.code_id}}"></span>
+<span id='js-approvedby' data-approve="{{teamDetails.approved_by}}" data-teamstatus="{{teamDetails.status}}" data-mainapprove="{{campaignInfo.team_approve}}" data-maincampaignid="{{campaignInfo.id}}"></span>
+<div class="container team">
+	<div class="alert alert-danger alert-dismissable" id="alertteamtimeleftDiv" style="display:none;margin-top:60px">Campaign supported by this team has been expired.</div>
+	<div class="alert alert-info alert-dismissable" id="teamCreateAlert" style="display:none;margin-top:60px"></div>
+	<div class="alert alert-info alert-dismissable" id="teamMainCampAlert" style="display:none;margin-top:60px"></div>
+	<div class="alert alert-info alert-dismissable" id="teamCreated" style="display:none;margin-top:60px"></div>
+	<div class="alert alert-info alert-dismissable" id="checkTeamEmail" style="display:none;margin-top:60px"></div>
+	<div class="alert alert-danger alert-dismissable" id="alertTeamStatusDiv" style="display:none;margin-top:60px">This team currently paused</div>
+	<div class="alert alert-info alert-dismissable" id="alertTeamForApprove" style="display:none;margin-top:60px">Your team created successfully and it is in draft.Your team will be published after approved by main campaign owner.</div>
+	<div class="row">
+		<div class="col-sm-9 team-right">
+			<div class="team-row">
+				<div class="row">
+					<div class="col-sm-3">
+						<a><img src="{{constructUrl teamDetails.team_logo '200x200'}}" style="width:200px;height:200px;margin-top:15px;cursor:default;" class="pull-left img-rounded" alt="user profile image"></a>
+					</div>
+					<div class="col-sm-9">
+						{{#if campaignInfo.id}}
+						<h1>
+						 <b>{{teamDetails.team_name}}</b>
+						</h1>
+						<h2>is a team for <a href="/{{campaignInfo.code_slug}}">{{teamDetails.main_campaign_name}}</a> campaign</h2>{{else}}
+						<h1>
+					 <b>{{teamDetails.team_name}}</b>
+					</h1>
+					<h2>is a team for support multiple fundraisers</h2>
+						{{/if}}
+						<div class="row team-info">
+							<div class="col-sm-4">
+								<div class="t-info">
+									<h2>
+								Raised <br>
+								<small>${{amount}}</small>
+							</h2>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="t-info">
+									<h2>
+								Donors <br>
+								<small>{{donors}}</small>
+							</h2>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="t-info">
+									<h2>
+								Fundraisers <br>
+								<small>{{teamFundraisers.noOfFundraisers}}</small>
+							</h2>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="team-row">
+				<div class="row team-leaderboard">
+					<h3><b>Leaderboard</b></h3>
+					<div class="table-responsive team-table">
+						<table class="table">
+							<thead>
+								<tr>
+									<!-- <th>Image</th> -->
+									<th>Name</th>
+									<th>Goal</th>
+									<th>Amount Raised</th>
+									<th>Donors</th>
+								</tr>
+							</thead>
+							<tbody>
+								{{#each teamMembersDetails}}
+								<tr>
+									<td>
+										<img src="{{profile_pic_url}}" style="width:42px;height:42px;float:left;margin-right:10px;" class="pull-left img-circle"> {{#equal created 'yes'}}
+										<a href="/{{user_slug}}" title="Click here to see team member details">{{name}}</a>
+										<br>
+										<a data-toggle="tooltip" data-placement="bottom" {{#equal status 'draft'}} href="/{{code_slug}}?status=preview" {{else}} href="/{{code_slug}}" {{/equal}} title="Click here to see fundraiser details">
+											<b>{{title}}</b>
+										</a>
+										{{else}} {{name}} {{/equal}}
+									</td>
+									<td>{{#notequal goal null}}{{currency_symbol}}{{/notequal}}{{goal}}</td>
+									<td>{{#notequal noof_donations null}}{{currency_symbol}}{{/notequal}}{{noof_donations}}</td>
+									<td>{{noof_donors}}</td>
+								</tr>
+								{{/each}} {{^teamMembersDetails}}
+								<tr>
+									<td colspan="4" align="center">No Data Available For This View</td>
+								</tr>
+								{{/teamMembersDetails}}
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="row team-overview">
+					<h2>Overview</h2>
+					<p>{{{teamDetails.team_description}}}</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3 team-left">
+			<div class="team-row" style="padding-top:15px;">
+				<div class="row">
+					<div class="col-sm-4">
+						<a href="/{{teamDetails.team_captaign_slug}}"><img src="{{teamDetails.team_captain_pic}}" style=" height: 74px; width: 74px;"></a>
+					</div>
+					<div class="col-sm-8">
+						<h3 style="margin-top:0px;">
+						<span><a href="/{{teamDetails.team_captaign_slug}}">{{teamDetails.team_captain}}</a></span>
+							 <br>
+						</h3>
+						<small>Team Captain</small>
+					</div>
+				</div>
+			</div>
+			{{#equal teamDetails.donot_allow_join 'no'}}
+			<div class="team-row">
+				<div class="row team-overview">
+					<h3><b>Join this team</b></h3>
+					<p>
+						<div class="teamExpire hide">
+							<span class="count" style="color:red">campaign expired.</span>
+						</div>
+					</p>
+					<button class="btn btn-lg btn-block btn-orange js-join-team" data-currency_code="{{campaignInfo.currency_code}}" data-image="{{campaignInfo.code_picture_url}}" data-description="{{campaignInfo.description}}" data-currency_symbol="{{campaignInfo.currency_symbol}}" data-codeid="{{campaignInfo.id}}" data-title="{{campaignInfo.title}}" data-userid="{{campaignInfo.user_id}}" data-campaignadmin="{{campaignInfo.campaignAdmin}}" data-canmailing="{{campaignInfo.can_mailing_required}}" data-campadmin="{{campaignAdmin}}" data-teamcaptain="{{teamDetails.tc_user_id}}" data-teamid="{{teamid}}" data-joinnow="yes" data-maincampstatus="{{campaignInfo.status}}" data-teamstatus="{{teamDetails.status}}">Join Now</button>
+				</div>
+			</div>
+			{{/equal}}
+			{{#equal teamDetails.support_multiple_campaigns 'no'}}
+			{{else}}
+			<div class="team-multiple hide">
+			            <h4>
+						<a class="js-support-multiple blue" data-currency_code="{{campaignInfo.currency_code}}" data-image="{{campaignInfo.code_picture_url}}" data-description="{{campaignInfo.description}}" data-currency_symbol="{{campaignInfo.currency_symbol}}" data-codeid="{{campaignInfo.id}}" data-title="{{campaignInfo.title}}" data-userid="{{campaignInfo.user_id}}" data-campaignadmin="{{campaignInfo.campaignAdmin}}" data-canmailing="{{campaignInfo.can_mailing_required}}" data-campadmin="{{campaignAdmin}}" data-teamcaptain="{{teamDetails.tc_user_id}}" data-teamid="{{teamid}}" data-joinnow="yes" data-maincampstatus="{{campaignInfo.status}}" data-teamstatus="{{teamDetails.status}}">Click here to support multiple campaigns</a></h4>
+					</div>
+					{{/equal}}
+			<div class="team-row">
+				<div class="row team-overview">
+					<h3><b>Share this team</b></h3>
+					<span class="socialshare-container">
+					<div class="col-sm-12">
+					<div class="col-sm-6">
+					<a class="btn btn-social btn-twitter js-social-share save-share-info" data-fundraiseruserid="{{fundraiser_userid}}" data-fundraisercodeid="{{fundraiser_codeid}}" id="js-facebook-share" data-fundraiser="{{fundraiser}}" data-source="twitter" data-url="{{twitterUrl}}" data-href="{{twitterUrl}}">
+	<i class="fa fa-twitter"></i> Tweet</a>
+	</div>
+	<div class="col-sm-6">
+	<a class="btn btn-social btn-google js-social-share save-share-info" data-href="{{gpUrl}}" data-url="{{gpUrl}}" data-fundraiseruserid="{{fundraiser_userid}}" data-fundraisercodeid="{{teamid}}" id="js-facebook-share"  data-source="google">
+						<i class="fa fa-google-plus"></i> +1
+					</a>
+
+	</div>
+	</div>
+	<div class="col-sm-12">
+					<div class="col-sm-6">
+<a class="btn btn-social btn-facebook js-social-share save-share-info"  data-fundraiseruserid="{{fundraiser_userid}}" data-fundraisercodeid="{{teamid}}" id="js-facebook-share"  data-source="facebook" data-url="{{fburl}}" data-href="{{fbUrl}}"><i class="fa fa-facebook"></i> Share</a>
+					</div>
+					<div class="col-sm-6">
+					<a class="btn btn-social btn-pinterest js-social-share save-share-info"
+					data-fundraiseruserid="{{fundraiser_userid}}" data-fundraisercodeid="{{teamid}}" id="js-facebook-share"  data-source="pinterest" data-href="{{pinUrl}}"
+					data-url="{{pinUrl}}">
+						<i class="fa fa-pinterest-p"></i> Pin
+					</a>
+					</div>
+					</div>
+</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

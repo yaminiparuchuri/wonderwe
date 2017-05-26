@@ -1,0 +1,56 @@
+<!DOCTYPE sql-queries [
+<!ELEMENT sql-queries (sql-query)*>
+<!ELEMENT sql-query (#PCDATA)>
+<!ATTLIST sql-query id CDATA #REQUIRED>
+]>
+<sql-queries>
+	<sql-query id="campaignBasedOnCategory">
+        <![CDATA[ select 
+        c.id,
+        c.title as name,
+        IFNULL(o.profile_pic_url,upt.profile_pic_url) as org_pic_url,
+        IFNULL(o.background_pic_url,upt.background_pic_url) as background_pic_url,
+        chat.name_tmp as organization_name,
+        c.code_text as code_text,
+        c.team_campaign as teamcampaign,
+        e.entity_type,
+        c.code_picture_url as profile_pic_url,
+        c.state as state,
+        ch.name as campaign_creator,
+        IFNULL(c.beneficiary,'') as beneficiary,
+        c.city as city,
+        IFNULL(c.charity_id,'') as charity_id,
+        c.suggested_donation,
+        c.code_text as wecode,
+        c.goal as goal,
+        c.end_date,
+        c.type,
+        e.entity_id as entityid,c.description,e.nooffollowers,
+        e.noof_donors,
+        e.slug,
+        e.noof_donations as donation,
+        TRUNCATE((e.noof_donations/c.goal)*100,2) as donation_progress,
+        cct.currency_code,
+        cct.currency_symbol,
+        c.user_id,
+        IFNULL(c.charity_id,c.user_id)  as fundraiser_userid,
+        IFNULL(c.charity_id,c.id) as fundraiser_codeid,
+        IFNULL(c.charity_id,'fundraiser') as fundraiser,
+        c.individual
+from code_tbl c 
+inner join
+    entity_tbl e on e.entity_id=c.id and e.entity_type='code' and e.date_deleted is null and c.status="published" and c.show_in_search=1
+    left outer join charity_tbl chat on chat.id=c.charity_id
+    and chat.charity_from != 'self'
+    left outer join organization_tbl o on o.id = chat.organization_id
+    left outer join user_tbl ch on ch.id= c.user_id
+    left outer join user_profile_tbl upt on upt.user_id = ch.id
+    left outer join countries_currency cct on cct.country_id = ifnull(chat.country,upt.country)
+   where c.goal>e.noof_donations
+   and c.end_date >= CURDATE() 
+   ]]>
+    </sql-query>
+    <sql-query id="temp">
+    	
+    </sql-query>
+</sql-queries>

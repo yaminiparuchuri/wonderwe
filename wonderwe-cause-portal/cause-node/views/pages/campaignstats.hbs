@@ -1,0 +1,32 @@
+<style>
+table,td,th {
+	border: 1px solid black;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+</style>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>Campaign Name</th>
+			<th>Beneficiary/Organization</th>
+			<th>Email</th>
+			<th>Phone Number</th>
+		</tr>
+	</thead>
+	<tbody>
+	{{#each campaigns}}
+	<tr>
+		<td style="text-align: center"><a href={{../domain}}/{{slug}}>{{Campaign_Name}}</a></td>
+		<td style="text-align: center">{{beneficiary}}</td>
+		<td style="text-align: center;width:100px">{{email}}</td>
+		<td style="text-align: center">{{phone}}</td>
+	</tr>
+	{{/each}}
+	</tbody>
+</table>

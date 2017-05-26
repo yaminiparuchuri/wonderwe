@@ -1,0 +1,13 @@
+<div class="row signup-box">
+	<div class=" success col-sm-7 col-md-6 col-lg-5 col-centered whitebox">
+		{{#if approved}}
+		  <div><p>Team has been approved successfully.</p></div>
+        {{/if}}
+        {{#if Accepted_already}}
+        <p>{{team_name}} team has been already approved by {{name}}.</p>
+        {{/if}}
+        {{#if nodata}}
+        <p>This Team has been denied already.</p>
+        {{/if}}
+	</div>
+</div>

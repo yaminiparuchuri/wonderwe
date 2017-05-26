@@ -1,0 +1,188 @@
+<div class="onboarding-wizard">
+    <nav class="topnavbar navbar navbar-inverse publicnav">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="/"> <img src="/images/top-logo.png" alt="WonderWe" /> </a>
+            </div>
+            <div id="navbar">
+                <div class="col-sm-offset-3 hidden-xs">
+                    <ul class="nav navbar-nav mainnav">
+                        <li>
+                            <p><strong>Complete Your Profile</strong></p>
+                        </li>
+                    </ul>
+                </div>
+                <p class="visible-xs onboarding-stepText"><strong>Complete Your Profile</strong></p>
+                <div class="nav navbar-nav navbar-right">
+                    <p>Step 5 of 5</p>
+                </div>
+            </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row onboarding-step">
+            <div class="col-xs-12 col-sm-8 col-lg-6 onboarding-message">
+                <!-- <h2>Last step <span id="first">{{name}}</span>!</h2>
+                TODO: Instead of fullname show just the first name
+             -->
+                <h2>Last step!</h2>
+                <form class="form-horizontal" id="accountForm_id">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="wecode_logo">Profile Picture (Recommended dimension is 500x500px)</label>
+                        <div class="col-sm-6 settings">
+                            <div class="photoupload tooltipbtn" id="org_cover_img_div" data-toggle="tooltip" data-placement="right" trigger="hover" title="Upload a 500x500px image">
+                                <label for="fileImg" style="position:relative;">
+                                    <div class="choose-value" style="position:absolute;top:50%;left:50%;transform: translateX(-50%) translateY(-50%);">
+                                        <center>
+                                            <i class="fa fa-camera" style="font-size:25px;color:#fff;"></i>
+                                            <br>
+                                            <span style="font-size:18px;text-align:center;color:#fff;">Add Photo</span>
+                                        </center>
+                                    </div>
+                                    <img class="org-img" id="codeimage" src="{{profile_pic_url}}" alt="user_logo">
+                                </label>
+                                <!--  <div class="fileupload pull-left fileupload-new" id="org_cover_img_div" data-provides="fileupload"> -->
+                                <!-- <div class="qq-uploader">
+                                        <div class="qq-upload-drop-area" style="display: none;"><span>Drop files here to upload</span></div>
+                                        <div class="qq-upload-button" style="position: relative; overflow: hidden; direction: ltr;">
+                                            <div><i class="fa fa-camera"></i> Change photo</div>
+                                            <input type="file" id="file" name="file" style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0;">
+                                        </div><span class="qq-drop-processing"><span>Processing dropped files...</span><span class="qq-drop-processing-spinner"></span></span>
+                                        <ul class="qq-upload-list"></ul>
+                                    </div> -->
+                                <!--                                 </div>
+ -->
+<!-- <img class="org-img" id="codeimage" src="{{profile_pic_url}}" alt="user_logo">
+ -->                            </div>
+                            <input id="wecode_logo" name="profile_pic_url" value="{{profile_pic_url}}" type="hidden" class="form-control">
+                            <!-- <div class="col-sm-offset-3 col-sm-5">
+                                <div id="error" class="error">
+                                    <span></span>
+                                    <br clear="all">
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="slug">User Name</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="slug" id="js-user-slug" value="{{slug}}" class="form-control tooltipbtn" data-toggle="tooltip" data-placement="right" trigger="focus" title="User Name" data-original="{{slug}}" />
+                            <span>{{domain}}/<span id="js-user-url">{{slug}}</span></span>
+                            </br>
+                            <span class="js-user-error hide" style="color:red"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="address1">Address 1 </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="address_1" id="address_1" value="{{address_1}}" class="form-control tooltipbtn" data-toggle="tooltip" data-placement="right" trigger="focus" title="Address 1">
+                            <!-- optional help text here -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="address2">Address 2 </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="address_2" id="address_2" value="{{address_2}}" class="form-control tooltipbtn" data-toggle="tooltip" data-placement="right" trigger="focus" title="Address 2">
+                            <!-- optional help text here -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="city">City </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="city" id="city" value="{{city}}" class="form-control tooltipbtn" data-toggle="tooltip" data-placement="right" trigger="focus" title="City">
+                            <!-- optional help text here -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="country">Country </label>
+                        <div class="col-sm-6">
+                            <select name="country" id="country" class="form-control tooltipbtn country" data-toggle="tooltip" data-placement="right" trigger="focus" title="Country">
+                                <option value="select">-- Select --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="organization-title">State </label>
+                        <div class="col-sm-6">
+                            <select name="state" id="state" class="form-control tooltipbtn state" data-toggle="tooltip" data-placement="right" trigger="focus" title="State">
+                                <option value="select">-- Select --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="zipcode">ZIP Code </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="postal_code" id="zipcode" value="{{postal_code}}" class="form-control tooltipbtn" data-toggle="tooltip" data-placement="right" trigger="focus" title="ZIP Code">
+                            <!-- optional help text here -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="Contact">Phone </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="phone" id="phone" value="{{home_phone}}" class="form-control tooltipbtn" data-toggle="tooltip" data-placement="right" trigger="focus" title="Phone Number">
+                            <!-- optional help text here -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="gender">Gender </label>
+                        <div class="col-sm-6">
+                            <ul class="icheck-list">
+                                <li>
+                                    <input type="radio" name="gender" id="male" value="male" checked=""> Male</li>
+                                <li>
+                                    <input type="radio" name="gender" id="female" value="female"> Female</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="relationship">Relationship Status </label>
+                        <div class="col-sm-6">
+                            <select name="relationship" id="relationship" class="form-control tooltipbtn" data-toggle="tooltip" data-placement="right" trigger="focus" title="Relationship Status">
+                                <option value="null">-- Select --</option>
+                                <option value="single">Single</option>
+                                <option value="married">Married</option>
+                                <option value="divorced">Divorced</option>
+                                <option value="widowed">Widowed</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="Religious Affiliation">Religious Affiliation </label>
+                        <div class="col-sm-6">
+                            <select name="religious_affiliation" id="religious_affiliation" class="form-control tooltipbtn" data-toggle="tooltip" data-placement="right" trigger="focus" title="Religion">
+                                <option value="null">-- Select --</option>
+                                <option value="catholic">Catholic</option>
+                                <option value="protestant">Protestant</option>
+                                <option value="mormon">Mormon</option>
+                                <option value="christian-other">Christian (other)</option>
+                                <option value="jewish">Jewish</option>
+                                <option value="muslim">Muslim</option>
+                                <option value="hindu">Hindu</option>
+                                <option value="buddhist">Buddhist</option>
+                                <option value="atheist">Atheist</option>
+                                <option value="agnostic">Agnostic</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                        </div>
+                        <div class="col-sm-6">
+                            <span class="js-donorprofile" id="donoreditprofile" style="color:red" data-name="{{name}}"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="hidden-xs hidden-sm col-md-4 pull-right">
+                <img src="/images/lock.png" />
+                <p>Help your friends find you by adding a picture and telling us a little more about you.</p>
+                <p>Your contact information will only be shared with the organizations you make a donation to.</p>
+            </div>
+            <div class="onboarding-buttons">
+                <div id="js-auth-controll-div">
+                    <a class="btn btn-orange" id="accountSave_id" data-id="{{user_id}}" data-name="{{name}}">Save and Launch!</a>
+                    <a class="skip" id="js-acount-login-id" data-userid="{{user_id}}">Nevermind, I'll do this later.</a></div>
+            </div>
+        </div>
+    </div>
+    </div>

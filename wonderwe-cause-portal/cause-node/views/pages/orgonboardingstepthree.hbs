@@ -1,0 +1,221 @@
+<div class="onboarding-wizard">
+    <nav class="topnavbar navbar navbar-inverse publicnav">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="/"> <img src="/images/top-logo.png" alt="WonderWe"/> </a>
+            </div>
+            <div id="navbar">
+                <div class="col-sm-offset-3 hidden-xs">
+                    <ul class="nav navbar-nav mainnav">
+                        <li>
+                            <p><strong>Invite People</strong></p>
+                        </li>
+                    </ul>
+                </div>
+                <p class="visible-xs onboarding-stepText"><strong>Invite People</strong></p>
+                <div class="nav navbar-nav navbar-right">
+                    <p>Step 3 of 5</p>
+                </div>
+            </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div id="js-charitydiv" data-id="{{id}}" data-name="{{title}}" data-userid="{{userid}}"></div>
+        <div class="row onboarding-step">
+            <div class="col-xs-12 col-sm-8 col-lg-6 onboarding-message">
+                <h2 class="first-view">Invite people you know.</h2>
+                <img class="js-import-success" src="/images/check-green.png" alt="Completed" style="display: none" />
+                <p class="first-view">Invite constituents to support your campaigns and events.  It's easy! Just click import and we will email them for you.</p>
+ 
+                <a class="btn btn-big btn-subtle" data-toggle="modal" data-target="#importModal" id="gmail-contacts" data-userid={{userid}}><img src="/images/gmail.png" /> Gmail</a>
+                <br>
+                <br>
+                <a class="first-view" href="/js/views/sample.csv">Download Sample File</a>
+                
+                <a class="fileupload pull-left fileupload-new btn btn-subtle first-view" id="upload_file_div" data-provides="fileupload"></a>
+                <p class="js-import-success" style="display: none">
+                    We've successfully imported the contacts.
+                </p>
+            </div>
+
+            <div class="hidden-xs hidden-sm col-md-4 pull-right">
+                <img src="/images/invite-to-wonderwe.png" class="img-responsive"/>
+            </div>
+
+            <div class="onboarding-buttons">
+                <a class="skip skipbtn" href="/pages/onboarding/organization/stepfour/{{id}}/{{userid}}">Skip</a>
+                <!--<a class="btn btn-orange continuebtn" href="/pages/stepfour/onboarding/organization/?id={{id}}&name={{title}}&userid={{userid}}">Save and Continue <i class="fa fa-chevron-right"></i></a>-->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal -->
+    <!--<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModallabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title" id="importModalLabel">We've imported <span id="totalcontactscount"></span> contacts.</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="selectall-container">
+
+                        <label>
+                            <input tabindex="0" type="checkbox">
+                            <strong>Select All</strong>
+                            <span></span>
+                        </label>
+                    </div>
+                    <div class="import-contacts-container">
+                        <ul>
+                            <li>
+                                <label>
+                                    <input tabindex="1" type="checkbox" id="" class="contactcheckbox">
+                                    <strong>Andrew Stanley</strong>
+                                    <span>andrew@volunteermark.com</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input tabindex="2" type="checkbox" id="" class="contactcheckbox">
+                                    <strong>John Stanley</strong>
+                                    <span>john@jstanleylaw.com</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input tabindex="3" type="checkbox" id="" class="contactcheckbox">
+                                    <strong>John Stanley</strong>
+                                    <span>john@jstanleylaw.com</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input tabindex="4" type="checkbox" id="" class="contactcheckbox">
+                                    <strong>John Stanley</strong>
+                                    <span>john@jstanleylaw.com</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input tabindex="5" type="checkbox" id="" class="contactcheckbox">
+                                    <strong>John Stanley</strong>
+                                    <span>john@jstanleylaw.com</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input tabindex="6" type="checkbox" id="" class="contactcheckbox">
+                                    <strong>John Stanley</strong>
+                                    <span>john@jstanleylaw.com</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input tabindex="7" type="checkbox" id="" class="contactcheckbox">
+                                    <strong>John Stanley</strong>
+                                    <span>john@jstanleylaw.com</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input tabindex="8" type="checkbox" id="" class="contactcheckbox">
+                                    <strong>John Stanley</strong>
+                                    <span>john@jstanleylaw.com</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input tabindex="9" type="checkbox" id="" class="contactcheckbox">
+                                    <strong>John Stanley</strong>
+                                    <span>john@jstanleylaw.com</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input tabindex="10" type="checkbox" id="" class="contactcheckbox">
+                                    <strong>John Stanley</strong>
+                                    <span>john@jstanleylaw.com</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input tabindex="11" type="checkbox" id="" class="contactcheckbox">
+                                    <strong>John Stanley</strong>
+                                    <span>john@jstanleylaw.com</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input tabindex="12" type="checkbox" id="" class="contactcheckbox">
+                                    <strong>John Stanley</strong>
+                                    <span>john@jstanleylaw.com</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input tabindex="13" type="checkbox" id="" class="contactcheckbox">
+                                    <strong>John Stanley</strong>
+                                    <span>john@jstanleylaw.com</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input tabindex="14" type="checkbox" id="" class="contactcheckbox">
+                                    <strong>John Stanley</strong>
+                                    <span>john@jstanleylaw.com</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input tabindex="15" type="checkbox" id="" class="contactcheckbox">
+                                    <strong>John Stanley</strong>
+                                    <span>john@jstanleylaw.com</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input tabindex="16" type="checkbox" id="" class="contactcheckbox">
+                                    <strong>John Stanley</strong>
+                                    <span>john@jstanleylaw.com</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input tabindex="17" type="checkbox" id="" class="contactcheckbox">
+                                    <strong>John Stanley</strong>
+                                    <span>john@jstanleylaw.com</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input tabindex="18" type="checkbox" id="" class="contactcheckbox">
+                                    <strong>John Stanley</strong>
+                                    <span>john@jstanleylaw.com</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input tabindex="19" type="checkbox" id="" class="contactcheckbox">
+                                    <strong>John Stanley</strong>
+                                    <span>john@jstanleylaw.com</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input tabindex="20" type="checkbox" id="" class="contactcheckbox">
+                                    <strong>John Stanley</strong>
+                                    <span>john@jstanleylaw.com</span>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-orange">Invite and Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>-->
+</div>

@@ -1,0 +1,166 @@
+<script type="text/javascript">
+    function filterCampaigns(ele) {
+   var category = ele.value;
+      if (category > 0) {
+       var queries = '?';
+    if($('#js-team-info').data('team')){
+      queries += 'teamid='+$('#js-team-info').data('team')+'&';
+    }
+    if(state.user && state.user.id){
+      queries += 'userid='+state.user.id;
+    }
+        window.location = '/pages/campaigns/list/' + category+queries;
+      } else {
+        window.location = '/pages/campaigns/list/all?userid='+state.user.id;
+      }
+    }
+</script>
+
+
+  <div class="container-fluid wrapper" id="js-search-div" style="display: block;top: 51px;">
+<div id="p2palertdiv" class="alert alert-info alert-dismissable" style="display:none">
+    </div>
+
+    {{#if team_id}}
+      <div class="js-alert col-sm-12" style="margin-bottom: -10px;">
+        <div class="alert alert-info" style="margin-top:2px;">
+          <h4>
+              Select a cause close to your heart to begin your <b>{{team_name}}</b> team fundraising journey!
+          </h4>
+        </div>
+      </div>
+    {{/if}}
+
+<div id="js-team-info" data-team="{{team_id}}"
+ data-category="{{selected_category}}">
+</div>
+        <aside class="col-sm-3" id="js-sidebar-profile">
+
+          <div class="module web-campaign-categories" id="js-sitelink-newuser" style="">
+            <h4><i class="fa fa-tags" aria-hidden="true"></i>Category</h4>
+            <hr>
+            <div class="row m-b-2">
+              <div class="col-xs-12">
+                <div class="btn-group btn-group-vertical" id="campaign-categories" data-toggle="buttons">
+                  <label class="btn" onclick="goTocampaignPage('all');">
+                    <span class="{{#equal selected_category 'all'}} active-category {{/equal}}"><a type=""> All </a></span>
+                  </label>
+                  {{#each categories}}
+
+                  {{#equal id ../selected_category}}
+                    <label class="btn active-category">
+                      {{else}}
+                      <label class="btn " onclick="goTocampaignPage({{id}})">
+                        {{/equal}}
+                        <span>
+                        <a type=""> {{name}} </a>
+                        </span>
+                    </label>
+                  {{/each}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="module mobile-campaign-categories" id="js-sitelink-newuser">
+                <div>
+                  <select class="form-control" id="mobile-campaign-categories" onChange="filterCampaigns(this);">
+                    <option value="0">Select Category</option>
+                    {{#each categories}}
+                    <option value="{{id}}" {{#equal id ../selected_category}}selected {{/equal}}> {{name}}</option>
+                    {{/each}}
+                  </select>
+                </div>
+            </div>
+        </aside>
+
+        <section class="col-sm-9 col-xs-12" id="js-main">
+
+        {{#if team_id}}
+        {{/if}}
+          <div class="js-main-content">
+            <div class="discover-card-container elastic-search-container js-campaigns empty">
+              <ul class="search-list">
+                {{#each campaigns}}
+                <span class="js-fundraising-team" data-teamfrommail="yes" data-donate="yes" data-currency_code="{{currency_code}}" data-image="{{profile_pic_url}}" data-description="{{description}}" data-currency_symbol="{{currency_symbol}}"
+                  data-codeid="{{id}}" data-title="{{name}}" data-userid="{{campaign_creator_id}}" data-campaignadmin="{{campaignInfo.campaignAdmin}}" data-canmailing="{{can_mailing_required}}" data-campadmin="{{campaignAdmin}}" data-teamcampuser="{{../../teamcampuserid}}"  data-id="{{id}}" data-type="campaign" data-slug="{{slug}}" data-entitytype="code" data-donatePer="{{donatePer}}" data-entityid="{{campaignInfo.entityid}}" data-codeid="{{id}}" data-wecode="{{wecode}}" data-donations="{{campaignInfo.suggested_donation}}" data-goal="{{goal}}"
+        data-status="{{status}}" data-campaigntype="{{campaignInfo.type}}" data-timeleft="{{time_left}}" data-fundraiser="{{fundraiser}}" data-teamcampaign="{{campaignInfo.team_campaign}}" data-campaign="{{#toJson campaignInfo}}{{/toJson}}"
+        data-p2papprovalrequired="{{p2p_approval_required}}" data-individual="{{individual}}"  data-notallowp2p="{{donotallow_p2p_campaigns}}" data-teamcampaign="{{teamcampaign}}" data-title="{{name}}" data-campaignowneremail="{{campaignInfo.campaign_creator_email}}" data-noofgivinglevels="{{getGivingLevelsCount}}" data-noofdonors="{{donorscount}}" data-userid="{{campaign_creator_id}}" data-teamapproval="{{team_approve}}" data-teamid="{{../team_id}}" data-domain="{{../domain}}">
+                <li class="camp-prev campaignCard js-elastic-campaignsPage">
+                  <div class="gradient">
+                    <div class="personororgname">
+                      <!--  -->
+                      <h4>
+                        {{#if organization_name}}
+                        <i class="icon ion-ios-people"></i>
+                          {{organization_name}}
+                        {{else}}
+                          <i class="icon ion-speedometer"></i>
+                          {{beneficiary}}
+                        {{/if}}
+                      </h4>
+                      <!-- <h4>Mission of Our Lady of the Angels</h4> -->
+                    </div>
+                  </div>
+                  <div class="img-bg-card" style="background-image:url({{{constructUrl profile_pic_url '299x150'}}})">
+                  </div>
+                  <div class="dollor">
+                    <div class="top-card">
+                      <h3 class="text-center">{{currency_symbol}} {{donation}} <small> {{currency_code}}</small></h3>
+                    </div>
+                    <div class="bottom-card">
+                      <div class="donation-progress-bar-bg">
+                        <div class="donation-progress-bar">
+                          <div class="donation-progress-fill" style="width:{{donation_progress}}%;">
+                          </div>
+                        </div>
+                      </div>
+                      <h4>{{name}}</h4>
+                      <h5>Created by: {{campaign_creator}} </h5>
+                      <h5>We#{{wecode}}</h5>
+                    </div>
+                  </div>
+                  <div class="donorstats">
+                    <div class="statcard"><span>Donors</span><span class="count">{{noof_donors}}</span></div>
+                    <div class="statcard"><span>Goal</span><span class="count">{{currency_symbol}}{{goal}}</span></div>
+                    <div class="statcard"><span>Days to go</span>
+                      <span class="count">
+                <span class="count">
+              {{#equal type 'ongoing'}}
+              <img src="/images/infinity.png" width="25" height="10">
+              {{else}}
+              {{time_left}}
+              {{/equal}}
+            </span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="camp-btns">
+                    <!-- <div class="js-follow-campign-donate" data-slug="1wahg2t" data.charityid="" data-charitytitle="" data-codeid=""> -->
+                    <div class="get-team-data">
+                    {{#if ../team_id}}
+                      <a class="btn btn-subtle donate-model js-fundraising-team"  data-teamfrommail="yes" data-currency_code="{{currency_code}}" data-image="{{profile_pic_url}}" data-description="{{description}}" data-currency_symbol="{{currency_symbol}}"
+                  data-codeid="{{id}}" data-title="{{name}}" data-userid="{{campaign_creator_id}}" data-campaignadmin="{{campaignInfo.campaignAdmin}}" data-canmailing="{{can_mailing_required}}" data-campadmin="{{campaignAdmin}}" data-teamcampuser="{{../../teamcampuserid}}"  data-id="{{id}}" data-type="campaign" data-slug="{{campaignInfo.campaignSlug}}" data-entitytype="code" data-donatePer="{{donatePer}}" data-entityid="{{campaignInfo.entityid}}" data-codeid="{{id}}" data-wecode="{{wecode}}" data-donations="{{campaignInfo.suggested_donation}}" data-goal="{{goal}}"
+        data-status="{{status}}" data-campaigntype="{{campaignInfo.type}}" data-timeleft="{{time_left}}" data-fundraiser="{{fundraiser}}" data-teamcampaign="{{campaignInfo.team_campaign}}" data-campaign="{{#toJson campaignInfo}}{{/toJson}}"
+        data-p2papprovalrequired="{{p2p_approval_required}}" data-individual="{{individual}}"  data-notallowp2p="{{donotallow_p2p_campaigns}}" data-teamcampaign="{{teamcampaign}}" data-title="{{name}}" data-campaignowneremail="{{campaignInfo.campaign_creator_email}}" data-noofgivinglevels="{{getGivingLevelsCount}}" data-noofdonors="{{donorscount}}" data-userid="{{campaign_creator_id}}" data-teamapproval="{{team_approve}}">Select</a>{{else}}
+        <a target="_blank" href="{{../../domain}}/{{../wecode}}?donate=true" class="btn btn-subtle donate-model"  data-teamfrommail="yes" data-currency_code="{{currency_code}}" data-image="{{profile_pic_url}}" data-description="{{description}}" data-currency_symbol="{{currency_symbol}}"
+                  data-codeid="{{id}}" data-title="{{name}}" data-userid="{{campaign_creator_id}}" data-campaignadmin="{{campaignInfo.campaignAdmin}}" data-canmailing="{{can_mailing_required}}" data-campadmin="{{campaignAdmin}}"   data-id="{{id}}" data-type="campaign" data-slug="{{slug}}" data-entitytype="code" data-donatePer="{{donatePer}}" data-entityid="{{campaignInfo.entityid}}" data-codeid="{{id}}" data-wecode="{{wecode}}" data-donations="{{campaignInfo.suggested_donation}}" data-goal="{{goal}}"
+        data-status="{{status}}" data-campaigntype="{{campaignInfo.type}}" data-timeleft="{{time_left}}" data-fundraiser="{{fundraiser}}" data-teamcampaign="{{campaignInfo.team_campaign}}" data-campaign="{{#toJson campaignInfo}}{{/toJson}}"
+        data-p2papprovalrequired="{{p2p_approval_required}}" data-individual="{{individual}}"  data-notallowp2p="{{donotallow_p2p_campaigns}}" data-teamcampaign="{{teamcampaign}}" data-title="{{name}}" data-campaignowneremail="{{campaignInfo.campaign_creator_email}}" data-noofgivinglevels="{{getGivingLevelsCount}}" data-noofdonors="{{donorscount}}" data-userid="{{campaign_creator_id}}" data-teamapproval="{{team_approve}}">Donate</a>
+        {{/if}}
+                              <!-- <span id="data-info-team" </span> -->
+                    </div>
+                  </div>
+                </li>
+                </span>
+                {{/each}}
+                {{#if showmore}}
+                <div class="text-center">
+      <a class="btn btn-block btn-orange js-seeMoreCampaigns btn-showmoreone" data-category="" data-skip="12">Show More Results</a>
+      </div>
+      {{/if}}
+              </ul>
+          </div>
+          </div>
+        </section>
+        </div>

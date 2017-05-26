@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+{{> meta}}
+<style type="text/css">
+#campaign-categories label {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 2em;
+    text-align: left;
+    white-space: nowrap;
+    vertical-align: top;
+    cursor: pointer;
+    background-color: none;
+    border: 0px solid #c8c8c8;
+    border-radius: 3px;
+    color: #c8c8c8;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+  }
+  
+  .active-category {
+    background: #ddd;
+    border-radius: 20px !important;
+    padding: 5px 8px !important;
+  }
+  
+  @media screen and (max-width: 480px) {
+    .discover-card-container .camp-prev {
+      width: 100%;
+    }
+    .web-campaign-categories {
+      display: none;
+    }
+  }
+  
+  @media screen and (min-width: 481px) {
+    .mobile-campaign-categories {
+      display: none;
+    }
+  }
+  </style>
+
+<body>
+	<div class="app">
+		<div class="app-inner">
+			{{{body}}}
+		</div>
+	</div>
+	{{> fullfooter}}
+	<script src="https://apis.google.com/js/client.js"></script>
+	<!-- build:js /dist/<<timeStamp>>/bower_dist<<timeStamp>>.js -->
+	<script src="/bower_components/jquery/dist/jquery.js"></script>
+	<script src="/bower_components/chosen/chosen.jquery.min.js"></script>
+	<script src="/bower_components/summernote/dist/summernote.js"></script>
+	<script src="/js/jquerypp.custom.js"></script>
+	<script src="/bower_components/video.js/dist/video-js/video.js"></script>	
+	<script src="/bower_components/videojs-youtube/dist/vjs.youtube.js"></script>
+	<script src="/js/vjs.vimeo.js"></script>
+	<script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+	<script src="/bower_components/jquery.maskedinput/dist/jquery.maskedinput.min.js"></script>
+	<script src="/bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="/bower_components/jquery-validation/dist/additional-methods.min.js"></script>
+	<script src="/bower_components/moment/moment.js"></script>
+	<script src="/js/moment-timezone.js"></script>
+	<script src="/js/moment-timezone-with-data-2010-2020.js"></script>
+	<script src="/bower_components/countdownjs/countdown.js"></script>
+	<script src="/bower_components/moment-countdown/bin/moment-countdown.js"></script>
+	<script src="/bower_components/iCheck/icheck.js"></script>
+	<script src="/bower_components/underscore/underscore-min.js"></script>
+	<script src="/bower_components/blueimp-gallery/js/blueimp-gallery.min.js"></script>
+	<script src="/bower_components/blueimp-gallery/js/jquery.blueimp-gallery.min.js"></script>
+	<script src="/bower_components/Justified-Gallery/dist/js/jquery.justifiedGallery.js"></script>
+	<script src="/bower_components/colorbox/jquery.colorbox.js"></script>	
+	<script src="/js/jstz.js"></script>
+	<script src="/js/ajaxcommon.js"></script>
+	<script src="/js/jquery.simplyCountable.js"></script>
+	<script src="/js/can.custom.js"></script>
+	<script src="/js/jquery.fineuploader-3.3.0.js"></script>
+	<script src="/js/bootstrap-datetimepicker.js"></script>
+	<script src="/js/wNumb.js"></script>
+	<script src="/js/jquery.number.js"></script>
+	<script src="/js/modernizr.custom.js"></script>
+	<script src="/js/classie.js"></script>
+	<script src="/js/uisearch.js"></script>
+	<script src="/js/footer.js"></script>
+	<script src="/js/wepay.js"></script>
+	<script src="/js/logger.js"></script>
+	<script src="/js/mustache.helpers.js"></script>
+	<script src="/js/jquery-validations.js"></script>
+	<script src="/js/share.min.js"></script>
+	<script src="/js/jquery.textcomplete.js"></script>
+	<script src="/js/uuid.js"></script>
+	<script src="/bower_components/imagesloaded/imagesloaded.pkgd.js"></script>
+	<script src="/js/jquery-quick-pagination.js"></script>
+	<script src="/js/summernote-uploadcare.js"></script>
+	<script src="/js/controller/header_controller.js"></script>
+	<script src="/js/controller/auth_controller.js"></script>
+	<script src="/js/controller/organization/causeportal_controller.js"></script>
+	<script src="/js/controller/donorportal_controller.js"></script>
+	<script src="/js/controller/donorsettings_controller.js"></script>
+	<script src="/js/controller/donordashboard_controller.js"></script>
+	<script src="/js/controller/trending_controller.js"></script>
+	<script src="/js/controller/whotofollow_controller.js"></script>
+	<script src="/js/controller/followwizard_controller.js"></script>
+	<script src="/js/controller/gallery_controller.js"></script>
+	<script src="/js/controller/postfeed_controller.js"></script>
+	<script src="/js/controller/manage_controller.js"></script>
+	<script src="/js/controller/managecampaigns_controller.js"></script>
+	<script src="/js/controller/discover_controller.js"></script>
+	<script src="/js/controller/impact_controller.js"></script>
+	<script src="/js/controller/donor/claim_controller.js"></script>
+	<script src="/js/controller/notifications_controller.js"></script>
+	<script src="/js/controller/donation_controller.js"></script>
+	<script src="/js/controller/search_controller.js"></script>
+	<script src="/js/controller/share_controller.js"></script>
+	<script src="/js/controller/embeded_widgets_controller.js"></script>
+	<script src="/js/controller/videorecording_controller.js"></script>
+	<script src="/js/controller/ziggeo-v1.js"></script>
+	<script src="/js/controller/eventsignup_controller.js"></script>
+	<script src="/js/controller/donorinfo-collection_controller.js"></script>
+	<script src="/js/controller/invite_controller.js"></script>
+	<script src="/js/controller/fundraise-campaign_controller.js"></script>
+	<script src="/js/controller/publicpage_controller.js"></script>
+	<script src="/js/controller/team_controller.js"></script>
+	<script src="/js/controller/donor/donations_controller.js"></script>
+	<script src="/js/model/donorModel.js"></script>
+	<script src="/js/model/onboarding.js"></script>
+	<script src="/js/model/managementmodel.js"></script>
+	<script src="/js/model/settingsmodel.js"></script>
+	<script src="/js/model/campainsmodel.js"></script>
+	<script src="/js/model/causesModel.js"></script>
+	<script src="/js/model/donationmodel.js"></script>
+	<!-- /build -->
+	<!-- build:js /dist/<<timeStamp>>/js_dist<<timeStamp>>.js -->
+	<!-- /build -->
+	<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+	<script charset="utf-8" src="//ucarecdn.com/widget/2.6.0/uploadcare/uploadcare.full.min.js"></script>
+	<script>
+	UPLOADCARE_LOCALE = "en";
+	UPLOADCARE_TABS = "file url facebook gdrive dropbox instagram flickr skydrive box";
+	//UPLOADCARE_PUBLIC_KEY = "43591b9fb42eb9740146"; //Production
+	UPLOADCARE_PUBLIC_KEY = "786c3b03d6095e0a34f3"; // Development
+	UPLOADCARE_LIVE = false;
+	</script>
+	   <!--Start of Tawk.to Script-->
+	<script type="text/javascript">
+  var Tawk_API = '2173143078dcdce4f7158781525651189520bef8' || {},
+    Tawk_LoadStart = new Date();
+  (function() {
+    var s1 = document.createElement("script"),
+      s0 = document.getElementsByTagName("script")[0];
+    s1.async = true;
+    s1.src = 'https://embed.tawk.to/589b0848ff923c0ab414dde9/default';
+    s1.charset = 'UTF-8';
+    s1.setAttribute('crossorigin', '*');
+    s0.parentNode.insertBefore(s1, s0);
+  })();
+   </script>
+       <!--End of Tawk.to Script-->
+	{{> analytics}}
+	<script type="text/javascript">
+
+	Stripe.setPublishableKey("{{stripe_publishable_key}}");
+	ZiggeoApi.token = "{{ziggeoToken}}";
+	ZiggeoApi.Config.cdn = true;
+
+	if (ww.store.getItem('visitedUser')) {
+
+	} else {
+		var visitedUser = uuid.v4();
+		ww.store.storeCookie('visitedUser', visitedUser);
+	}
+	if (sessionStorage.getItem('sessionId')) {
+
+	} else {
+		var sessionId = uuid.v4();
+		sessionStorage.setItem('sessionId', sessionId);
+	}
+	Logger.debug('User Opened Public Page With Layout Pages');
+	var state = new can.Observe({});
+	$(document).ready(function() {
+
+		causesModel.loadSeedData({}, function(response) {
+			state.attr('seedData', response.seedData);
+			state.attr('geoData', response.geoData);
+			//Check the Country Should be in the 19 Countries We Support.
+			if (state.geoData) {
+				var supported = isCountrySupported(state.geoData.country.iso_code);
+				simplifyGeoInfo(response.geoData);
+			}
+			// Getting the data from localstorage, set the data if the user is empty
+			//if (!ww.store.getItem('user')) {
+			/*ww.store.storeItem('user', JSON.stringify(response.user));*/
+			state.user = response.user;
+			/*} else {
+				state.user = ww.store.getItem('user');
+			}*/
+			if (state.user) {
+				analytics.identify(state.user.user_id, state.user);
+				ww.store.storeCookie('logindonorid', state.user.user_id);
+
+			}
+			var props = state.attr('seedData').props;
+			if ("{{googleSLSearch}}") {
+				updateOutsideDetails({
+					'sitelinkSearch': "Yes"
+				})
+				if (state.user) {
+					state.user.sitelinkSearch = "Yes";
+				}
+				//ww.store.storeItem('sitelinkSearch', "Y");
+				console.log('loading donor dashboard here');
+				new donorPortal('body');
+			} else {
+				console.log('public instead');
+				new publicPageController('body');
+			}
+		});
+
+	});
+
+	$(document).delegate('.js-logout', 'click', function(ev) {
+		$(document).trigger('tracking', 'User Clicked On Logout Button');
+		ww.store.clear();
+		removeRedisData();
+        if($('.topnavbar').controls()[0]){
+        $('.topnavbar').controls()[0].destroy();
+      }
+		//document.location.href = '/';
+		new headerContorller('.topnavbar', {
+         header: "headervalue"
+    });
+    document.location.reload(true);
+
+	});
+
+	function goTocampaignPage(category_id){
+		var queries = '?';
+
+		if($('#js-team-info').data('team')){
+			queries += 'teamid='+$('#js-team-info').data('team')+'&';
+		}
+		if(state.user && state.user.id){
+			queries += 'userid='+state.user.id;
+		}
+		
+		document.location.href='/pages/campaigns/list/'+category_id+queries;
+	}
+	</script>
+	<!-- build_external:js /js/hotjar.js -->
+	<!-- /build_external -->
+	{{> meta-js}}
+
+<!-- Facebook pixel code will come here -->
+</body>
+
+</html>

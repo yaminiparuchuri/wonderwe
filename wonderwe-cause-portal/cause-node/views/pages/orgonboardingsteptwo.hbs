@@ -1,0 +1,775 @@
+<div class="onboarding-wizard">
+    <nav class="topnavbar navbar navbar-inverse publicnav">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="/"> <img src="/images/top-logo.png" alt="WonderWe" /> </a>
+            </div>
+            <div id="navbar">
+                <div class="col-sm-offset-3 hidden-xs">
+                    <ul class="nav navbar-nav mainnav">
+                        <li>
+                            <p><strong>Let's Build Your Profile</strong></p>
+                        </li>
+                    </ul>
+                </div>
+                <p class="visible-xs onboarding-stepText"><strong>Let's Build Your Profile</strong></p>
+                <div class="nav navbar-nav navbar-right">
+                    <p>Step 2 of 5</p>
+                </div>
+            </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row onboarding-step">
+            <div class="col-xs-12 no-gutter">
+                <form class="form-horizontal updateData" data-category="{{category}}" data-id="{{id}}" data-name="{{title}}" data-userid="{{userid}}">
+                    <div class="form-group">
+                        <div id="alertdiv" class="alert alert-danger alert-dismissable" style="display:none">
+                            <button type="button" id="js-close-div" class="close" aria-hidden="true"> &times;</button>
+                            <span id="spanid"></span>
+                        </div>
+                        <div id="successalert" class="alert alert-success alert-dismissable" style="display:none">
+                            <button type="button" id="js-close-div" class="close" aria-hidden="true"> &times;</button>
+                            <span id="spanid">Successfully Updated</span>
+                        </div>
+                        <label class="col-sm-4 control-label" for="wecode_logo">Your organization logo
+                            <br> (Recommended dimension is 500x500 pixels)</label>
+                        <div class="col-sm-6 settings">
+                            <div class="photoupload tooltipbtn" id="charity_logo_div" data-toggle="tooltip" data-placement="right" trigger="hover" title="Upload image 500x500 pixels">
+                                <!-- <div class="fileupload pull-left fileupload-new" id="charity_logo_div" data-provides="fileupload"></div> -->
+                                <label for="fileImg" style="position:relative;">
+                                    <div class="choose-value" style="position:absolute;top:50%;left:50%;transform: translateX(-50%) translateY(-50%);">
+                                        <center>
+                                            <i class="fa fa-camera" style="font-size:25px;color:#fff;"></i>
+                                            <br>
+                                            <span style="font-size:18px;text-align:center;color:#fff;">Change Photo</span>
+                                        </center>
+                                    </div>
+                                    <img class="org-img" id="codeimage" src="{{constructUrl profile_pic_url '258x258'}}" height="258px" width="258px" alt="user_logo"> </label>
+                            </div>
+                            <input id="wecode_logo" name="profile_pic_url" value="{{profile_pic_url}}" type="hidden" class="form-control">
+                            <!-- <div class="col-sm-offset-3 col-sm-5">
+                                <div id="error" class="error">
+                                    <span></span>
+                                    <br clear="all">
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label class="col-sm-4 control-label" for="org_cover_img">Your cover image</label>
+                        <div class="col-sm-6">
+                            <div class="photoupload">
+                                <div class="fileupload pull-left fileupload-new"  id="org_cover_img_div" data-provides="fileupload"></div>
+                                <img class="org-img" id="coverimage" src="" alt="cover image">
+                            </div>
+                            <input id="org_cover_img" name="org_cover_img" value="" type="hidden" class="form-control">
+                            <div class="col-sm-offset-3 col-sm-5">
+                                <div id="error" class="error">
+                                    <span></span>
+                                    <br clear="all">
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="organization-title">Organization Name </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="title" id="title" value="{{title}}" class="form-control tooltipbtn" data-toggle="tooltip" data-placement="right" trigger="focus" title="Organization Name" readonly="">
+                            <!-- optional help text here -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="slug">User Name </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="slug" id="js-org-slug" value="{{slug}}" class="form-control tooltipbtn" data-original="{{slug}}" data-toggle="tooltip" data-placement="right" trigger="focus" title="User Name">
+                            <!-- optional help text here -->
+                            <span>{{domain}}/<span id="js-org-url">{{slug}}</span></span>
+                            </br>
+                            <span class="js-org-error" style="color:red"> </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="Description">Description <a tabindex="0" class="popoverbtn" data-toggle="popover" data-trigger="focus" title="Profile Description" data-content="Your description can be a maximum of 333 characters.  We recommend adding your mission statement here."><i class="fa fa-question-circle"></i></a></label>
+                        <div class="col-sm-6">
+                            <textarea type="text" name="brief_description" id="brief_description" class="form-control tooltipbtn" data-toggle="tooltip" data-placement="right" trigger="focus" title="Description">{{description}}</textarea>
+                            <!-- optional help text here -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="organization-website">Website </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="web_url" id="web_url" value="{{web_url}}" class="form-control tooltipbtn" data-toggle="tooltip" data-placement="right" trigger="focus" title="Website URL">
+                            <!-- optional help text here -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Organization category <a tabindex="0" class="popoverbtn" data-toggle="popover" data-trigger="focus" title="National Taxonomy of Exempt Entities (NTEE) Classification System" data-content="WonderWe uses the NTEE Classification System developed by The National Center for Charitable Statistics.  Choosing a good, representative NTEE code will help your organization be more easily found by users searching our database."><i class="fa fa-question-circle"></i></a> </label>
+                        <div class="col-sm-6">
+                            <select data-placeholder="Organization category (NTEE Code)" style="width:100%;" class="chosen-select" multiple tabindex="6" name="category" id="category">
+                                <optgroup label="Arts, Culture and Humanities">
+                                    <option value="1836">Art Museums</option>
+                                    <option value="1837">Arts Council/Agency</option>
+                                    <option value="1838">Arts Education</option>
+                                    <option value="1839">Arts Service Organizations and Activities</option>
+                                    <option value="1840">Arts, Cultural Organizations -Multipurpose</option>
+                                    <option value="1841">Arts, Culture, and Humanities N.E.C</option>
+                                    <option value="1842">Ballet</option>
+                                    <option value="1843">Children's Museums</option>
+                                    <option value="1844">Commemorative Events</option>
+                                    <option value="1845">Cultural, Ethnic Awareness</option>
+                                    <option value="1846">Dance</option>
+                                    <option value="1847">Film, Video</option>
+                                    <option value="1848">Fund Raising and/or Fund Distribution</option>
+                                    <option value="1849">Historical Societies, Related Historical Activities</option>
+                                    <option value="1850">History Museums</option>
+                                    <option value="1851">Humanities Organizations</option>
+                                    <option value="1852">Management & Technical Assistance</option>
+                                    <option value="1853">Media, Communications Organizations</option>
+                                    <option value="1854">Museum, Museum Activities</option>
+                                    <option value="1855">Music</option>
+                                    <option value="1856">Music Groups, Bands, Ensembles</option>
+                                    <option value="1857">Natural History, Natural Science Museums</option>
+                                    <option value="1858">Nonmonetary Support N.E.C.*</option>
+                                    <option value="1859">Opera</option>
+                                    <option value="1860">Performing Arts Centers</option>
+                                    <option value="1861">Performing Arts Organizations</option>
+                                    <option value="1862">Performing Arts Schools</option>
+                                    <option value="1863">Printing, Publishing</option>
+                                    <option value="1864">Professional Societies, Associations</option>
+                                    <option value="1865">Radio</option>
+                                    <option value="1866">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="1867">Science and Technology Museums</option>
+                                    <option value="1868">Singing, Choral</option>
+                                    <option value="1869">Single Organization Support</option>
+                                    <option value="1870">Symphony Orchestras</option>
+                                    <option value="1871">Television</option>
+                                    <option value="1872">Theater</option>
+                                    <option value="1873">Visual Arts Organizations</option>
+                                </optgroup>
+                                <optgroup label="Educational Institutions and Related Activities">
+                                    <option value="1874">Adult, Continuing Education</option>
+                                    <option value="1875">Alliance/Advocacy Organizations</option>
+                                    <option value="1876">Alumni Associations</option>
+                                    <option value="1877">Community or Junior Colleges</option>
+                                    <option value="1878">Education N.E.C.</option>
+                                    <option value="1879">Educational Services and Schools - Other</option>
+                                    <option value="1880">Elementary, Secondary Education, K - 12</option>
+                                    <option value="1881">Fund Raising and/or Fund Distribution</option>
+                                    <option value="1882">Graduate, Professional Schools (Separate Entities)</option>
+                                    <option value="1883">Higher Education Institutions</option>
+                                    <option value="1884">Kindergarten, Preschool, Nursery School, Early Admissions</option>
+                                    <option value="1885">Libraries</option>
+                                    <option value="1886">Management & Technical Assistance</option>
+                                    <option value="1887">Nonmonetary Support N.E.C.</option>
+                                    <option value="1888">Parent/Teacher Group</option>
+                                    <option value="1889">Primary, Elementary Schools</option>
+                                    <option value="1890">Professional Societies, Associations</option>
+                                    <option value="1891">Remedial Reading, Reading Encouragement</option>
+                                    <option value="1892">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="1893">Scholarships, Student Financial Aid Services, Awards</option>
+                                    <option value="1894">Secondary, High School</option>
+                                    <option value="1895">Single Organization Support</option>
+                                    <option value="1896">Specialized Education Institutions</option>
+                                    <option value="1897">Student Services, Organizations of Students</option>
+                                    <option value="1898">Student Sororities, Fraternities</option>
+                                    <option value="1899">Undergraduate College (4-year)</option>
+                                    <option value="1900">University or Technological Institute</option>
+                                    <option value="1901">Vocational, Technical Schools</option>
+                                </optgroup>
+                                <optgroup label="Environmental Quality, Protection and Beautification">
+                                    <option value="1902">Alliance/Advocacy Organizations</option>
+                                    <option value="1903">Botanical Gardens, Arboreta and Botanical Organizations</option>
+                                    <option value="1904">Botanical, Horticultural, and Landscape Services</option>
+                                    <option value="1905">Energy Resources Conservation and Development</option>
+                                    <option value="1906">Environmental Beautification and Aesthetics</option>
+                                    <option value="1907">Environmental Education and Outdoor Survival Programs</option>
+                                    <option value="1908">Environmental Quality, Protection, and Beautification N.E.C.</option>
+                                    <option value="1909">Forest Conservation</option>
+                                    <option value="1910">Fund Raising and/or Fund Distribution</option>
+                                    <option value="1911">Garden Club, Horticultural Program</option>
+                                    <option value="1912">Land Resources Conservation</option>
+                                    <option value="1913">Management & Technical Assistance</option>
+                                    <option value="1914">Natural Resources Conservation and Protection</option>
+                                    <option value="1915">Nonmonetary Support N.E.C.</option>
+                                    <option value="1916">Pollution Abatement and Control Services</option>
+                                    <option value="1917">Professional Societies, Associations</option>
+                                    <option value="1918">Recycling Programs</option>
+                                    <option value="1919">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="1920">Single Organization Support</option>
+                                    <option value="1921">Water Resource, Wetlands Conservation and Management</option>
+                                </optgroup>
+                                <optgroup label="Animal-Related">
+                                    <option value="1922">Alliance/Advocacy Organizations</option>
+                                    <option value="1923">Animal Protection and Welfare</option>
+                                    <option value="1924">Animal Training, Behavio</option>
+                                    <option value="1925">Bird Sanctuary, Preserve</option>
+                                    <option value="1926">Fisheries Resources</option>
+                                    <option value="1927">Fund Raising and/or Fund Distribution</option>
+                                    <option value="1928">Management & Technical Assistance</option>
+                                    <option value="1929">Nonmonetary Support N.E.C.</option>
+                                    <option value="1930">Other Services - Specialty Animals</option>
+                                    <option value="1931">Professional Societies, Associations</option>
+                                    <option value="1932">Protection of Endangered Species</option>
+                                    <option value="1933">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="1934">Single Organization Support</option>
+                                    <option value="1935">Veterinary Services</option>
+                                    <option value="1936">Wildlife Preservation, Protection</option>
+                                    <option value="1937">Wildlife Sanctuary, Refuge</option>
+                                    <option value="1938">Zoo, Zoological Society</option>
+                                </optgroup>
+                                <optgroup label="Health - General and Rehabilitative">
+                                    <option value="1939">Alliance/Advocacy Organizations</option>
+                                    <option value="1940">Ambulance, Emergency Medical Transport Services</option>
+                                    <option value="1941">Ambulatory Health Center, Community Clinic</option>
+                                    <option value="1942">Blood Supply Related</option>
+                                    <option value="1943">Community Health Systems</option>
+                                    <option value="1944">Family Planning Centers</option>
+                                    <option value="1945">Fund Raising and/or Fund Distribution</option>
+                                    <option value="1946">Group Health Practice (Health Maintenance Organizations)</option>
+                                    <option value="1947">Health - General and Rehabilitative N.E.C.</option>
+                                    <option value="1948">Health Support Services</option>
+                                    <option value="1949">Health Treatment Facilities, Primarily Outpatient</option>
+                                    <option value="1950">Health, General and Financing</option>
+                                    <option value="1951">Home Health Care</option>
+                                    <option value="1952">Hospital, General</option>
+                                    <option value="1953">Hospital, Specialty</option>
+                                    <option value="1954">Hospitals and Related Primary Medical Care Facilities</option>
+                                    <option value="1955">Management & Technical Assistance</option>
+                                    <option value="1956">Nonmonetary Support N.E.C.</option>
+                                    <option value="1957">Nursing Services (General)</option>
+                                    <option value="1958">Nursing, Convalescent Facilities</option>
+                                    <option value="1959">Organ and Tissue Banks</option>
+                                    <option value="1960">Patient Services - Entertainment, Recreation</option>
+                                    <option value="1961">Professional Societies, Associations</option>
+                                    <option value="1962">Public Health Program (Includes General Health and Wellness Promotion Services)</option>
+                                    <option value="1963">Rehabilitative Medical Services</option>
+                                    <option value="1964">Reproductive Health Care Facilities and Allied Services</option>
+                                    <option value="1965">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="1966">Single Organization Support</option>
+                                </optgroup>
+                                <optgroup label="Mental Health, Crisis Intervention">
+                                    <option value="1967">Addictive Disorders N.E.C.</option>
+                                    <option value="1968">Alcohol, Drug Abuse, Prevention Only</option>
+                                    <option value="1969">Alcohol, Drug Abuse, Treatment Only</option>
+                                    <option value="1970">Alcohol, Drug and Substance Abuse, Dependency Prevention and Treatment</option>
+                                    <option value="1971">Alliance/Advocacy Organizations</option>
+                                    <option value="1972">Community Mental Health Center</option>
+                                    <option value="1973">Counseling, Support Groups</option>
+                                    <option value="1974">Eating Disorder, Addiction</option>
+                                    <option value="1975">Fund Raising and/or Fund Distribution</option>
+                                    <option value="1976">Gambling Addiction</option>
+                                    <option value="1977">Group Home, Residential Treatment Facility - Mental Health Related</option>
+                                    <option value="1978">Hot Line, Crisis Intervention Services</option>
+                                    <option value="1979">Management & Technical Assistance</option>
+                                    <option value="1980">Mental Health Association, Multipurpose</option>
+                                    <option value="1981">Mental Health Disorders</option>
+                                    <option value="1982">Mental Health Treatment - Multipurpose and N.E.C.</option>
+                                    <option value="1983">Mental Health, Crisis Intervention N.E.C.</option>
+                                    <option value="1984">Nonmonetary Support N.E.C.</option>
+                                    <option value="1985">Professional Societies, Associations</option>
+                                    <option value="1986">Psychiatric, Mental Health Hospital</option>
+                                    <option value="1987">Rape Victim Services</option>
+                                    <option value="1988">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="1989">Single Organization Support</option>
+                                    <option value="1990">Smoking Addiction</option>
+                                </optgroup>
+                                <optgroup label="Diseases, Disorders, Medical Disciplines">
+                                    <option value="1991">AIDS</option>
+                                    <option value="1992">Allergy Related Diseases</option>
+                                    <option value="1993">Alliance/Advocacy Organizations</option>
+                                    <option value="1994">Alzheimer's Disease</option>
+                                    <option value="1995">Arthritis</option>
+                                    <option value="1996">Asthma</option>
+                                    <option value="1997">Autism</option>
+                                    <option value="1998">Biomedicine, Bioengineering</option>
+                                    <option value="1999">Birth Defects and Genetic Diseases</option>
+                                    <option value="2000">Brain Disorders</option>
+                                    <option value="2001">Cancer</option>
+                                    <option value="2002">Digestive Diseases, Disorders</option>
+                                    <option value="2003">Diseases of Specific Organs</option>
+                                    <option value="2004">Diseases, Disorders, Medical Disciplines N.E.C.</option>
+                                    <option value="2005">Down Syndrome</option>
+                                    <option value="2006">Ear and Throat Diseases</option>
+                                    <option value="2007">Epilepsy</option>
+                                    <option value="2008">Eye Diseases, Blindness and Vision Impairments</option>
+                                    <option value="2009">Fund Raising and/or Fund Distribution</option>
+                                    <option value="2010">Geriatrics</option>
+                                    <option value="2011">Heart and Circulatory System Diseases, Disorders</option>
+                                    <option value="2012">Kidney Disease</option>
+                                    <option value="2013">Lung Disease</option>
+                                    <option value="2014">Management & Technical Assistance</option>
+                                    <option value="2015">Medical Disciplines</option>
+                                    <option value="2016">Nerve, Muscle and Bone Diseases</option>
+                                    <option value="2017">Neurology, Neuroscience</option>
+                                    <option value="2018">Nonmonetary Support N.E.C.</option>
+                                    <option value="2019">Pediatrics</option>
+                                    <option value="2020">Professional Societies, Associations</option>
+                                    <option value="2021">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="2022">Single Organization Support</option>
+                                    <option value="2023">Specifically Named Diseases</option>
+                                    <option value="2024">Surgery</option>
+                                </optgroup>
+                                <optgroup label="Medical Research">
+                                    <option value="2025">AIDS Research</option>
+                                    <option value="2026">Allergy Related Disease Research</option>
+                                    <option value="2027">Alliance/Advocacy Organizations</option>
+                                    <option value="2028">Alzheimer's Disease Research</option>
+                                    <option value="2029">Arthritis Research</option>
+                                    <option value="2030">Asthma Research</option>
+                                    <option value="2031">Autism Research</option>
+                                    <option value="2032">Biomedicine, Bioengineering Research</option>
+                                    <option value="2033">Birth Defects, Genetic Diseases Research</option>
+                                    <option value="2034">Brain Disorders Research</option>
+                                    <option value="2035">Cancer Research</option>
+                                    <option value="2036">Digestive Disease, Disorder Research</option>
+                                    <option value="2037">Down Syndrome Research</option>
+                                    <option value="2038">Ear and Throat Research</option>
+                                    <option value="2039">Epilepsy Research</option>
+                                    <option value="2040">Eye Research</option>
+                                    <option value="2041">Fund Raising and/or Fund Distribution</option>
+                                    <option value="2042">Geriatrics Research</option>
+                                    <option value="2043">Heart, Circulatory Research</option>
+                                    <option value="2044">Kidney Research</option>
+                                    <option value="2045">Lung Research</option>
+                                    <option value="2046">Management & Technical Assistance</option>
+                                    <option value="2047">Medical Research N.E.C.</option>
+                                    <option value="2048">Medical Specialty Research</option>
+                                    <option value="2049">Nerve, Muscle, Bone Research</option>
+                                    <option value="2050">Neurology, Neuroscience Research</option>
+                                    <option value="2051">Nonmonetary Support N.E.C.</option>
+                                    <option value="2052">Pediatrics Research</option>
+                                    <option value="2053">Professional Societies, Associations</option>
+                                    <option value="2054">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="2055">Single Organization Support</option>
+                                    <option value="2056">Specific Organ Research</option>
+                                    <option value="2057">Specifically Named Diseases Research</option>
+                                    <option value="2058">Surgery Research</option>
+                                </optgroup>
+                                <optgroup label="Crime, Legal-Related">
+                                    <option value="2059">Administration of Justice, Courts</option>
+                                    <option value="2060">Alliance/Advocacy Organizations</option>
+                                    <option value="2061">Child Abuse, Prevention of</option>
+                                    <option value="2062">Correctional Facilities N.E.C.</option>
+                                    <option value="2063">Crime Prevention N.E.C.</option>
+                                    <option value="2064">Crime, Legal Related N.E.C.</option>
+                                    <option value="2065">Delinquency Prevention</option>
+                                    <option value="2066">Dispute Resolution, Mediation Services</option>
+                                    <option value="2067">Drunk Driving Related</option>
+                                    <option value="2068">Fund Raising and/or Fund Distribution</option>
+                                    <option value="2069">Law Enforcement Agencies (Police Departments)</option>
+                                    <option value="2070">Legal Services</option>
+                                    <option value="2071">Management & Technical Assistance</option>
+                                    <option value="2072">Nonmonetary Support N.E.C.</option>
+                                    <option value="2073">Prison Alternatives</option>
+                                    <option value="2074">Professional Societies, Associations</option>
+                                    <option value="2075">Protection Against, Prevention of Neglect, Abuse, Exploitation</option>
+                                    <option value="2076">Public Interest Law, Litigation</option>
+                                    <option value="2077">Rehabilitation Services for Offenders</option>
+                                    <option value="2078">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="2079">Services to Prisoners and Families - Multipurpose</option>
+                                    <option value="2080">Sexual Abuse, Prevention of</option>
+                                    <option value="2081">Single Organization Support</option>
+                                    <option value="2082">Spouse Abuse, Prevention of</option>
+                                    <option value="2083">Transitional Care, Half-Way House for Offenders, Ex-Offenders</option>
+                                    <option value="2084">Alliance/Advocacy Organizations</option>
+                                </optgroup>
+                                <optgroup label="Employment, Job-Related">
+                                    <option value="2085">Employment Procurement Assistance, Job Training</option>
+                                    <option value="2086">Employment, Job Related N.E.C.</option>
+                                    <option value="2087">Fund Raising and/or Fund Distribution</option>
+                                    <option value="2088">Goodwill Industries</option>
+                                    <option value="2089">Labor Unions, Organizations</option>
+                                    <option value="2090">Management & Technical Assistance</option>
+                                    <option value="2091">Nonmonetary Support N.E.C.</option>
+                                    <option value="2092">Professional Societies, Associations</option>
+                                    <option value="2093">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="2094">Sheltered Remunerative Employment, Work Activity Center N.E.C.</option>
+                                    <option value="2095">Single Organization Support</option>
+                                    <option value="2096">Vocational Counseling, Guidance and Testing</option>
+                                    <option value="2097">Vocational Rehabilitation</option>
+                                    <option value="2098">Vocational Training</option>
+                                </optgroup>
+                                <optgroup label="Food, Agriculture and Nutrition">
+                                    <option value="2099">Agricultural Programs</option>
+                                    <option value="2100">Alliance/Advocacy Organizations</option>
+                                    <option value="2101">Congregate Meals</option>
+                                    <option value="2102">Eatery, Agency, Organization Sponsored</option>
+                                    <option value="2103">Farm Bureau, Grange</option>
+                                    <option value="2104">Farmland Preservation</option>
+                                    <option value="2105">Food Banks, Food Pantries</option>
+                                    <option value="2106">Food Service, Free Food Distribution Programs</option>
+                                    <option value="2107">Food, Agriculture, and Nutrition N.E.C.</option>
+                                    <option value="2108">Fund Raising and/or Fund Distribution</option>
+                                    <option value="2109">Home Economics</option>
+                                    <option value="2110">Livestock Breeding, Development, Management</option>
+                                    <option value="2111">Management & Technical Assistance</option>
+                                    <option value="2112">Meals on Wheels</option>
+                                    <option value="2113">Nonmonetary Support N.E.C.</option>
+                                    <option value="2114">Nutrition Programs</option>
+                                    <option value="2115">Professional Societies, Associations</option>
+                                    <option value="2116">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="2117">Single Organization Support</option>
+                                </optgroup>
+                                <optgroup label="Housing, Shelter">
+                                    <option value="2118">Alliance/Advocacy Organizations</option>
+                                    <option value="2119">Fund Raising and/or Fund Distribution</option>
+                                    <option value="2120">Home Improvement and Repairs</option>
+                                    <option value="2121">Homeless, Temporary Shelter For</option>
+                                    <option value="2122">Housing Development, Construction, Management</option>
+                                    <option value="2123">Housing Expense Reduction Support</option>
+                                    <option value="2124">Housing Owners, Renters Organizations</option>
+                                    <option value="2125">Housing Rehabilitation</option>
+                                    <option value="2126">Housing Search Assistance</option>
+                                    <option value="2127">Housing Support Services -- Other</option>
+                                    <option value="2128">Housing, Shelter N.E.C.</option>
+                                    <option value="2129">Low-Cost Temporary Housing</option>
+                                    <option value="2130">Management & Technical Assistance</option>
+                                    <option value="2131">Nonmonetary Support N.E.C.</option>
+                                    <option value="2132">Professional Societies, Associations</option>
+                                    <option value="2133">Public Housing Facilities</option>
+                                    <option value="2134">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="2135">Senior Citizens' Housing/Retirement Communities</option>
+                                    <option value="2136">Single Organization Support</option>
+                                </optgroup>
+                                <optgroup label="Public Safety, Disaster Preparedness and Relief">
+                                    <option value="2137">Alliance/Advocacy Organizations</option>
+                                    <option value="2138">Automotive Safety</option>
+                                    <option value="2139">Disaster Preparedness and Relief Services</option>
+                                    <option value="2140">Fire Prevention, Protection, Control</option>
+                                    <option value="2141">First Aid Training, Services</option>
+                                    <option value="2142">Fund Raising and/or Fund Distribution</option>
+                                    <option value="2143">Management & Technical Assistance</option>
+                                    <option value="2144">Nonmonetary Support N.E.C.</option>
+                                    <option value="2145">Professional Societies, Associations</option>
+                                    <option value="2146">Public Safety, Disaster Preparedness, and Relief N.E.C.</option>
+                                    <option value="2147">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="2148">Safety Education</option>
+                                    <option value="2149">Search and Rescue Squads, Services</option>
+                                    <option value="2150">Single Organization Support</option>
+                                </optgroup>
+                                <optgroup label="Recreation, Sports, Leisure, Athletics">
+                                    <option value="2151">Alliance/Advocacy Organizations</option>
+                                    <option value="2152">Amateur Sports Clubs, Leagues, N.E.C.</option>
+                                    <option value="2153">Amateur Sports Competitions</option>
+                                    <option value="2154">Baseball, Softball</option>
+                                    <option value="2155">Basketball</option>
+                                    <option value="2156">Community Recreational Centers</option>
+                                    <option value="2157">Equestrian, Riding</option>
+                                    <option value="2158">Fairs, County and Other</option>
+                                    <option value="2159">Fishing, Hunting Clubs</option>
+                                    <option value="2160">Football Clubs, Leagues</option>
+                                    <option value="2161">Fund Raising and/or Fund Distribution</option>
+                                    <option value="2162">Golf</option>
+                                    <option value="2163">Management & Technical Assistance</option>
+                                    <option value="2164">Nonmonetary Support N.E.C.</option>
+                                    <option value="2165">Olympics Committees and Related International Competitions</option>
+                                    <option value="2166">Parks and Playgrounds</option>
+                                    <option value="2167">Physical Fitness and Community Recreational Facilities</option>
+                                    <option value="2168">Professional Athletic Leagues</option>
+                                    <option value="2169">Professional Societies, Associations</option>
+                                    <option value="2170">Recreation, Sports, Leisure, Athletics N.E.C.</option>
+                                    <option value="2171">Recreational and Sporting Camps</option>
+                                    <option value="2172">Recreational, Pleasure, or Social Club</option>
+                                    <option value="2173">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="2174">Single Organization Support</option>
+                                    <option value="2175">Soccer Clubs, Leagues</option>
+                                    <option value="2176">Special Olympics</option>
+                                    <option value="2177">Sports Training Facilities, Agencies</option>
+                                    <option value="2178">Swimming, Water Recreation</option>
+                                    <option value="2179">Tennis, Racquet Sports Clubs, Leagues</option>
+                                    <option value="2180">Winter Sports (Snow and Ice)</option>
+                                </optgroup>
+                                <optgroup label="Youth Development">
+                                    <option value="2181">Adult, Child Matching Programs</option>
+                                    <option value="2182">Alliance/Advocacy Organizations</option>
+                                    <option value="2183">Big Brothers, Big Sisters</option>
+                                    <option value="2184">Boy Scouts of America</option>
+                                    <option value="2185">Boys and Girls Clubs (Combined)</option>
+                                    <option value="2186">Boys Clubs</option>
+                                    <option value="2187">Camp Fire</option>
+                                    <option value="2188">Fund Raising and/or Fund Distribution</option>
+                                    <option value="2189">Girl Scouts of the U.S.A.</option>
+                                    <option value="2190">Girls Clubs</option>
+                                    <option value="2191">Management & Technical Assistance</option>
+                                    <option value="2192">Nonmonetary Support N.E.C.</option>
+                                    <option value="2193">Professional Societies, Associations</option>
+                                    <option value="2194">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="2195">Scouting Organizations</option>
+                                    <option value="2196">Single Organization Support</option>
+                                    <option value="2197">Youth Centers, Clubs, Multipurpose</option>
+                                    <option value="2198">Youth Community Service Clubs</option>
+                                    <option value="2199">Youth Development - Agricultural</option>
+                                    <option value="2200">Youth Development - Business</option>
+                                    <option value="2201">Youth Development - Citizenship Programs</option>
+                                    <option value="2202">Youth Development - Religious Leadership</option>
+                                    <option value="2203">Youth Development N.E.C.</option>
+                                    <option value="2204">Youth Development Programs, Other</option>
+                                </optgroup>
+                                <optgroup label="Human Services - Multipurpose and Other">
+                                    <option value="2205">Adoption</option>
+                                    <option value="2206">Alliance/Advocacy Organizations</option>
+                                    <option value="2207">American Red Cross</option>
+                                    <option value="2208">Blind/Visually Impaired Centers, Services</option>
+                                    <option value="2209">Child Day Care</option>
+                                    <option value="2210">Children's, Youth Services</option>
+                                    <option value="2211">Deaf/Hearing Impaired Centers, Services</option>
+                                    <option value="2212">Developmentally Disabled Centers, Services</option>
+                                    <option value="2213">Emergency Assistance (Food, Clothing, Cash)</option>
+                                    <option value="2214">Ethnic, Immigrant Centers, Services</option>
+                                    <option value="2215">Family Counseling</option>
+                                    <option value="2216">Family Services</option>
+                                    <option value="2217">Family Services, Adolescent Parents</option>
+                                    <option value="2218">Family Violence Shelters, Services</option>
+                                    <option value="2219">Financial Counseling, Money Management</option>
+                                    <option value="2220">Foster Care</option>
+                                    <option value="2221">Fund Raising and/or Fund Distribution</option>
+                                    <option value="2222">Gift Distribution</option>
+                                    <option value="2223">Group Home (Long Term)</option>
+                                    <option value="2224">Half-Way House (Short-Term Residential Care)</option>
+                                    <option value="2225">Homeless Persons Centers, Services</option>
+                                    <option value="2226">Homemaker, Home Health Aide</option>
+                                    <option value="2227">Hospice</option>
+                                    <option value="2228">Human Service Organizations - Multipurpose</option>
+                                    <option value="2229">Human Services - Multipurpose and Other N.E.C.</option>
+                                    <option value="2230">Management & Technical Assistance</option>
+                                    <option value="2231">Neighborhood Centers, Settlement Houses</option>
+                                    <option value="2232">Nonmonetary Support N.E.C.</option>
+                                    <option value="2233">Personal Social Services</option>
+                                    <option value="2234">Professional Societies, Associations</option>
+                                    <option value="2235">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="2236">Residential, Custodial Care</option>
+                                    <option value="2237">Salvation Army</option>
+                                    <option value="2238">Senior Centers, Services</option>
+                                    <option value="2239">Senior Continuing Care Communities</option>
+                                    <option value="2240">Services to Promote the Independence of Specific Populations</option>
+                                    <option value="2241">Single Organization Support</option>
+                                    <option value="2242">Single Parent Agencies, Services</option>
+                                    <option value="2243">Thrift Shops</option>
+                                    <option value="2244">Transportation, Free or Subsidized</option>
+                                    <option value="2245">Travelers' Aid</option>
+                                    <option value="2246">Urban League</option>
+                                    <option value="2247">Victims' Services</option>
+                                    <option value="2248">Volunteers of America</option>
+                                    <option value="2249">Young Men's or Women's Associations (YMCA, YWCA, YWHA, YMHA)</option>
+                                </optgroup>
+                                <optgroup label="International, Foreign Affairs and National Security">
+                                    <option value="2250">Alliance/Advocacy Organizations</option>
+                                    <option value="2251">Arms Control, Peace Organizations</option>
+                                    <option value="2252">Fund Raising and/or Fund Distribution</option>
+                                    <option value="2253">International Agricultural Development</option>
+                                    <option value="2254">International Cultural Exchange</option>
+                                    <option value="2255">International Development, Relief Services</option>
+                                    <option value="2256">International Economic Development</option>
+                                    <option value="2257">International Exchanges, N.E.C.</option>
+                                    <option value="2258">International Human Rights</option>
+                                    <option value="2259">International Migration, Refugee Issues</option>
+                                    <option value="2260">International Peace and Security</option>
+                                    <option value="2261">International Relief</option>
+                                    <option value="2262">International Student Exchange and Aid</option>
+                                    <option value="2263">International, Foreign Affairs, and National Security N.E.C.</option>
+                                    <option value="2264">Management & Technical Assistance</option>
+                                    <option value="2265">National Security, Domestic</option>
+                                    <option value="2266">Nonmonetary Support N.E.C.</option>
+                                    <option value="2267">Professional Societies, Associations</option>
+                                    <option value="2268">Promotion of International Understanding</option>
+                                    <option value="2269">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="2270">Single Organization Support</option>
+                                    <option value="2271">United Nations Association</option>
+                                </optgroup>
+                                <optgroup label="Civil Rights, Social Action, Advocacy">
+                                    <option value="2272">Alliance/Advocacy Organizations</option>
+                                    <option value="2273">Censorship, Freedom of Speech and Press Issues</option>
+                                    <option value="2274">Civil Liberties Advocacy</option>
+                                    <option value="2275">Civil Rights, Advocacy for Specific Groups</option>
+                                    <option value="2276">Civil Rights, Social Action, Advocacy N.E.C.</option>
+                                    <option value="2277">Disabled Persons' Rights</option>
+                                    <option value="2278">Fund Raising and/or Fund Distribution</option>
+                                    <option value="2279">Intergroup, Race Relations</option>
+                                    <option value="2280">Lesbian, Gay Rights</option>
+                                    <option value="2281">Management & Technical Assistance</option>
+                                    <option value="2282">Minority Rights</option>
+                                    <option value="2283">Nonmonetary Support N.E.C.</option>
+                                    <option value="2284">Professional Societies, Associations</option>
+                                    <option value="2285">Reproductive Rights</option>
+                                    <option value="2286">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="2287">Right to Die, Euthanasia Issues</option>
+                                    <option value="2288">Right to Life</option>
+                                    <option value="2289">Seniors' Rights</option>
+                                    <option value="2290">Single Organization Support</option>
+                                    <option value="2291">Voter Education, Registration</option>
+                                    <option value="2292">Women's Rights</option>
+                                </optgroup>
+                                <optgroup label="Community Improvement, Capacity Building">
+                                    <option value="2293">Alliance/Advocacy Organizations</option>
+                                    <option value="2294">Boards of Trade</option>
+                                    <option value="2295">Business and Industry</option>
+                                    <option value="2296">Community Coalitions</option>
+                                    <option value="2297">Community Improvement, Capacity Building N.E.C.</option>
+                                    <option value="2298">Community Service Clubs</option>
+                                    <option value="2299">Community, Neighborhood Development, Improvement (General)</option>
+                                    <option value="2300">Economic Development</option>
+                                    <option value="2301">Fund Raising and/or Fund Distribution</option>
+                                    <option value="2302">Management & Technical Assistance</option>
+                                    <option value="2303">Management Services for Small Business, Entrepreneurs</option>
+                                    <option value="2304">Men's Service Clubs</option>
+                                    <option value="2305">Neighborhood, Block Associations</option>
+                                    <option value="2306">Nonmonetary Support N.E.C.</option>
+                                    <option value="2307">Nonprofit Management</option>
+                                    <option value="2308">Professional Societies, Associations</option>
+                                    <option value="2309">Promotion of Business</option>
+                                    <option value="2310">Real Estate Organizations</option>
+                                    <option value="2311">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="2312">Rural Development</option>
+                                    <option value="2313">Single Organization Support</option>
+                                    <option value="2314">Urban, Community Economic Development</option>
+                                    <option value="2315">Women's Service Clubs</option>
+                                </optgroup>
+                                <optgroup label="Philanthropy, Voluntarism and Grantmaking Foundations">
+                                    <option value="2316">Alliance/Advocacy Organizations</option>
+                                    <option value="2317">Community Foundations</option>
+                                    <option value="2318">Corporate Foundations</option>
+                                    <option value="2319">Fund Raising and/or Fund Distribution</option>
+                                    <option value="2320">Fund Raising Organizations That Cross Categories</option>
+                                    <option value="2321">Management & Technical Assistance</option>
+                                    <option value="2322">Named Trusts/Foundations N.E.C.</option>
+                                    <option value="2323">Nonmonetary Support N.E.C.</option>
+                                    <option value="2324">Philanthropy, Charity, Voluntarism Promotion, General</option>
+                                    <option value="2325">Philanthropy, Voluntarism, and Grantmaking Foundations N.E.C.</option>
+                                    <option value="2326">Private Grantmaking Foundations</option>
+                                    <option value="2327">Private Independent Foundations</option>
+                                    <option value="2328">Private Operating Foundations</option>
+                                    <option value="2329">Professional Societies, Associations</option>
+                                    <option value="2330">Public Foundations</option>
+                                    <option value="2331">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="2332">Single Organization Support</option>
+                                    <option value="2333">Voluntarism Promotion</option>
+                                </optgroup>
+                                <optgroup label="Science and Technology Research Institutes, Services">
+                                    <option value="2334">Alliance/Advocacy Organizations</option>
+                                    <option value="2335">Astronomy</option>
+                                    <option value="2336">Biological, Life Science Research</option>
+                                    <option value="2337">Chemistry, Chemical Engineering</option>
+                                    <option value="2338">Computer Science</option>
+                                    <option value="2339">Engineering</option>
+                                    <option value="2340">Engineering and Technology Research, Services</option>
+                                    <option value="2341">Fund Raising and/or Fund Distribution</option>
+                                    <option value="2342">Geology</option>
+                                    <option value="2343">Management & Technical Assistance</option>
+                                    <option value="2344">Marine Science and Oceanography</option>
+                                    <option value="2345">Mathematics</option>
+                                    <option value="2346">Nonmonetary Support N.E.C.</option>
+                                    <option value="2347">Physical Sciences, Earth Sciences Research and Promotion</option>
+                                    <option value="2348">Professional Societies, Associations</option>
+                                    <option value="2349">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="2350">Science and Technology Research Institutes, Services N.E.C.</option>
+                                    <option value="2351">Science, General</option>
+                                    <option value="2352">Single Organization Support</option>
+                                </optgroup>
+                                <optgroup label="Social Science Research Institutes, Services">
+                                    <option value="2353">Alliance/Advocacy Organizations</option>
+                                    <option value="2354">Anthropology, Sociology</option>
+                                    <option value="2355">Behavioral Science</option>
+                                    <option value="2356">Black Studies</option>
+                                    <option value="2357">Economics (as a social science)</option>
+                                    <option value="2358">Ethnic Studies</option>
+                                    <option value="2359">Fund Raising and/or Fund Distribution</option>
+                                    <option value="2360">Gerontology (as a social science)</option>
+                                    <option value="2361">Interdisciplinary Research</option>
+                                    <option value="2362">International Studies</option>
+                                    <option value="2363">Labor Studies</option>
+                                    <option value="2364">Law, International Law, Jurisprudence</option>
+                                    <option value="2365">Management & Technical Assistance</option>
+                                    <option value="2366">Nonmonetary Support N.E.C.</option>
+                                    <option value="2367">Political Science</option>
+                                    <option value="2368">Population Studies</option>
+                                    <option value="2369">Professional Societies, Associations</option>
+                                    <option value="2370">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="2371">Single Organization Support</option>
+                                    <option value="2372">Social Science Institutes, Services</option>
+                                    <option value="2373">Social Science Research Institutes, Services N.E.C.</option>
+                                    <option value="2374">Urban Studies</option>
+                                    <option value="2375">Women's Studies</option>
+                                </optgroup>
+                                <optgroup label="Public, Society Benefit - Multipurpose and Other">
+                                    <option value="2376">Alliance/Advocacy Organizations</option>
+                                    <option value="2377">Citizen Participation</option>
+                                    <option value="2378">Consumer Protection, Safety</option>
+                                    <option value="2379">Credit Unions</option>
+                                    <option value="2380">Financial Institutions, Services (Non-Government Related)</option>
+                                    <option value="2381">Fund Raising and/or Fund Distribution</option>
+                                    <option value="2382">Government and Public Administration</option>
+                                    <option value="2383">Leadership Development</option>
+                                    <option value="2384">Management & Technical Assistance</option>
+                                    <option value="2385">Military, Veterans' Organizations</option>
+                                    <option value="2386">Nonmonetary Support N.E.C.</option>
+                                    <option value="2387">Professional Societies, Associations</option>
+                                    <option value="2388">Public Finance, Taxation, Monetary Policy</option>
+                                    <option value="2389">Public Transportation Systems, Services</option>
+                                    <option value="2390">Public Utilities</option>
+                                    <option value="2391">Public, Society Benefit - Multipurpose and Other N.E.C.</option>
+                                    <option value="2392">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="2393">Single Organization Support</option>
+                                    <option value="2394">Telephone, Telegraph and Telecommunication Services</option>
+                                </optgroup>
+                                <optgroup label="Religion-Related, Spiritual Development">
+                                    <option value="2395">Alliance/Advocacy Organizations</option>
+                                    <option value="2396">Buddhist</option>
+                                    <option value="2397">Christian</option>
+                                    <option value="2398">Fund Raising and/or Fund Distribution</option>
+                                    <option value="2399">Hindu</option>
+                                    <option value="2400">Interfaith Issues</option>
+                                    <option value="2401">Islamic</option>
+                                    <option value="2402">Jewish</option>
+                                    <option value="2403">Management & Technical Assistance</option>
+                                    <option value="2404">Nonmonetary Support N.E.C.</option>
+                                    <option value="2405">Professional Societies, Associations</option>
+                                    <option value="2406">Protestant</option>
+                                    <option value="2407">Religion Related, Spiritual Development N.E.C.</option>
+                                    <option value="2408">Religious Film, Video</option>
+                                    <option value="2409">Religious Media, Communications Organizations</option>
+                                    <option value="2410">Religious Printing, Publishing</option>
+                                    <option value="2411">Religious Radio</option>
+                                    <option value="2412">Religious Television</option>
+                                    <option value="2413">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="2414">Roman Catholic</option>
+                                    <option value="2415">Single Organization Support</option>
+                                </optgroup>
+                                <optgroup label="Mutual/Membership Benefit Organizations, Other">
+                                    <option value="2416">Alliance/Advocacy Organizations</option>
+                                    <option value="2417">Cemeteries, Burial Services</option>
+                                    <option value="2418">Domestic Fraternal Societies</option>
+                                    <option value="2419">Employee Funded Pension Trust</option>
+                                    <option value="2420">Fraternal Beneficiary Societies</option>
+                                    <option value="2421">Fund Raising and/or Fund Distribution</option>
+                                    <option value="2422">Insurance Providers, Services</option>
+                                    <option value="2423">Local Benevolent Life Insurance Associations, Mutual Irrigation and Telephone Companies, and Like Organizations</option>
+                                    <option value="2424">Management & Technical Assistance</option>
+                                    <option value="2425">Multi-Employer Pension Plans</option>
+                                    <option value="2426">Mutual Insurance Company or Association</option>
+                                    <option value="2427">Mutual/Membership Benefit Organizations, Other N.E.C.</option>
+                                    <option value="2428">Nonmonetary Support N.E.C.</option>
+                                    <option value="2429">Pension and Retirement Funds</option>
+                                    <option value="2430">Professional Societies, Associations</option>
+                                    <option value="2431">Research Institutes and/or Public Policy Analysis</option>
+                                    <option value="2432">Single Organization Support</option>
+                                    <option value="2433">State-Sponsored Worker's Compensation Reinsurance Organizations</option>
+                                    <option value="2434">Supplemental Unemployment Compensation</option>
+                                    <option value="2435">Teachers Retirement Fund Association</option>
+                                    <option value="2436">Voluntary Employees Beneficiary Associations (Government)</option>
+                                    <option value="2437">Voluntary Employees Beneficiary Associations (Non-Government)</option>
+                                </optgroup>
+                                <optgroup label="Unknown">
+                                    <option value="2438">Unknown</option>
+                                </optgroup>
+                            </select>
+                            You may select multiple categories.
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="onboarding-buttons">
+                <a class="skip skipbtn" href="/pages/onboarding/organization/stepthree/{{id}}/{{userid}}">Skip</a>
+                <a class="btn btn-orange continuebtn" id="js-getCharityProfileId" data-loading-text="Loading..." data-charityId="{{id}}" data-original="{{slug}}" data-orgid="{{organization_id}}" data-charityName="{{title}}">Save and Continue <i class="fa fa-chevron-right"></i></a>
+            </div>
+        </div>
+    </div>

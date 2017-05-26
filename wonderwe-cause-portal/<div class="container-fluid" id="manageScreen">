@@ -1,0 +1,220 @@
+<div class="container-fluid" id="manageScreen">
+    <span class="pull-left" style="margin-top:24px;">
+        <a href=""><i class="fa fa-arrow-circle-o-left  fa-lg"></i>Back to Interim Home  </a>
+    </span>
+    <h3>&nbsp;&nbsp;Assign Test</h3>
+    <div class="row manage-test text-center">
+        <div class="col-sm-4 manage-left">
+            <img src="images/test_icon.png">
+            <h3><%=testName%></h3>
+            <p>
+                <%=testDescription%>
+            </p>
+            <a id="PreviewLink">Preview Test</a>
+        </div>
+        <div class="col-sm-8 manage-right">
+            <form class="row" id="js-formsearch">
+                <%if(groups && groups.length>0){%>
+                    <div class="form-group col-sm-4">
+                        <label>Student Group <a id="whygroups"><i class="fa fa-question-circle" aria-hidden="true"></i></a></label>
+                        <select id="existinggroup" class="form-control">
+                            <option value="no">Select Student Group</option>
+                            <%for(var i=0;i <groups.length; i++) {%>
+                                <option value="<%=groups[i].id%>">
+                                    <%=groups[i].groupName%>
+                                </option>
+                                <%}%>
+                        </select>
+                    </div>
+                    <%}%>
+                        <div class="form-group col-sm-3">
+                            <label>ROSTER</label>
+                            <select id="interimRoster" class="form-control">
+                                <%for(var i=0;i <dropdownObject.rostername.length; i++) {%>
+                                    <option value="<%=dropdownObject.rostername[i].id%>">
+                                        <%=dropdownObject.rostername[i].name%>
+                                    </option>
+                                    <%}%>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-3">
+                            <label>GRADE</label>
+                            <select id="interimRosterGrade" class="form-control">
+                                <%for(var i=0;i <dropdownObject.gradename.length; i++) {%>
+                                    <option value="<%=dropdownObject.gradename[i].id%>">
+                                        <%=dropdownObject.gradename[i].name%>
+                                    </option>
+                                    <%}%>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label id="transparent">Search</label>
+                            <a href="#" class="btn btn-primary" id="studentSearch">Search</a>
+                        </div>
+            </form>
+            <div id="js-groupselect" style="display:none">
+                <table id="groupstudenttable">
+                    <tr>
+                        <td />
+                    </tr>
+                </table>
+                <div id="pagerStudentgroup"></div>
+            </div>
+            <div id="js-individualselect">
+                <table id="studentTable">
+                    <tr>
+                        <td />
+                    </tr>
+                </table>
+                <div id="pagerStudent"></div>
+            </div>
+            <div id="js-testassigned" style="display:none">
+                <table id="testassignedTable">
+                    <tr>
+                        <td />
+                    </tr>
+                </table>
+                <div id="testassignedpager"></div>
+            </div>
+            <form class="row form-horizontal h_form" id="js-groupnameform" style="display:none">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="groupname" class="form-control" placeholder="Student Group Name">
+                        <span id="groupnameerror" style="color:red;display:none">Please give the student group name</span>
+                    </div>
+                </div>
+            </form>
+            <a href="#" class="btn btn-green btn-lg pull-right" style="display:none" id="movingToSchedule">Assign Now</a>
+            <a href="#" class="btn btn-gray btn-lg pull-right" id="js-cancelgroup" onclick="cancelGroupCreation()" style="display:none">Cancel</a>
+            <a href="#" class="btn btn-green btn-lg pull-right" id="js-savegroup" style="display:none">Save</a>
+            <a href="#" class="btn btn-green btn-lg pull-right" id="js-showSchdule" style="display:none">Next</a>
+            <a href="#" class="btn btn-green btn-lg pull-right" id="js-edittestsesstion" style="display:none">Save Changes</a>
+            <div id="group-create" class="modal" tabindex="-1" style="z-index: 2000;top: 50px;left:300px">
+                <div class="modal-header">
+                    <input type="hidden" id="cancelmessageId" />
+                    <h2>Group Creation</h2>
+                </div>
+                <div class="modal-body">
+                    <p>Would you like to create a Student Group? Creating a Student Group means that you do can reuse this group of students later without selecting them individually.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="createGroup()" class="btn" style="margin-left: 60%; margin-top: 10px; height: 35px;">Yes</button>
+                    <button role="button" type="button" onclick="cancelGroupCreation()" class="btn" style="margin-left: 3%; margin-top: 10px; height: 35px;">
+                        No</button>
+                </div>
+            </div>
+            <div id="cancel-group-create" class="modal" tabindex="-1" style="z-index: 2000;top: 50px;right:30px;left:300px">
+                <div class="modal-header">
+                    <input type="hidden" id="cancelmessageId" />
+                    <h2>Group Creation</h2>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you don't won't to create student group?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="cancelGroupCreation()" class="btn" style="margin-left: 60%; margin-top: 10px; height: 35px;">Yes</button>
+                    <button role="button" type="button" onclick="yescreategroup()" class="btn" style="margin-left: 3%; margin-top: 10px; height: 35px;">
+                        No</button>
+                </div>
+            </div>
+            <div id="why-group-creation" class="modal" tabindex="-1" style="z-index: 2000;top: 50px;left:300px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>A Student Group saves the list of students you have selected so that you can assign tests to that group later without having to re-select the students. Student Groups can be edited later. Student Groups make it easier to assign Interim Tests and do not affect class rosters or other kinds of tests.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn group-okay" style="margin-left: 60%; margin-top: 10px; height: 35px;">Okay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" id="scheduleScreen" style="display:none">
+    <h3>Manage Tests</h3>
+    <div class="row schedule-test text-center">
+        <div class="col-sm-4 schedule-left">
+            <img src="images/schedule_icon.png">
+            <h3>SCHEDULING</h3>
+            <p id="scheduleSummary"></p>
+        </div>
+        <div class="col-sm-8 schedule-right">
+            <div class="card">
+                <h3><label>Select Test Dates And Time Range <a id="whatSchedule"><i class="fa fa-question-circle" aria-hidden="true"></i></a></label></h3>
+                <br/>
+                <form class="row">
+                    <div class="form-group col-sm-6">
+                        <label>Start Date</label>
+                        <input type="text" id="js-start-date" class="form-control" placeholder="Select">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>End Date</label>
+                        <input type="text" id="js-end-date" class="form-control" placeholder="Select">
+                    </div>
+                    <div class="col-sm-12">
+                        <label>Students May Start Tests During This Time Range</label>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <input type="text" id="js-start-time" class="form-control" placeholder="Select">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <input type="text" id="js-end-time" class="form-control" placeholder="Select">
+                    </div>
+                </form>
+                <div class="row">
+                    <small id="schedulepage-errors" style="color:red"></small>
+                    <div class="col-sm-8">
+                        <button class="btn btn-green btn-block btn-lg" id="scheduleButton">Schedule</button>
+                    </div>
+                    <div class="col-sm-4">
+                        <button class="col-sm-6 btn btn-primary btn-lg btn-block" id="backtomanage">Cancel</button>
+                    </div>
+                    <div class=" col-sm-12 backtointerimhome" style="display:none">
+                        <button class="col-sm-12 btn btn-primary btn-lg btn-block"><a href="interim.htm">Back to Interim Home</button>
+                    </div>
+                </div>
+            </div><br/>
+        </div>
+    </div>
+</div>
+
+        <div id="what-Schedule" class="modal" tabindex="-1" style="z-index: 2000;top: 50px;left:600px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                
+            </div>
+            <div class="modal-body">
+            <p>This is the test scheduling page, The tests will be scheduled for days between Start Date and End Date. And the time interval for students to begin test would be between Start Time and End Time</p>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn group-okay"
+                style="margin-left: 60%; margin-top: 10px; height: 35px;">Okay</button>
+                </div>
+        </div>
+
+
+
+
+<div class="container-fluid" id="scheduleConfirm" style="display:none">
+    <h3>Assign Tests</h3>
+    <div class="row assign-test text-center">
+        <div class="assign-right">
+            <div class="card">
+                <h3>You have scheduled interim test <span class="text-primary"><%=testName%></span> successfully to <span  class="text-primary" id="assigned-students-count"></span>  students.</h3>
+
+            </div><br/>
+            <div class="row">
+                <div class="col-sm-offset-6 col-sm-6">
+                    <a class="col-sm-6 btn btn-primary btn-lg btn-block" href="interim.htm">Back to Interim Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

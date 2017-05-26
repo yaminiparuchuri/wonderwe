@@ -1,0 +1,92 @@
+<div id="js-chooseCharityIds">
+    <div class="onboarding-wizard">
+        <nav class="topnavbar navbar navbar-inverse publicnav">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="/"> <img src="/images/top-logo.png" alt="WonderWe" /> </a>
+                </div>
+                <div id="navbar">
+                    <div class="col-sm-offset-3 hidden-xs">
+                        <ul class="nav navbar-nav mainnav">
+                            <li>
+                                <p><strong>Stripe Connect</strong></p>
+                            </li>
+                        </ul>
+                    </div>
+                    <p class="visible-xs onboarding-stepText"><strong>Welcome</strong></p>
+                    <div class="nav navbar-nav navbar-right">
+                        <p>Step 5 of 5</p>
+                    </div>
+                </div>
+        </nav>
+        <div class="container-fluid">
+            <div class="row onboarding-step">
+              
+                {{#if account_id}}
+                <div class="col-centered col-sm-12" style="margin-top:10%;padding-top:3%;" align="center">
+                    <h4>Hey, Your account has been connected to WonderWe, Please click "Go to Dashboard" to access your account now.</h4>
+                    <a class="org-onboarding-finish btn btn-orange" data-loading-text="Loading..." data-userid="{{userid}}" href="#"> Go to Dashboard</a>
+                </div>
+                {{else}}
+
+
+
+       {{#if  payment_method}}
+
+
+             <div class="col-xs-12 col-sm-6 onboarding-message wepay-basic-view">
+                    <!--  <h2>Welcome, <span id="organization-title">{{title}}</span>.</h2> -->
+                    <p style="margin-bottom:10px">Hey, You are almost there, Just one more step, it is easy just click "WePay Connect" button below and it will let you login if you already have an existing account or it let's you create one instantly. It is that easy. </p>
+                    <!-- /onboarding/organization/stepone -->
+                    <!--   <a class="skip skipbtn" href="/pages/onboarding/organization/stepfive/{{id}}/{{userid}}">Skip</a> -->
+                    <a id="start_oauth2" class="col-sm-4 col-sm-offset-3">WePay Connect</a>
+                 
+                   <!--  <p style="margin-top: 0px; margin-bottom:0px; font-size:14px">New account : </p> -->
+
+                </div>
+
+
+          {{else}}
+
+
+                <div class="col-xs-12 col-sm-6 onboarding-message wepay-basic-view">
+                    <!--  <h2>Welcome, <span id="organization-title">{{title}}</span>.</h2> -->
+                    <p style="margin-bottom:10px">Hey, You are almost there, Just one more step, it is easy just click "Stripe Connect" button below and it will let you login if you already have an existing account or it let's you create one instantly. It is that easy. </p>
+                    <!-- /onboarding/organization/stepone -->
+                    <!--   <a class="skip skipbtn" href="/pages/onboarding/organization/stepfive/{{id}}/{{userid}}">Skip</a> -->
+                    <a id="start_oauth2" class="col-sm-4 col-sm-offset-3 hide">WePay Connect</a>
+                 
+                   <!--  <p style="margin-top: 0px; margin-bottom:0px; font-size:14px">New account : </p> -->
+
+
+                <p>If you already have a stripe account, Please <a class="btn btn-success" href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id={{stripe_client_id}}&scope=read_write&state={{stripe_state}}&stripe_user[url]={{domain}}&redirect_uri={{redirect_uri}}&stripe_landing=login"> Connect your Stripe Account </a>
+
+                <p>
+                Do not worry if you do not have stripe account, just click "Create Stripe Account" button below.
+                </p>
+
+             <p>             <!--  <p style="margin-top: 0px; margin-bottom:10px"> -->
+
+                   <a class="btn btn-orange col-sm-4 col-sm-offset-3" href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id={{stripe_client_id}}&scope=read_write&state={{stripe_state}}&stripe_user[email]={{email}}&stripe_user[url]={{domain}}&stripe_user[country]={{country_code}}&stripe_landing=register&redirect_uri={{redirect_uri}}&always_prompt=true"> Create Stripe Account</a>
+                    </p>
+       
+                </div>
+
+    {{/if}}
+
+                <div class="onboarding-buttons"> <a class="org-onboarding-finish" data-userid="{{userid}}" href="#">Or, Never mind, I will do it later</a></div>
+
+                <div class="wepay-success-message col-xs-12 col-sm-8 col-sm-offset-2" style="min-height: 300px;display:none;">
+                    <div class="col-centered col-sm-12" style="margin-top:13%;padding-top:3%" align="center">
+                        <img src="/images/check-green.png" alt="Completed" />
+                        <h4>WePay account has been connected to WonderWe Successfully, Please click "Go to Dashboard" to access your account now.</h4>
+                        <a class="org-onboarding-finish btn btn-orange" data-loading-text="Loading..." data-userid="{{userid}}" href="#"> Go to Dashboard</a>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 wepay-image">
+                    <img src="/images/onboarding.jpg" alt="WonderWe Campaign Examples" class="img-responsive" />
+                </div>
+                {{/if}}
+            </div>
+        </div>
+        </div>

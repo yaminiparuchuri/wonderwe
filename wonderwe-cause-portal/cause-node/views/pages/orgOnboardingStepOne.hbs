@@ -1,0 +1,37 @@
+<div class="onboarding-wizard">
+    <nav class="topnavbar navbar navbar-inverse publicnav">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="/"> <img src="/images/top-logo.png" alt="WonderWe"/> </a>
+            </div>
+            <div id="navbar">
+                <div class="col-sm-offset-3 hidden-xs">
+                    <ul class="nav navbar-nav mainnav">
+                        <li>
+                            <p><strong>Welcome</strong></p>
+                        </li>
+                    </ul>
+                </div>
+                <p class="visible-xs onboarding-stepText"><strong>Welcome</strong></p>
+                <div class="nav navbar-nav navbar-right">
+                    <p>Step 1 of 5</p>
+                </div>
+            </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row onboarding-step">
+            <div class="col-xs-12 col-sm-6 onboarding-message">
+                <h2>Welcome, <span id="organization-title">{{title}}</span>.</h2>
+                <p>We know you're eager to use our system.  Before you begin, let's complete your profile.</p>
+                <p>Don't worry, this will be a piece of cake.</p>
+                <!-- /onboarding/organization/stepone -->
+                <a class="btn btn-orange" href="/pages/onboarding/organization/steptwo/{{id}}/{{userid}}">Let's get started!</a>
+                <a class="skip" id="js-takeMeToTheAppId" data-userid="{{userid}}" href="#">Or, just take me to the app.</a>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <img src="/images/onboarding.jpg" alt="WonderWe Campaign Examples" class="img-responsive"/>
+            </div>
+        </div>
+
+    </div>

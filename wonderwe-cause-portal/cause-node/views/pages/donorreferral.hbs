@@ -1,0 +1,121 @@
+<div class="signup-full-page page-signup" id="js-donor-signup">
+    <div class="container">
+        <div class="row signup-box no-gutter">
+            <div class="col-sm-5 col-md-4 hidden-xs">
+                <div class="signup-left">
+                    <h1>Welcome to <span>WonderWe.</span></h1>
+                    <div class="row">
+                        <div class="col-sm-3 col-md-2"><img src="/images/flash.png" alt="">
+                        </div>
+                        <div class="col-sm-9 col-md-10">
+                            <p>
+                                Connect with donors and organizations.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 col-md-2"><img src="/images/check.png" alt="">
+                        </div>
+                        <div class="col-sm-9 col-md-10">
+                            <p>
+                                Follow causes and campaigns.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 col-md-2"><img src="/images/money.png" alt="">
+                        </div>
+                        <div class="col-sm-9 col-md-10">
+                            <p>
+                                Raise money for causes you care about.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-7 col-md-7" id="">
+                <div class="signup-right">
+                    <div id="alertdiv" class="alert alert-danger alert-dismissable" style="display:none">
+                        <button type="button" id="js-close-div" class="close" aria-hidden="true"> &times;</button>
+                        <span id="spanid"></span>
+                    </div>
+                    <div id="register">
+                        <div class="formheader signup-form">
+                            <img src="/images/default-user-74x74.png" alt="" class="thumbnail">
+                            <h3>Hello, <span id="first_name">let's make a difference!</span>&nbsp;<span id="last_name"></span></h3>
+                        </div>
+                        <form action="" name="myForm" method="POST" id="registration" class="form-horizontal">
+                            <div class="firsterror col-sm-offset-4 col-sm-12" id="fnValidation" style="color:#DF3A3A"></div>
+                            <div class="form-group">
+                                <label for="firstname" class="control-label col-sm-4">First Name<span class="required-asterisk">*</span></label>
+                                <div class="col-sm-8 col-md-6">
+                                    <input type="text" id="firstname" name="firstname" class="form-control" value={{firstname}}>
+                                </div>
+                            </div>
+                            <div class="lasterror col-sm-offset-4 col-sm-10" id="lnValidation" style="color:#DF3A3A"></div>
+                            <div class="form-group">
+                                <label for="lastname" class="control-label col-sm-4">Last Name<span class="required-asterisk">*</span></label>
+                                <div class="col-sm-8 col-md-6">
+                                    <input type="text" id="lastname" name="lastname" class="form-control" value={{lastname}}>
+                                </div>
+                            </div>
+                            <div class="emailerror col-sm-offset-4 col-sm-10" id="emailValidation" style="color:#DF3A3A"></div>
+                            <div class="form-group">
+                                <label for="email" class="control-label col-sm-4">Email<span class="required-asterisk">*</span></label>
+                                <div class="col-sm-8 col-md-6">
+                                    <input type="text" id="email" name="email" class="form-control" value={{email}}>
+                                </div>
+                            </div>
+                            <div class="passerror col-sm-offset-4 col-sm-10" id="passValidation" style="color:#DF3A3A"></div>
+                            <div class="form-group">
+                                <label for="password" class="control-label col-sm-4">Password<span class="required-asterisk">*</span></label>
+                                <div class="col-sm-8 col-md-6">
+                                    <input type="password" id="password" name="password" class="form-control">
+                                </div>
+                            </div>
+                            <div class="cpasserror col-sm-offset-4 col-sm-10" id="cpassValidation" style="color:#DF3A3A"></div>
+                            <div class="form-group">
+                                <label for="confirmpassword" class="control-label col-sm-4">Confirm Password<span class="required-asterisk">*</span></label>
+                                <div class="col-sm-8 col-md-6">
+                                    <input type="password" id="confirmpassword" name="confirmpassword" class="form-control">
+                                </div>
+                            </div>
+                            <div class="cpasserror col-sm-offset-4 col-sm-10" id="termsValidation" style="color:#DF3A3A"></div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-8 col-md-6">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="acceptTerms" name="acceptTerms">
+                                            <span><small>I agree to the <a href="/termsandconditions" target="_blank">User Terms</a> and <a href="/privacypolicy" target="_blank">Privacy Policy</a>.</small></span>
+                                        </label>
+                                        <div class="help-block" id="acceptTermsError"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-4"></div>
+                                <div class="col-sm-8 col-md-6">
+                                    <p class="error" id="js-signinFormValidation" style="color: red"></p>
+                                    <input class="btn btn-orange" id="js-donor-rigistration" type="submit" name="submit" data-invitedid={{userId}} value="Create My Account">
+                                    <a href='/' class="btn btn-subtle"> Cancel </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="success" style="display: none;height: 450px;">
+                        <div class="col-centered">
+                            <img src="/images/check-green.png" alt="Completed" />
+                            <h3>Congratulations, <span id="firstlast"></span></h3>
+                            <p>
+                                An email has been sent to you for verification process. Trust us, it's an easy step.
+                            </p>
+                            <div class="form-group actions">
+                                <a href='/' class="btn btn-default btn-subtle"> Back to homepage </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

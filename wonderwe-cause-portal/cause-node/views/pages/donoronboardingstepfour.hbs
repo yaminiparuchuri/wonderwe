@@ -1,0 +1,46 @@
+<div class="onboarding-wizard">
+    <nav class="topnavbar navbar navbar-inverse publicnav">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="/"> <img src="/images/top-logo.png" alt="WonderWe" /> </a>
+            </div>
+            <div id="navbar">
+                <div class="col-sm-offset-3 hidden-xs">
+                    <ul class="nav navbar-nav mainnav">
+                        <li>
+                            <p><strong>Invite People You Know</strong></p>
+                        </li>
+                    </ul>
+                </div>
+                <p class="visible-xs onboarding-stepText"><strong>Invite People You Know</strong></p>
+                <div class="nav navbar-nav navbar-right">
+                    <p>Step 4 of 5</p>
+                </div>
+            </div>
+    </nav>
+    <div class="container">
+        <div id="detailsDiv" data-id="{{id}}" data-name="{{title}}" data-userid="{{userid}}"></div>
+        <div class="row onboarding-step">
+            <div class="col-xs-12 col-sm-8 col-lg-6 onboarding-message">
+                <img class="js-import-success" src="/images/check-green.png" alt="Completed" style="display: none" />
+                <h2>Invite your friends to support organizations and their campaigns on WonderWe! </h2>
+                <p>It's easy: just click the import button to import your email contacts into WonderWe, and we'll send them an email invitation, letting them know you'd like them to join you in making an impact.</p>
+                <a class="btn btn-big btn-subtle" data-toggle="modal" data-target="#importModal" id="gmail-contacts" data-userid={{userid}}><img src="/images/gmail.png" /> Gmail</a>
+              <!--  <a href="#" id="importHotmail">Import contacts</a>-->
+                <br>
+                <br>
+                <a class="fileupload pull-left fileupload-new btn btn-subtle first-view" id="upload_file_div" data-provides="fileupload"></a>&nbsp&nbsp
+                <a class="first-view" href="/js/views/sample.csv">Download Sample File</a>
+                <p class="js-import-success" style="display: none">
+                    We've successfully imported the contacts.
+                </p>
+            </div>
+            <div class="hidden-xs hidden-sm col-md-4 pull-right">
+                <img src="/images/invite-to-wonderwe.png" class="img-responsive" />
+            </div>
+            <div class="onboarding-buttons">
+                <a class="skip skipbtn" href="/pages/profile/of/donor/onboarding/{{userid}}">Skip</a>
+            </div>
+        </div>
+    </div>
+    </div>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>	{{#if metadata.seoTitle}} {{metadata.seoTitle}} | WonderWe {{else}} WonderWe {{/if}}</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+	<!-- build:css /dist/<<timeStamp>>/wonderwe_<<timeStamp>>.min.css -->
+	 <link href="/css/modal.css" rel="stylesheet" />
+	<link href="/css/styles.css" rel="stylesheet" />
+    <link href="/bower_components/chosen/chosen.min.css" rel="stylesheet" />
+    <link href="/js/lib/fontawesome/css/font-awesome.css" type="text/css" rel="stylesheet"/>
+    <link href="/bower_components/iCheck/skins/square/grey.css" rel="stylesheet" />
+    <link href="/bower_components/video.js/dist/video-js/video-js.min.css" rel="stylesheet" />
+    <!-- /build -->
+	<link rel="icon" href="/images/favicons/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="/images/favicons/favicon.ico" type="image/x-icon" />
+	<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.ico">
+	<link rel="icon" type="image/png" sizes="128x128" href="/favicon-128x128.ico">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.ico">
+</head>
+
+<body class="lightbg-body">
+	<div class="thecontainer">
+		{{> header}} {{{body}}} {{> footer}}
+	</div>
+	    <!-- build:js /dist/<<timeStamp>>/bower_dist<<timeStamp>>.js -->
+	<script src="/bower_components/jquery/dist/jquery.js"></script>
+	<script src="/js/jquerypp.custom.js"></script>
+	<script src="/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+	<script src="/bower_components/summernote/dist/summernote.js"></script>
+	<script src="/js/can.custom.js"></script>
+	<script src="/js/logger.js"></script>
+	<script src="/js/uuid.js"></script>
+	<script src="/js/jstz.js"></script>
+	<script src="/js/ajaxcommon.js"></script>
+	<script src="/bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="/bower_components/jquery-validation/dist/additional-methods.min.js"></script>
+	<script src="/js/jquery-validations.js"></script>
+	<script src="/bower_components/chosen/chosen.jquery.min.js"></script>
+	<script src="/js/flotr2.js"></script>
+    <script src="/bower_components/masonry/dist/masonry.pkgd.js"></script>
+    <script src="/bower_components/imagesloaded/imagesloaded.pkgd.js"></script>
+
+    
+	<script src="/bower_components/moment/moment.js"></script>
+	<script src="/js/moment-timezone.js"></script>
+	<script src="/js/moment-timezone-with-data-2010-2020.js"></script>
+	<script src="/js/jquery.simplyCountable.js"></script>
+	<script src="/js/jquery.fineuploader-3.3.0.js"></script>
+	<script src="/js/bootstrap-datetimepicker.js"></script>
+	<script src="/js/wNumb.js"></script>
+	<script src="/js/wepay.js"></script>
+	<script src="/js/controller/auth_controller.js"></script>
+	<script src="/js/model/causesModel.js"></script>
+	<script src="/js/controller/campaignpage_controller.js"></script>
+	<script src="/js/controller/organizationprofile_controller.js"></script>
+	<!-- /build -->
+	<!-- build:js /dist/<<timeStamp>>/js_dist<<timeStamp>>.js -->
+	<!-- /build -->
+	{{> analytics}}
+		<script type="text/javascript">
+	if (ww.store.getItem('visitedUser')) {
+
+	} else {
+		var visitedUser = uuid.v4();
+		ww.store.storeCookie('visitedUser', visitedUser);
+
+	}
+	if (ww.store.getItem('sessionId')) {
+
+	} else {
+		var sessionId = uuid.v4();
+		ww.store.storeItem('sessionId', sessionId);
+	}
+	Logger.debug('User Opened Public Page With Layout Main');
+	new publicPageController('body');
+
+	</script>
+<!-- build_external:js /js/hotjar.js -->
+<!-- /build_external -->
+</body>
+
+</html>

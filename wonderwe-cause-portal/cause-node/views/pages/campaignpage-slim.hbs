@@ -1,0 +1,406 @@
+<span id='js-public-donate-click' data-donate="{{donatePopup}}"> </span>
+<span id="data-info" data-type="campaign"  data-entity="{{#toJson campaignInfo}}{{/toJson}}"></span>
+<div class="campaign-canopy">
+	<div class="container-fluid">
+		
+		<div class="alert alert-danger alert-dismissable" id="alerttimeleftDiv" style="z-index: 1000;display:none">
+			Sorry this event has already expired.
+		</div>
+		
+		<div class="alert alert-info alert-dismissable" id="teamCreationAlertDiv" style="z-index: 1000;display:none">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> Team <strong>{{teamAdmin.team_name}}</strong> Campaign has been created successfully for <strong>{{campaignInfo.title}} </strong>.
+		</div>
+		
+		<div class="alert alert-warning alert-dismissable" id="alertdraftdiv" style="z-index: 1000;display:none">
+			<strong>This is a draft only viewable by you.</strong>. To publish this campaign click on "Manage" link above.
+		</div>
+		{{#if videoData}}
+			<div class="share-video-link alert alert-info" style="margin-top:15px;text-align:center; z-index: 1000;display:none"><strong>{{videoData.name}}</strong> recorded a personalized video just for you. <a href="#" class="vide-show-click">  Click here to watch it again</a></div>
+		{{/if}}
+		<div class="campaign-header">
+			<div class="col-sm-9 campaign-title">
+				{{#if teamAdmin}}
+					<h1 style="margin-bottom: -20px;"><small>{{teamAdmin.name}}'s fundraiser:</small></h1>
+					<h1>{{teamAdmin.team_name}} <small>is a mini campaign for</small> <strong><a href="/{{teamAdmin.mainCampaignSlug}}"> {{campaignInfo.title}} </a></strong></h1> 
+				{{else}}
+					<h1>{{campaignInfo.title}}</h1> 
+				{{/if}}
+			</div>
+			<div class="col-sm-3 campaign-location">
+				<p>
+					{{#if campaignInfo.city}}
+						<i class="fa fa-map-marker"></i> {{ifconcat campaignInfo.city campaignInfo.state}}
+					{{/if}}
+				</p>
+			</div>
+		</div>
+		
+		<div class="col-sm-9">
+			<div class="js-mediaLoad" style="width: 900; height: 675px;"></div>
+			<div class="js-campaignVideo" style="display:none"></div>
+			<div class="js-campaignPic" style="display:none">
+				{{#if teamAdmin}}
+					<img src="{{constructUrl teamAdmin.code_picture_url '900x675'}}" class="stretch"> 
+				{{else}}
+					<img src="{{constructUrl campaignInfo.code_picture_url '900x675'}}" class="stretch" /> 
+				{{/if}}
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="module contribute-box">
+				<div class="amount-raised">{{campaignInfo.currency_symbol}}{{campaignInfo.noof_donations}}
+					<span class="campaign-currency-code" style="margin-left:-5px;">{{campaignInfo.currency_code}}</span>
+				</div>
+				<div class="donation-progress-bar-bg">
+					<div class="donation-progress-bar">
+						<div class="donation-progress-fill" style="width:{{campaignInfo.donatePercentage}}%;">
+						</div>
+					</div>
+				</div>
+				<p>{{campaignInfo.donatePercentage}}% funded</p>
+				<a href="{{domain}}/{{campaignInfo.campaignSlug}}/donation" class="btn btn-default btn-orange btn-lg btn-block ">Donate Now</a>
+				<div class="stats-below-donate">
+					<div class="statcard">
+						<span class="count" id="js-campaign-goal" data-goal="{{campaignInfo.goal}}">{{campaignInfo.currency_symbol}}{{campaignInfo.goal}} <sub class="campaign-currency-code">{{campaignInfo.currency_code}}</sub></span>
+						<span>goal</span>
+					</div>
+					<div class="statcard">
+						{{#equal campaignInfo.type "ongoing"}}
+							<span class="count">
+								<img src="/images/infinity.png"/>
+							</span> 
+						{{else}}
+							<span class="count">{{campaignInfo.time_left}}</span> 
+						{{/equal}}
+							<span>days to go</span>
+					</div>
+					<div class="statcard statcard-full">
+						{{#equaltoo user.currency_code campaignInfo.currency_code}} 
+							<span class="count">Approx. {{user.currency_symbol}}{{campaignInfo.goalConversion}} {{user.currency_code}} goal</span> 
+						{{/equaltoo}}
+					</div>
+				</div>
+				<div class="statcardinfo hide">
+					<span class="count" style="color:red">Campaign ended.</span>
+				</div>
+			</div>
+			{{#if teamAdmin}}
+				<br>
+				<p>Campaign promoter:</p>
+				<a href="{{domain}}/{{teamAdmin.slug}}">
+					<div class="camp-prev promoter-card">
+						<div class="gradient">
+							<div class="personororgname"></div>
+						</div>
+						{{#if teamAdmin.background_pic_url }}
+						<div class="img-bg-card" style="background-image:url({{constructUrl teamAdmin.background_pic_url '290x110'}}"></div>{{else}}
+						<div class="img-bg-card"></div>
+						{{/if}}
+						<div class="people-card-section">
+							<div class="top-card">
+								<div class="profile-card-avatar">
+									<img src="{{constructUrl teamAdmin.profile_pic_url '74x74'}}" class="img-rounded" alt="user profile image">
+								</div>
+							</div>
+							<div class="bottom-card">
+								<h4>{{teamAdmin.name}}</h4>
+								<h5>@{{teamAdmin.slug}}</h5>
+							</div>
+						</div>
+						<div class="donorstats">
+							<div class="statcard"><span>Posts</span><span class="count">{{teamAdmin.noofposts}}</span></div>
+							<div class="statcard"><span>Campaigns</span><span class="count">{{teamAdmin.campaigns}}</span></div>
+							<div class="statcard js-followers-stat"><span>Followers</span><span class="count">{{teamAdmin.nooffollowers}}</span></div>
+						</div>
+					</div>
+				</a>
+			{{else}}
+				<a class="btn btn-block btn-subtle js-fundraising-team" data-currency_code="{{campaignInfo.currency_code}}" data-currency_symbol="{{campaignInfo.currency_symbol}}" data-codeid="{{campaignInfo.id}}" data-title="{{campaignInfo.title}}">Promote this campaign!</a> 
+			{{/if}}
+			<div class="campaign-actions">
+			</div>
+		</div>
+		<!-- /col-sm-3 -->
+	</div>
+</div>
+<!-- /campaign-canopy -->
+<div class="campaign-body">
+	<div class="headerbar" id="headerbar">
+		<div class="affix-headerbar">
+			<div class="container-fluid">
+				<div class="row affix-hoverbar">
+					<div class="col-sm-6">
+						<h1>{{campaignInfo.title}}</h1>
+					</div>
+					<div class="col-sm-3 text-right">
+						<h2>{{campaignInfo.currency_symbol}}{{campaignInfo.noof_donations}}
+							<span class="campaign-currency-code">{{campaignInfo.currency_code}}</span>
+						</h2>
+						<p>{{donatePer}}% funded</p>
+					</div>
+					<div class="col-sm-3">
+						{{#equal nav 'donor'}} 
+							<a href="{{domain}}/{{campaignInfo.campaignSlug}}/donation" class="animated bounceInDown btn btn-default btn-orange btn-lg btn-block ">Donate Now</a>
+						{{/equal}}
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /affix-headerbar -->
+	</div>
+	<!-- /profileheading-container -->
+	<div class="container-fluid wrapper sticker">
+		<div class="col-xs-12 campaign-margin-fix">
+			<div class="filterbar">
+				<div class="wecode-callout pull-left">We#{{campaignInfo.code_text}} <a href="#" class="other-link-type js-campaignwecode-help icon-circle"><i class="fa fa-question"></i></a></div>
+				{{#equal nav 'donor'}}
+						{{#if teamAdmin}} 
+						
+						{{else}} 
+							{{#if campaignInfo.is_following}}
+								<a class="pull-right btn btn-subtle btn-following js-follow-campaign-user" data-slug="{{campaignInfo.campaignSlug}}" data-id="{{campaignInfo.id}}" data-charityId="{{charityData.charity_id}}" data-type="code">
+									<span class="follow-text"><i class="fa fa-plus"></i> Follow</span>
+									<span class="following-text">Following</span>
+									<span class="unfollow-text">Unfollow</span>
+								</a>
+							{{else}}
+								<a class="pull-right btn btn-subtle btn-follow js-follow-campaign-user" data-slug="{{campaignInfo.campaignSlug}}" data-id="{{campaignInfo.id}}" data-charityId="{{charityData.charity_id}}" data-type="code">
+									<span class="follow-text"><i class="fa fa-plus"></i>  Follow</span>
+									<span class="following-text">Following</span>
+									<span class="unfollow-text">Unfollow</span>
+								</a>
+							{{/if}} 
+						{{/if}} 
+				{{/equal}}
+				<div class="filter-choice">
+					<a class="js-share pull-right" role="button" data-description="{{campaignInfo.description}}" data-image="{{constructUrl campaignInfo.code_picture_url '900x500'}}" data-type="campaign" data-toggle="collapse" data-codeid="{{campaignInfo.id}}" data-campaignSlug="{{campaignInfo.campaignSlug}}" data-charityname="{{charityData.title}}" data-campaignName="{{campaignInfo.title}}" data-charityid="{{charityData.charity_id}}" href="#share-content" data-url="{{shareObject.url}}" data-name="{{shareObject.name}}" data-teamcampaign="{{campaignInfo.team_campaign}}" data-via="{{shareObject.via}}" aria-expanded="false" aria-controls="share-content">
+						<i class="filter-icon fa fa-share-alt"></i> Share
+					</a>
+					{{#if teamAdmin}} 
+
+					{{else}}
+						<a class="js-writepost pull-right" role="button" href="#writepost-content" aria-expanded="false" aria-controls="writepost-content" data-toggle="collapse" data-id="{{campaignInfo.id}}" data-entityid="{{campaignInfo.entityid}}" data-type="code" data-image="{{campaignInfo.code_picture_url}}" data-wecode="{{campaignInfo.code_text}}" data-name="{{campaignInfo.title}}" data-slug="{{campaignInfo.campaignSlug}}" data-type="code"> <i class="filter-icon icon-we-star"></i> Comment</a>
+					{{/if}}
+				</div>
+			</div>
+			<div class="actionbar">
+				<div class="collapse" id="share-content"></div>
+				{{#if teamAdmin}} 
+				
+				{{else}}
+					<div class="collapse" id="writepost-content"></div>
+				{{/if}}
+			</div>
+		</div>
+		<div class="col-sm-3">
+		
+			<div class="module campaign-organizer">
+				
+				{{#if campaignInfo.beneficiary}}
+				<h4>Campaign beneficiary:</h4>
+				<h4>{{campaignInfo.beneficiary}}</h4>
+				<br>
+				<p>Created By:</p>
+				<a href="/{{owner.slug}}">
+					<img src="{{constructUrl owner.profile_pic_url '200x200'}}" alt="profile image">
+				</a>
+				<h4><a href="/{{owner.slug}}">{{owner.name}}</a></h4> 
+				{{else}}
+					<a href="/{{owner.slug}}">
+						<img src="{{constructUrl owner.profile_pic_url '200x200'}}" alt="profile image">
+					</a>
+					<div class="profile-header-card">
+						<h4><a href="/{{owner.slug}}">{{owner.name}}</a></h4>
+						<p id="js-cause-desc">{{{owner.full_description}}}</p>
+					</div>
+				{{/if}}
+			</div>
+		
+		</div>
+		<!-- /col-sm-3 -->
+		<div class="col-sm-6 profile-spacing">
+			<div class="module discover-card-container">
+				<div class="profileheading">
+					<ul class="profileheading-toggle">
+						<li>
+							<a class="js-campaign-donor active js-campaignOverviewBtn" href="#headerbar" data-userId="">
+								<span>Overview</span>
+								<span class="count"><i class="fa fa-comment"></i></span>
+							</a>
+						</li>
+						{{#if teamAdmin}} 
+						{{else}}
+						<li>
+							<a class="js-campaign-donor js-campaignPostsBtn" href="#headerbar" data-userId="">
+								<span>Posts</span>
+								<span class="count">{{numOfPosts}}</span>
+							</a>
+						</li>
+						<li>
+							<a class="js-campaign-donor js-teamcampaignBtn" href="#headerbar" data-userId="">
+								<span>Promoters</span>
+								<span class="count">{{teamsCount}}</span>
+							</a>
+						</li>
+						<li>
+							<a class="js-campaign-donor js-campaignFollowersBtn" href="#headerbar" data-userId="">
+								<span>Followers</span>
+								<span class="count">{{numOfFollowers}}</span>
+							</a>
+						</li>
+						{{/if}}
+					</ul>
+				</div>
+				<div class="js-campaignDescription">
+					<div class="campaign-description">{{{campaignInfo.description}}}</div>
+				</div>
+				<div class="campaignfeed js-campaignsFeed">
+				</div>
+				<div class="js-campaignFollowers" style="display: none">
+					<ul class="js-follower-list">
+						{{#if followers.length}} 
+						{{#each followers}}
+						<li class="camp-prev js-showUserProfile" data-userid="{{user_id}}" data-slug="{{userSlug}}">
+							<div class="gradient">
+								<div class="personororgname"></div>
+							</div>
+							{{#if background_pic_url}}
+							<div class="img-bg-card" style="background-image:url({{constructUrl background_pic_url '258x258'}})"></div>
+							{{else}}
+							<div class="img-bg-card">
+							</div>
+							{{/if}}
+							<div class="people-card-section">
+								<div class="top-card">
+									<a class="profile-card-avatar">
+										<img src="{{constructUrl profile_pic_url '74x74'}}" class="img-rounded" alt="user profile image">
+									</a>
+								</div>
+								<div class="bottom-card">
+									<h4>{{name}}</h4>
+									<h5>@{{userSlug}}</h5>
+								</div>
+								<div class="donorstats">
+									<div class="statcard"><span>Fundraising</span><span class="count">{{campaigns}}</span></div>
+									<div class="statcard"><span>Following</span><span class="count">{{following}}</span></div>
+									<div class="statcard js-followers-stat"><span>Followers</span><span class="count">{{nooffollowers}}</span>
+									</div>
+								</div>
+							</div>
+							<div class="camp-btns">
+								{{#equal ../nav 'donor'}}
+								{{#equal id ../user.id}}
+								<a href="#!member" class="js-editprofile btn-editprofile btn btn-subtle" style="width: 100%;" data-userId="{{user.id}}"><i class="fa fa-pencil"></i> Edit Profile</a> {{else}}
+								<a class="js-showUserProfile btn-editprofile btn btn-subtle" data-id="{{user_id}}" data-slug="{{userSlug}}"> View Profile</a> 
+
+								{{#if is_following}}
+								<a class="btn btn-subtle follow-user-profile btn-following js-followbutton" data-slug="{{userSlug}}" data-id="{{user_id}}" data-type="user">
+									<span class="follow-text">Follow</span>
+									<span class="unfollow-text">Unfollow</span>
+									<span class="following-text">Following</span>
+								</a>
+								
+								{{else}}
+								<a class="btn btn-subtle follow-user-profile btn-follow js-followbutton" data-slug="{{userSlug}}" data-id="{{user_id}}" data-type="user">
+									<span class="follow-text">Follow</span>
+									<span class="unfollow-text">Unfollow</span>
+									<span class="following-text">Following</span>
+								</a>
+								{{/if}} 
+								
+								{{/equal}} 
+								{{/equal}}
+							</div>
+						</li>
+						{{/each}} 
+						{{else}}
+							<img src="/images/campaign-nofollowers.png" alt="This campaign doesn't yet have any followers" class="img-responsive"> 
+						{{/if}}
+					</ul>
+				</div>
+				<div class="js-team-campaigns" style="display: none">
+					{{#if teams}}
+					<h4 style="padding: 0 10px;">Leaderboard</h4>
+					<ul class="discover-card-container">
+						{{#each teams}}
+						<li class="camp-prev campaignCard js-org-campaignsPage" data-slug="{{campaignSlug}}">
+							<div class="gradient">
+								<div class="personororgname">
+								</div>
+								{{#if group_title}}
+								<div><i class="fa fa-tag"></i> {{group_title}}</div>
+								{{/if}}
+							</div>
+							<div class="img-bg-card" style="background-image:url({{constructUrl team_picture_url '283x283'}})">
+							</div>
+							<div class="dollor">
+								<div class="top-card">
+									<h3 class="text-center">{{currency_symbol}}{{numberFormat donation}}</h3>
+								</div>
+								<div class="bottom-card">
+									<div class="donation-progress-bar-bg">
+										<div class="donation-progress-bar">
+											<div class="donation-progress-fill" style="width: {{donation_progress}}%;">
+											</div>
+										</div>
+									</div>
+									<h4>{{{greater team_name 41}}}</h4>
+									<h5>We#{{code_text}}</h5>
+									<h5>Created by: {{#if campaign_creator}} {{greater campaign_creator 20}} {{else}} {{greater organization_name 20}} {{/if}}</h5>
+								</div>
+								<div class="donorstats">
+									<div class="statcard">
+										<span>Donors</span>
+										<span class="count">{{noof_donors}}</span>
+									</div>
+									<div class="statcard">
+										<span>Goal</span>
+										<span class="count">{{currency_symbol}}{{numberFormat goal}}</span>
+									</div>
+									<div class="statcard">
+										<span>Days to go</span>
+										<span class="count">
+											{{#equal type 'ongoing'}}
+													<img src="/images/infinity.png" width="25" height="10">
+											{{else}}
+												{{days_togo}}
+											{{/equal}}
+										</span>
+									</div>
+								</div>
+							</div>
+							{{#equal nav 'donor'}}
+								<div class="camp-btns-actions row">
+									<div class="col-sm-12">
+											<button type="submit" class="btn btn-block btn-default charity-donate-model" data-slug="{{campaignSlug}}" data-charityid="{{charity_id}}" data-charitytitle="{{../charityInfo.name_tmp}}" data-codeid="{{id}}" data-donations="{{suggested_donation}}" data-title="{{team_name}}" data-wecode="{{code_text}}" data-payment_gateway="{{payment_gateway}}" data-currency_code="{{currency_code}}" data-currency_symbol="{{currency_symbol}}" data-fundraiseruserid="{{fundraiser_userid}}" data-fundraisercodeid="{{fundraiser_codeid}}" data-fundraiser="{{fundraiser}}" data-referenceuserid="{{reference_userid}}">Donate</button> 
+									</div>
+								</div>
+							{{/equal}}
+						</li>
+						{{/each}}
+					</ul>
+					{{else}}
+						<img src="/images/noteams.png"/>
+						<a class="btn btn-block btn-orange js-fundraising-team" data-currency_code="{{charityData.currency_code}}" data-currency_symbol="{{charityData.currency_symbol}}" data-codeid="{{campaignInfo.id}}" data-title="{{campaignInfo.title}}">Promote this campaign!</a>
+					{{/if}}
+				</div>
+			</div>
+			<!-- /discover-card-container -->
+		</div>
+		<!-- /col-sm-6 -->
+		<div class="col-sm-3 lg-noOverflow">
+			<!-- Donors Widget Will Be Shown Here.-->
+			<div class="footer inappfooter">
+			</div>
+		</div>
+		<!-- / col-sm-3 -->
+	</div>
+	<!-- / container-fluid -->
+</div>
+</div>
+<!-- /campaign-body -->
+{{#if videoData}}
+<div id="videoModal" class="modal" data-backdrop="static" data-keyboard="false">
+	{{> showvideo}}
+</div>
+{{/if}}
